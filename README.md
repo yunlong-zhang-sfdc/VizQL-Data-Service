@@ -1,7 +1,5 @@
-# VizQL Data Service API Postman Collection
+# VizQL Data Service API Schema
 
-This is the repository for content to help you use the VizQL Data Service API Postman collection.
+This repository contains the OpenAPI schema for Tableau's [VizQL Data Service](https://help.tableau.com/current/api/vizql-data-service/en-us/index.html). OpenAPI is a widely used specification for describing RESTful APIs. Offering a standardized and easily understandable API description allows you to see the structure and expected data format of the API requests and responses.
 
-# Documentation
-For more information on how to use this colleciton, please visit the [Using Postman with VDS](https://help.tableau.com/current/api/vizql-data-service/en-us/docs/using_postman_with_vds.html) section of our documentation
-
+This repository doesn't accept pull requests.
