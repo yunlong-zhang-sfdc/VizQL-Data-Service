@@ -1,0 +1,19 @@
+{
+	"datasource": {
+		"datasourceLuid": "115aeab4-a07d-43af-9290-f51352763ec4"
+	},
+	"options": {
+		"returnFormat": "OBJECTS"
+	},
+	"query": {
+		"fields": [
+			{
+				"fieldCaption": "Category"
+			},
+			{
+				"fieldCaption": "Sales",
+				"function": "SUM"
+			}
+		]
+	}
+}
