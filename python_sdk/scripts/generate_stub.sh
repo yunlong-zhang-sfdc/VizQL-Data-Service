@@ -15,8 +15,8 @@ pip install openapi-generator-cli
 # Generate client code
 openapi-generator-cli generate \
     -i VizQLDataServiceOpenAPISchema.json \
-    -g python \
-    -o python-sdk/build/generated \
+    -g python-pydantic-v1 \
+    -o python_sdk/build/generated \
     --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
 
 echo "OpenAPI client generation completed successfully"
