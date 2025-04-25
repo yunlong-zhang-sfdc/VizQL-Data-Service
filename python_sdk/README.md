@@ -8,7 +8,7 @@ The VizQL Data Service Python SDK is a lightweight client library that enables i
 ## Installation
 TBD
 ```bash
-pip install vizqldataservicesdk
+pip install vizql-data-service-python-sdk
 ```
 
 ## Quick Start
@@ -63,9 +63,13 @@ client.query_datasource(query_request)
 
 ### Running Examples
 ```bash
-python .\examples\sync_example.py --user=<username> --password=<password> --server="http://localhost" >> out_sync.txt
-python .\examples\async_example.py --user=<username> --password=<password> --server="http://localhost" >> out_async.txt
+cd examples
+python .\sync_example.py --user=<username> --password=<password> --server="http://localhost" >> out_sync.txt
+python .\async_example.py --user=<username> --password=<password> --server="http://localhost" >> out_async.txt
 ```
 
 ## Testing
-TBD
+```bash
+pip install -e ".[dev]"
+pytest tests/ -v
+```

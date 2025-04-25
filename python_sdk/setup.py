@@ -14,7 +14,7 @@ from typing import Optional, Dict, Any
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "vizqldataservicesdk"
+NAME = "vizql-data-service-python-sdk"
 PYTHON_REQUIRES = ">= 3.8"
 
 def read_version() -> str:
@@ -134,7 +134,7 @@ long_description="""\
         ],
     },
     package_data={
-        "vizqldataservicesdk": ['examples/payloads/*.json']
+        "vizql-data-service-python-sdk": ['examples/payloads/*.json']
     },
     include_package_data=True,
 )
