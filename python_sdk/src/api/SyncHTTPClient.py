@@ -1,10 +1,10 @@
 """
-This is an synchronous http client that can be used to query VizDataService API.
+This is an synchronous http client that can be used to query VizQL Data Service API.
 """
 
 from typing import Optional, Dict, Any
 import openapi_client
-from vizdataserviceclient.api.BaseVizqlDataServiceHTTPClient import BaseVizqlDataServiceHTTPClient
+from src.api.BaseVizqlDataServiceHTTPClient import BaseVizqlDataServiceHTTPClient
 
 class SyncHTTPClient(BaseVizqlDataServiceHTTPClient):
     

@@ -1,34 +1,33 @@
 """
-VizDataService Client Module
+VizQL Data Service Client Module
 
-This module provides a client for interacting with the VizDataService API.
+This module provides a client for interacting with the VizQL Data Service API.
 It handles authentication and provides methods for querying datasources and reading metadata.
 """
 
 from typing import Optional, Union
 import tableauserverclient as TSC
 
-from openapi_client import ReadMetadataRequest
 from openapi_client.models.query_request import QueryRequest
-from vizdataserviceclient.models.user import User
-from vizdataserviceclient.models.server import Server
+from src.models.user import User
+from src.models.server import Server
 
-from vizdataserviceclient.api.EndPoints import EndPoints
-from vizdataserviceclient.api.HTTPHeaders import default_headers
-from vizdataserviceclient.api.SyncHTTPClient import SyncHTTPClient
+from src.api.EndPoints import EndPoints
+from src.api.HTTPHeaders import default_headers
+from src.api.SyncHTTPClient import SyncHTTPClient
 
 class Client:
     """
-    A client for interacting with the VizDataService API.
+    A client for interacting with the VizQL Data Service API.
     
     This client handles authentication via Tableau Server and provides methods
     for querying datasources and reading metadata.
     
     Example:
         ```python
-        from vizdataserviceclient.models.user import User
-        from vizdataserviceclient.models.server import Server
-        from vizdataserviceclient.client import Client
+        from src.models.user import User
+        from src.models.server import Server
+        from src.client import Client
         
         user = User('test', 'password', personal_access_token='')
         server = Server('http://localhost', '')
@@ -41,7 +40,7 @@ class Client:
     
     def __init__(self, user: User, server: Server):
         """
-        Initialize the VizDataService client.
+        Initialize the VizQL Data Service client.
         
         Args:
             user: User credentials for authentication
@@ -51,16 +50,16 @@ class Client:
         self.server = server
 
     """
-    This is a utility method that can be used for VizDataService APIs.
+    This is a utility method that can be used for VizQL Data Service APIs.
     User login happens via the tableau server-client-python library
-    Tableau auth is obtained and used to query the Vizdataservice apis
+    Tableau auth is obtained and used to query the VizQL Data Service apis
     
     Here is an example usage :
     from openapi_client.models.query_request import QueryRequest
-    from vizdataserviceclient.models.user import User
-    from vizdataserviceclient.models.server import Server
-    from vizdataserviceclient.utils import file_util
-    from vizdataserviceclient.client import Client
+    from src.models.user import User
+    from src.models.server import Server
+    from src.utils import file_util
+    from src.client import Client
 
     user=User('test','password',personal_access_token='')
     server=Server('http://localhost','')
@@ -80,7 +79,7 @@ class Client:
         sync_client: bool = True
     ) -> str:
         """
-        Query a datasource using the VizDataService API.
+        Query a datasource using the VizQL Data Service API.
         
         Args:
             query_request: The query request to execute
@@ -119,7 +118,7 @@ class Client:
         sync_client: bool = True
     ) -> str:
         """
-        Read metadata from a datasource using the VizDataService API.
+        Read metadata from a datasource using the VizQL Data Service API.
         
         Args:
             read_metadata_request: The metadata request to execute

@@ -1,6 +1,6 @@
-# Contributing to VizDataService Python Client
+# Contributing to VizQL Data Service Python Client
 
-Thank you for your interest in contributing to the VizDataService Python Client! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to the VizQL Data Service Python Client! This document provides guidelines and instructions for contributing.
 
 ## Code of Conduct
 

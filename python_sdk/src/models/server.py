@@ -12,7 +12,7 @@ class Server:
     A class that encapsulates server configuration information.
     
     This class stores and manages server connection details including server name
-    and site information for connecting to the VizDataService API.
+    and site information for connecting to the VizQL Data Service API.
     
     Attributes:
         server_name (str): The server's URL or hostname

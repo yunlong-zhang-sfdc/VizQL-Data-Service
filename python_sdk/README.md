@@ -16,10 +16,10 @@ pip install vizqldataservicesdk
 ### Basic Usage
 ```python
 from openapi_client.models.query_request import QueryRequest
-from vizdataserviceclient.models.user import User
-from vizdataserviceclient.models.server import Server
-from vizdataserviceclient.utils import file_util
-from vizdataserviceclient.client import Client
+from src.models.user import User
+from src.models.server import Server
+from src.utils import file_util
+from src.client import Client
 
 # Initialize client
 user = User('<username>', '<password>', '')
@@ -52,7 +52,7 @@ client.query_datasource(query_request)
 3. Generate OpenAPI client:
    ```bash
    pip install openapi-generator-cli
-   openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python -o openapi_client --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
+   openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
    ```
 
 4. Install SDK:

@@ -7,10 +7,10 @@ import tableauserverclient as TSC
 from openapi_client.models.query_request import QueryRequest
 from openapi_client.models.read_metadata_request import ReadMetadataRequest
 
-from vizdataserviceclient.api.EndPoints import EndPoints
-from vizdataserviceclient.api.HTTPHeaders import default_headers
-from vizdataserviceclient.utils import file_util
-from vizdataserviceclient.api.SyncHTTPClient import SyncHTTPClient
+from src.api.EndPoints import EndPoints
+from src.api.HTTPHeaders import default_headers
+from src.utils import file_util
+from src.api.SyncHTTPClient import SyncHTTPClient
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
 

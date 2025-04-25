@@ -1,5 +1,5 @@
 """
-This is an asynchronous http client that can be used to query VizDataService API.
+This is an asynchronous http client that can be used to query VizQL Data Service API.
 httpx module is used for these requests
 """
 
@@ -7,7 +7,7 @@ from typing import Optional, Dict, Any
 import json as json_lib
 import httpx
 from openapi_client import MetadataOutput, QueryOutput
-from vizdataserviceclient.api.BaseVizqlDataServiceHTTPClient import BaseVizqlDataServiceHTTPClient
+from src.api.BaseVizqlDataServiceHTTPClient import BaseVizqlDataServiceHTTPClient
 
 class AsyncHTTPClient(BaseVizqlDataServiceHTTPClient):
 

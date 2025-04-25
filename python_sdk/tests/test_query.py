@@ -1,6 +1,6 @@
 
 import unittest
-from vizdataserviceclient.api.HTTPHeaders import default_headers
+from src.api.HTTPHeaders import default_headers
 from openapi_client.models.query import Query
 from pydantic import validate_call
 from openapi_client.models.read_metadata_request import ReadMetadataRequest

@@ -1,5 +1,5 @@
 """
-Setup configuration for the VizDataService Python Client.
+Setup configuration for the VizQL Data Service Python Client.
 """
 
 from setuptools import setup, find_packages
@@ -73,7 +73,7 @@ extra_files = package_files('examples/payloads')
 setup(
     name=NAME,
     version=read_version(),
-    description="A Python client library for interacting with the VizDataService API",
+    description="A Python client library for interacting with the VizQL Data Service API",
     long_description_content_type="text/markdown",
     author="Tableau",
 long_description="""\

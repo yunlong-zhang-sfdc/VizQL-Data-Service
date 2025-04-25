@@ -12,7 +12,7 @@ class User:
     A class that encapsulates user authentication information.
     
     This class stores and manages user credentials including username, password,
-    and personal access token for authentication with the VizDataService API.
+    and personal access token for authentication with the VizQL Data Service API.
     
     Attributes:
         username (str): The user's username

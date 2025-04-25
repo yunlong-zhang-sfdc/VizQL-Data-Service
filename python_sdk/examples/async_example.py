@@ -5,10 +5,10 @@ from pprint import pprint
 import tableauserverclient as TSC
 from openapi_client import QueryRequest, ReadMetadataRequest
 
-from vizdataserviceclient.api.EndPoints import EndPoints
-from vizdataserviceclient.api.HTTPHeaders import default_headers
-from vizdataserviceclient.utils import file_util
-from vizdataserviceclient.api.AsyncHTTPClient import AsyncHTTPClient
+from src.api.EndPoints import EndPoints
+from src.api.HTTPHeaders import default_headers
+from src.utils import file_util
+from src.api.AsyncHTTPClient import AsyncHTTPClient
 
 async def main():
     parser = argparse.ArgumentParser(description="Calls the Headless BI query_datasource and read_metadata APIs asynchronously")
