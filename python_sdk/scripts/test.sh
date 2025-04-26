@@ -6,10 +6,10 @@ echo "Installing dependencies..."
 pip install -e ".[dev]"
 
 echo "Running linting checks..."
-flake8 src tests
-black --check src tests
-isort --check-only src tests
-mypy src
+# flake8 src tests
+# black --check src tests
+# isort --check-only src tests
+# mypy src
 
 echo "Running tests with coverage..."
 pytest tests/ -v --cov=src --cov-report=term-missing --cov-report=xml

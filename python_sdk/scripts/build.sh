@@ -12,7 +12,6 @@ pip install setuptools wheel build
 pip install requests
 
 # Build the package
-cd python_sdk
 python setup.py sdist bdist_wheel
 
 echo "Build completed successfully. Packages are in python_sdk/dist/"
