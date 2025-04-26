@@ -1,16 +1,6 @@
 name: Python SDK Build
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'python_sdk/**'
-      - '!python_sdk/.github/workflows/**'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'python_sdk/**'
-      - '!python_sdk/.github/workflows/**'
+on: [push, pull_request]
 
 jobs:
   build:

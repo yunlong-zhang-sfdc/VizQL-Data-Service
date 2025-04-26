@@ -1,16 +1,6 @@
 name: Python SDK Generate Stubs
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'VizQLDataServiceOpenAPISchema.json'
-      - 'python_sdk/scripts/generate_stub.sh'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'VizQLDataServiceOpenAPISchema.json'
-      - 'python_sdk/scripts/generate_stub.sh'
+on: [push, pull_request]
 
 jobs:
   generate:

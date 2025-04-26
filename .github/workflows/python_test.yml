@@ -1,18 +1,6 @@
 name: Python SDK Test
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'python_sdk/src/**'
-      - 'python_sdk/tests/**'
-      - 'python_sdk/scripts/test.sh'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'python_sdk/src/**'
-      - 'python_sdk/tests/**'
-      - 'python_sdk/scripts/test.sh'
+on: [push, pull_request]
 
 jobs:
   test:
