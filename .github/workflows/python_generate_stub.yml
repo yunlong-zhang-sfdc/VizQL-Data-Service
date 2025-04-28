@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10"]
 
     steps:
     - uses: actions/checkout@v4
@@ -21,14 +21,6 @@ jobs:
         pip install setuptools
         pip install jdk4py
         pip install openapi-generator-cli
-    - name: Debug Environment Info
-      run: |
-        echo "Python version: $(python --version)"
-        echo "Pip location: $(which pip)"
-        echo "Python location: $(which python)"
-        echo "PATH=$PATH"
-        echo "Installed packages:"
-        pip list
     - name: Verify openapi-generator-cli installation
       run: |
         openapi-generator-cli version

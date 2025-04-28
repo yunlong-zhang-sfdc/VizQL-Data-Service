@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10"]
 
     steps:
     - uses: actions/checkout@v4
@@ -21,6 +21,9 @@ jobs:
         pip install setuptools
         pip install jdk4py
         pip install openapi-generator-cli
+    - name: Verify openapi-generator-cli installation
+      run: |
+        openapi-generator-cli version
     - name: Run generate script
       run: |
         cd python_sdk
