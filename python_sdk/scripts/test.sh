@@ -12,7 +12,7 @@ source venv/bin/activate
 
 ls dist -al
 
-python -m pip install dist/vizql-data-service*.whl
+python -m pip install dist/vizql_data_service_python_sdk*.whl
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 pip install -r test-requirements.txt
