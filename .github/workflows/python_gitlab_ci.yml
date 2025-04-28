@@ -16,20 +16,25 @@ jobs:
         python-version: ["3.9", "3.10"]
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
+    - name: Check out repository 
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Install dependencies
       run: |
         pip install --upgrade pip
         pip install setuptools
         pip install jdk4py
         pip install openapi-generator-cli
+
     - name: Verify openapi-generator-cli installation
       run: |
         openapi-generator-cli version
+
     - name: Run generate script
       run: |
         cd python_sdk
@@ -37,7 +42,8 @@ jobs:
         bash scripts/generate_stub.sh
       env:
         JAVA_HOME: /usr/lib/jvm/java-11-openjdk
-    - name: Upload artifacts
+
+    - name: Upload client artifacts
       uses: actions/upload-artifact@v4
       with:
         name: generated-client-${{ matrix.python-version }}
@@ -52,22 +58,27 @@ jobs:
         python-version: ["3.9", "3.10"]
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Check out repository
+      uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Download generated client
+
+    - name: Download client artifacts
       uses: actions/download-artifact@v4
       with:
         name: generated-client-${{ matrix.python-version }}
         path: python_sdk/openapi_client/
+
     - name: Run build script
       run: |
         cd python_sdk
         chmod +x scripts/build.sh
         bash scripts/build.sh
-    - name: Upload artifacts
+
+    - name: Upload package artifacts
       uses: actions/upload-artifact@v4
       with:
         name: python-package-${{ matrix.python-version }}
@@ -82,27 +93,33 @@ jobs:
         python-version: ["3.9", "3.10"]
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Check out repository
+      uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Download generated client
+
+    - name: Download client artifacts
       uses: actions/download-artifact@v4
       with:
         name: generated-client-${{ matrix.python-version }}
         path: python_sdk/openapi_client/
-    - name: Download built package
+
+    - name: Download package artifacts
       uses: actions/download-artifact@v4
       with:
         name: python-package-${{ matrix.python-version }}
         path: python_sdk/dist/
+
     - name: Run test script
       run: |
         cd python_sdk
         chmod +x scripts/test.sh
         bash scripts/test.sh
-    - name: Upload coverage reports
+
+    - name: Upload coverage reports artifacts
       uses: actions/upload-artifact@v4
       with:
         name: coverage-reports-${{ matrix.python-version }}
