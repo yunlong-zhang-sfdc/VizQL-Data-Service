@@ -13,7 +13,7 @@ pip install jdk4py
 pip install openapi-generator-cli
 
 # Generate client code
-openapi-generator-cli generate \
+python -m openapi-generator-cli generate \
     -i VizQLDataServiceOpenAPISchema.json \
     -g python-pydantic-v1 \
     -o python_sdk/build/generated \
