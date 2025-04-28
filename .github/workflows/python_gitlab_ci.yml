@@ -41,9 +41,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: generated-client-${{ matrix.python-version }}
-        path: 
-          - python_sdk/openapi_client/
-          - python_sdk/docs/
+        path: python_sdk/openapi_client/
 
   build:
     needs: [generateStub, build]
@@ -95,9 +93,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: generated-client-${{ matrix.python-version }}
-        path:
-          - python_sdk/openapi_client/
-          - python_sdk/docs/
+        path: python_sdk/openapi_client/
     - name: Download built package
       uses: actions/download-artifact@v4
       with:
