@@ -21,6 +21,9 @@ jobs:
         pip install setuptools
         pip install jdk4py
         pip install openapi-generator-cli
+    - name: Verify openapi-generator-cli installation
+      run: |
+        openapi-generator-cli version
     - name: Run generate script
       run: |
         cd python_sdk

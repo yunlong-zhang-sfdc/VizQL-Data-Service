@@ -6,6 +6,10 @@ set -e
 # Print commands as they are executed
 set -x
 
+which python
+which pip
+pip list  # Check installed packages
+
 # Generate client code
 python -m openapi-generator-cli generate \
     -i VizQLDataServiceOpenAPISchema.json \
