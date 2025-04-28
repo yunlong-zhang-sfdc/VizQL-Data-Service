@@ -5,7 +5,7 @@ set -e
 echo "Installing dependencies..."
 pip install setuptools wheel build
 pip install requests
-pip install -e . --no-use-pep517
+pip install -e ".[dev]" --no-use-pep517
 
 echo "Running linting checks..."
 # flake8 src tests
