@@ -7,10 +7,9 @@ set -e
 set -x
 
 # Generate client code
-python -m openapi-generator-cli generate \
-    -i VizQLDataServiceOpenAPISchema.json \
+openapi-generator-cli generate \
+    -i ../VizQLDataServiceOpenAPISchema.json \
     -g python-pydantic-v1 \
-    -o python_sdk/build/generated \
     --ignore-file-override .openapi-generator-ignore \
     --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
 
