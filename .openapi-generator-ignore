@@ -23,5 +23,5 @@
 #!docs/README.md
 
 # Don't generate files that have one_of or OneOf in the names
-**/models/*one_of*.py
-**/docs/*OneOf*.md
+generated-client*/models/*one_of*.py
+generated-client*/docs/*OneOf*.md
