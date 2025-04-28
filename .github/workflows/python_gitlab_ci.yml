@@ -44,7 +44,7 @@ jobs:
         path: python_sdk/openapi_client/
 
   build:
-    needs: [generateStub, build]
+    needs: [generateStub]
     if: needs.generateStub.result == 'success'
     runs-on: ubuntu-latest
     strategy:
@@ -60,10 +60,8 @@ jobs:
     - name: Download generated client
       uses: actions/download-artifact@v4
       with:
-      name: generated-client-${{ matrix.python-version }}
-      path:
-        - python_sdk/openapi_client/
-        - python_sdk/docs/
+        name: generated-client-${{ matrix.python-version }}
+        path: python_sdk/openapi_client/
     - name: Run build script
       run: |
         cd python_sdk
