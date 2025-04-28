@@ -8,7 +8,7 @@ set -x
 
 rm -rf venv
 python -m venv venv
-source venv/Scripts/activate
+source venv/bin/activate
 
 python -m pip install dist/vizql_data_service*.whl
 pwd
