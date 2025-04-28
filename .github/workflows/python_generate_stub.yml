@@ -5,22 +5,29 @@ on: [push, pull_request]
 jobs:
   generate:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
-    - name: Set up JDK
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install setuptools
+        pip install jdk4py
+        pip install openapi-generator-cli
     - name: Run generate script
       run: |
         cd python_sdk
         chmod +x scripts/generate_stub.sh
         bash scripts/generate_stub.sh
+      env:
+        JAVA_HOME: /usr/lib/jvm/java-11-openjdk
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:

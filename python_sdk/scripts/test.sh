@@ -4,7 +4,7 @@ set -e
 
 echo "Installing dependencies..."
 pip install requests setuptools wheel 
-pip install -e ".[dev]" --no-build-isolation
+pip install -e . --no-build-isolation
 
 echo "Running linting checks..."
 # flake8 src tests
