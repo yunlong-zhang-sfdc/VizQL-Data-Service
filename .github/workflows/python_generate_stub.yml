@@ -20,9 +20,15 @@ jobs:
         pip install --upgrade pip
         pip install setuptools
         pip install jdk4py
-        pip install openapi-generator-cli      
-    - name: Add local pip bin to PATH
-      run: echo "$HOME/.local/bin" >> $GITHUB_PATH  
+        pip install openapi-generator-cli
+    - name: Debug Environment Info
+      run: |
+        echo "Python version: $(python --version)"
+        echo "Pip location: $(which pip)"
+        echo "Python location: $(which python)"
+        echo "PATH=$PATH"
+        echo "Installed packages:"
+        pip list
     - name: Verify openapi-generator-cli installation
       run: |
         openapi-generator-cli version
