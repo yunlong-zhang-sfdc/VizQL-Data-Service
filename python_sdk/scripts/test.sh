@@ -10,7 +10,8 @@ rm -rf venv
 python -m venv venv
 source venv/bin/activate
 
-python -m pip install dist/vizql_data_service*.whl
+ls dist -al
+python -m pip install dist/vizql-data-service*.whl
 pwd
 
 python -m pip install --upgrade pip
