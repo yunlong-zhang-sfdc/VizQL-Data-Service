@@ -1,11 +1,21 @@
 #!/bin/bash
 
+# Exit on error
 set -e
 
-echo "Installing dependencies..."
-pip install setuptools wheel build
-pip install requests
-pip install -e ".[dev]" --no-use-pep517
+# Print commands as they are executed
+set -x
+
+rm -rf venv
+python -m venv venv
+source venv/Scripts/activate
+
+python -m pip install dist/vizql_data_service*.whl
+pwd
+
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install -r test-requirements.txt
 
 echo "Running linting checks..."
 # flake8 src tests
@@ -14,7 +24,7 @@ echo "Running linting checks..."
 # mypy src
 
 echo "Running tests with coverage..."
-pytest tests/ -v --cov=src --cov-report=term-missing --cov-report=xml
+pytest tests --disable-warnings --cov
 
 if [ $? -eq 0 ]; then
     echo "All tests passed successfully!"

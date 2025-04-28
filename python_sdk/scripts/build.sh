@@ -7,7 +7,7 @@ set -e
 set -x
 
 # Install dependencies
-pip install --upgrade pip
+python -m pip install --upgrade pip
 pip install setuptools wheel build
 pip install requests
 

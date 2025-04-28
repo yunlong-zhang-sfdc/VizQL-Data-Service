@@ -1,6 +1,12 @@
 name: Python SDK Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -15,22 +21,6 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install setuptools
-        pip install jdk4py
-        pip install openapi-generator-cli
-    - name: Verify openapi-generator-cli installation
-      run: |
-        openapi-generator-cli version
-    - name: Run generate script
-      run: |
-        cd python_sdk
-        chmod +x scripts/generate_stub.sh
-        bash scripts/generate_stub.sh
-      env:
-        JAVA_HOME: /usr/lib/jvm/java-11-openjdk
     - name: Run test script
       run: |
         cd python_sdk
