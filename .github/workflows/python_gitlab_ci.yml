@@ -1,0 +1,127 @@
+name: Python SDK Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+timeout-minutes: 30
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  PYTHONPATH: ${{ github.workspace }}/python_sdk
+
+jobs:
+  generateStub:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install setuptools
+        pip install jdk4py
+        pip install openapi-generator-cli
+    - name: Verify openapi-generator-cli installation
+      run: |
+        openapi-generator-cli version
+    - name: Run generate script
+      run: |
+        cd python_sdk
+        chmod +x scripts/generate_stub.sh
+        bash scripts/generate_stub.sh
+      env:
+        JAVA_HOME: /usr/lib/jvm/java-11-openjdk
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: generated-client-${{ matrix.python-version }}
+        path: 
+          - python_sdk/openapi_client/
+          - python_sdk/docs/
+
+  build:
+    needs: [generateStub, build]
+    if: needs.generateStub.result == 'success'
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Download generated client
+      uses: actions/download-artifact@v4
+      with:
+      name: generated-client-${{ matrix.python-version }}
+      path:
+        - python_sdk/openapi_client/
+        - python_sdk/docs/
+    - name: Run build script
+      run: |
+        cd python_sdk
+        chmod +x scripts/build.sh
+        bash scripts/build.sh
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-${{ matrix.python-version }}
+        path: python_sdk/dist/ 
+
+  test:
+    needs: [generateStub, build]
+    if: needs.generateStub.result == 'success' && needs.build.result == 'success'
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Download generated client
+      uses: actions/download-artifact@v4
+      with:
+        name: generated-client-${{ matrix.python-version }}
+        path:
+          - python_sdk/openapi_client/
+          - python_sdk/docs/
+    - name: Download built package
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-${{ matrix.python-version }}
+        path: python_sdk/dist/
+    - name: Run test script
+      run: |
+        cd python_sdk
+        chmod +x scripts/test.sh
+        bash scripts/test.sh
+    - name: Upload coverage reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-reports-${{ matrix.python-version }}
+        path: python_sdk/coverage.xml 
