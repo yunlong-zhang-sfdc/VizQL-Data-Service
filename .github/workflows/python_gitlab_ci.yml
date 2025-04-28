@@ -40,8 +40,6 @@ jobs:
         cd python_sdk
         chmod +x scripts/generate_stub.sh
         bash scripts/generate_stub.sh
-      env:
-        JAVA_HOME: /usr/lib/jvm/java-11-openjdk
 
     - name: Upload client artifacts
       uses: actions/upload-artifact@v4
