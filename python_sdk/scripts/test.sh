@@ -14,8 +14,7 @@ ls dist -al
 
 python -m pip install dist/vizql_data_service_python_sdk*.whl
 python -m pip install --upgrade pip
-pip install -r requirements.txt
-pip install -r test-requirements.txt
+pip install -e .[dev]
 
 echo "Running linting checks..."
 flake8 .
