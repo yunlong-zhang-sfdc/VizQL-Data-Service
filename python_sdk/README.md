@@ -52,7 +52,7 @@ client.query_datasource(query_request)
 3. Generate OpenAPI client:
    ```bash
    pip install openapi-generator-cli
-   openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python-pydantic-v1 --ignore-file-override .openapi-generator-ignore --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
+   openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python-pydantic-v1 --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
    ```
 
 4. Install SDK:
