@@ -15,7 +15,7 @@ from typing import Optional, Dict, Any
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "vizql-data-service-python-sdk"
-PYTHON_REQUIRES = ">= 3.8"
+PYTHON_REQUIRES = ">= 3.9"
 
 def read_version() -> str:
     """
@@ -24,11 +24,16 @@ def read_version() -> str:
     Returns:
         str: The version number or 'UNKNOWN' if not found
     """
-    url = 'https://raw.githubusercontent.com/tableau/VizQL-Data-Service/refs/heads/main/VizQLDataServiceOpenAPISchema.json'
-    read_file = read_json_from_url(url)
-    if read_file is not None:
-        return read_file['info']['version']
-    return 'UNKNOWN'
+    schema_path = os.path.join(os.path.dirname(__file__), '..', 'VizQLDataServiceOpenAPISchema.json')
+    try:
+        with open(schema_path, 'r') as f:
+            schema = json.load(f)
+            version = schema['info']['version']
+            print(f"Found version: {version}")
+            return version
+    except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
+        print(f"Error reading version from schema: {e}")
+        return 'UNKNOWN'
 
 def read_json_from_url(url: str) -> Optional[Dict[str, Any]]:
     """
@@ -62,7 +67,7 @@ def package_files(directory: str) -> list:
         list: List of file paths
     """
     paths = []
-    for (path,directories, filenames) in os.walk(directory):
+    for (path, directories, filenames) in os.walk(directory):
         for filename in filenames:
             paths.append(os.path.join('..', path, filename))
     return paths
@@ -76,28 +81,31 @@ setup(
     description="A Python client library for interacting with the VizQL Data Service API",
     long_description_content_type="text/markdown",
     author="Tableau",
-long_description="""\
+    author_email="github@tableau.com",
+    maintainer="Tableau",
+    maintainer_email="github@tableau.com",
+    long_description="""\
     python sdk to query Tableau published data sources
     """,
-    author_email="ajonnavittula@tableau.com",
-    url="",
+    url="https://github.com/tableau/VizQL-Data-Service/python_sdk",
     project_urls={
-        "Bug Tracker": "",
+        "Bug Tracker": "https://github.com/tableau/VizQL-Data-Service/issues",
         "Documentation": "",
-        "Source Code": "",
+        "Source Code": "https://github.com/tableau/VizQL-Data-Service/python_sdk",
     },
+    download_url="TBD",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
+    keywords=["vizqldataservice tableau"],
     packages=find_packages(),
     test_requires=["pytest"],
     python_requires=PYTHON_REQUIRES,
@@ -120,7 +128,7 @@ long_description="""\
         "python-dateutil>=2.8.2",
         "httpx>=0.23.3",
         "urllib3>=1.25.3,<3.0.0",
-        "pydantic>=2.0.0",
+        "pydantic<2",
         "typing-extensions>=4.7.1",
     ],
     extras_require={
