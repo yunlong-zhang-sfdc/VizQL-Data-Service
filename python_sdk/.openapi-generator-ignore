@@ -22,6 +22,12 @@
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
 
-# Don't generate files that have one_of or OneOf in the names
-openapi_client/**/*one_of*.py
-openapi_client/**/*OneOf*.md
+# Don't generate files that have one_of1, one_of2, OneOf1, or OneOf2 in the names
+openapi_client/**/field_one_of1.py
+openapi_client/**/field_one_of2.py
+openapi_client/**/filter_field_one_of1.py
+openapi_client/**/filter_field_one_of2.py
+openapi_client/**/FieldOneOf1.md
+openapi_client/**/FieldOneOf2.md
+openapi_client/**/FilterFieldOneOf1.md
+openapi_client/**/FilterfieldOneOf2.md
