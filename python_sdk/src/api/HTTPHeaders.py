@@ -2,6 +2,7 @@ class HTTPHeaders:
     """
     Class for maintaining HTTP headers
     """
+
     def __init__(self, headers=None):
         self._headers = headers or {}
 
@@ -30,13 +31,13 @@ class HTTPHeaders:
         :return: the header value for the header key
         :rtype: str
         """
-        return  self._headers.get(key, None)
+        return self._headers.get(key, None)
 
     def set_accept_json(self):
         """
         Set the accept json header
         """
-        self.add_header("User-Agent","application/json")
+        self.add_header("User-Agent", "application/json")
 
     def set_tableau_auth(self, auth_token):
         """
@@ -61,9 +62,10 @@ class HTTPHeaders:
         """
         return self._headers.copy()
 
+
 def default_headers():
     headers = HTTPHeaders()
-    headers.add_header("Content-Type","application/json")
+    headers.add_header("Content-Type", "application/json")
     headers.set_accept_json()
-    headers.set_user_agent('python-sdk-client')
+    headers.set_user_agent("python-sdk-client")
     return headers

@@ -18,10 +18,7 @@ pip install -r requirements.txt
 pip install -r test-requirements.txt
 
 echo "Running linting checks..."
-# flake8 src tests
-# black --check src tests
-# isort --check-only src tests
-# mypy src
+flake8 .
 
 echo "Running tests with coverage..."
 pytest tests --disable-warnings --cov

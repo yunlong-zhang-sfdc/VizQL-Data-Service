@@ -17,31 +17,35 @@ from typing import Optional, Dict, Any
 NAME = "vizql-data-service-python-sdk"
 PYTHON_REQUIRES = ">= 3.9"
 
+
 def read_version() -> str:
     """
     Read the version from the OpenAPI schema.
-    
+
     Returns:
         str: The version number or 'UNKNOWN' if not found
     """
-    schema_path = os.path.join(os.path.dirname(__file__), '..', 'VizQLDataServiceOpenAPISchema.json')
+    schema_path = os.path.join(
+        os.path.dirname(__file__), "..", "VizQLDataServiceOpenAPISchema.json"
+    )
     try:
-        with open(schema_path, 'r') as f:
+        with open(schema_path, "r") as f:
             schema = json.load(f)
-            version = schema['info']['version']
+            version = schema["info"]["version"]
             print(f"Found version: {version}")
             return version
     except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
         print(f"Error reading version from schema: {e}")
-        return 'UNKNOWN'
+        return "UNKNOWN"
+
 
 def read_json_from_url(url: str) -> Optional[Dict[str, Any]]:
     """
     Read JSON data from a URL.
-    
+
     Args:
         url: The URL to read from
-        
+
     Returns:
         Optional[Dict[str, Any]]: The JSON data or None if failed
     """
@@ -56,24 +60,26 @@ def read_json_from_url(url: str) -> Optional[Dict[str, Any]]:
         print(f"JSON decode error: {e}")
         return None
 
+
 def package_files(directory: str) -> list:
     """
     Get a list of files in a directory for package data.
-    
+
     Args:
         directory: The directory to scan
-        
+
     Returns:
         list: List of file paths
     """
     paths = []
-    for (path, directories, filenames) in os.walk(directory):
+    for path, directories, filenames in os.walk(directory):
         for filename in filenames:
-            paths.append(os.path.join('..', path, filename))
+            paths.append(os.path.join("..", path, filename))
     return paths
 
+
 # Get example files
-extra_files = package_files('examples/payloads')
+extra_files = package_files("examples/payloads")
 
 setup(
     name=NAME,
@@ -141,8 +147,6 @@ setup(
             "mypy>=1.0.0",
         ],
     },
-    package_data={
-        "vizql-data-service-python-sdk": ['examples/payloads/*.json']
-    },
+    package_data={"vizql-data-service-python-sdk": ["examples/payloads/*.json"]},
     include_package_data=True,
 )

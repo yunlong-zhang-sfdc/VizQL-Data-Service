@@ -9,15 +9,20 @@ import httpx
 from openapi_client import MetadataOutput, QueryOutput
 from src.api.BaseVizqlDataServiceHTTPClient import BaseVizqlDataServiceHTTPClient
 
+
 class AsyncHTTPClient(BaseVizqlDataServiceHTTPClient):
 
-    async def query_datasource(self, url: str, headers: Optional[Dict[str, str]] = None,
-                     json: Optional[Dict[str, Any]] = None) -> Any:
+    async def query_datasource(
+        self,
+        url: str,
+        headers: Optional[Dict[str, str]] = None,
+        json: Optional[Dict[str, Any]] = None,
+    ) -> Any:
         async with httpx.AsyncClient() as client:
             try:
                 response = await client.post(url, headers=headers, json=json)
                 if response.status_code == 200:
-                    return (QueryOutput.from_json(json_lib.dumps(response.json())))
+                    return QueryOutput.from_json(json_lib.dumps(response.json()))
                 response.raise_for_status()
                 return response
             except httpx.RequestError as e:
@@ -27,13 +32,17 @@ class AsyncHTTPClient(BaseVizqlDataServiceHTTPClient):
                 print(f"An unexpected error occurred: {e}")
                 return None
 
-    async def read_metadata(self, url: str, headers: Optional[Dict[str, str]] = None,
-                      json: Optional[Dict[str, Any]] = None) -> MetadataOutput:
+    async def read_metadata(
+        self,
+        url: str,
+        headers: Optional[Dict[str, str]] = None,
+        json: Optional[Dict[str, Any]] = None,
+    ) -> MetadataOutput:
         async with httpx.AsyncClient() as client:
             try:
-                response = await client.post(url, headers=headers,json=json)
-                if response.status_code== 200:
-                    return (MetadataOutput.from_json(json_lib.dumps(response.json())))
+                response = await client.post(url, headers=headers, json=json)
+                if response.status_code == 200:
+                    return MetadataOutput.from_json(json_lib.dumps(response.json()))
                 response.raise_for_status()
                 return response
             except httpx.RequestError as e:
