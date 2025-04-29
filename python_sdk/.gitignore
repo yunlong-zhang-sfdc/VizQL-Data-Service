@@ -175,5 +175,6 @@ cython_debug/
 
 # Open api related file
 openapi_client/
+.openapi-generator-ignore
 .openapi-generator/
 openapi_client_README.md

@@ -135,6 +135,7 @@ setup(
         "httpx>=0.23.3",
         "urllib3>=1.25.3,<3.0.0",
         "pydantic<2",
+        "aenum >= 3.1.11",
         "typing-extensions>=4.7.1",
     ],
     extras_require={
