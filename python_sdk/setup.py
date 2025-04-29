@@ -4,9 +4,7 @@ Setup configuration for the VizQL Data Service Python Client.
 
 from setuptools import setup, find_packages
 import os
-import requests
 import json
-from typing import Optional, Dict, Any
 
 # To install the library, run the following
 #
@@ -37,29 +35,6 @@ def read_version() -> str:
     except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
         print(f"Error reading version from schema: {e}")
         return "UNKNOWN"
-
-
-def read_json_from_url(url: str) -> Optional[Dict[str, Any]]:
-    """
-    Read JSON data from a URL.
-
-    Args:
-        url: The URL to read from
-
-    Returns:
-        Optional[Dict[str, Any]]: The JSON data or None if failed
-    """
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Request error: {e}")
-        return None
-    except json.JSONDecodeError as e:
-        print(f"JSON decode error: {e}")
-        return None
-
 
 def package_files(directory: str) -> list:
     """
