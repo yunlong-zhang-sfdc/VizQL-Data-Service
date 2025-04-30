@@ -67,6 +67,7 @@ dev = [
 [tool.setuptools.packages]
 find = {}
 
+# Include sample json payload files in src/examples/
 [tool.setuptools.package-data]
 "*" = ["*.json"]
 
