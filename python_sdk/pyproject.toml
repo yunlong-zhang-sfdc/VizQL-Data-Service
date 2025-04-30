@@ -70,4 +70,4 @@ dev = [
 find = {}
 
 [tool.setuptools.package-data]
-"vizql-data-service-python-sdk" = ["examples/payloads/*.json"]
+#"vizql-data-service-python-sdk" = ["examples/payloads/*.json"]
