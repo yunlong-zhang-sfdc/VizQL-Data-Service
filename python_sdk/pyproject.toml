@@ -64,11 +64,12 @@ dev = [
     "flake8>=6.0.0",
 ]
 
-[tool.setuptools.packages]
-find = {}
+[tool.setuptools.packages.find]
+where = ["python_sdk"]
+include = ["src", "openapi_client"]
 
 [tool.setuptools.package-data]
-examples = ["*.json"]
+examples = ["src/examples/*.json"]
 
 
 [tool.isort]
