@@ -6,14 +6,14 @@ It handles authentication and provides methods for querying datasources and read
 """
 
 import tableauserverclient as TSC
+
 from openapi_client.models.query_request import QueryRequest
 from openapi_client.models.read_metadata_request import ReadMetadataRequest
-
-from src.models.user import User
-from src.models.server import Server
 from src.api.EndPoints import EndPoints
 from src.api.HTTPHeaders import default_headers
 from src.api.SyncHTTPClient import SyncHTTPClient
+from src.models.server import Server
+from src.models.user import User
 
 
 class Client:

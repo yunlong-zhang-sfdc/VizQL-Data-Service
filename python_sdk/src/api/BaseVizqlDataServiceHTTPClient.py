@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Any, Optional, Dict
+from typing import Any, Dict, Optional
+
+from openapi_client.models import QueryRequest, ReadMetadataRequest
 
 
 class BaseVizqlDataServiceHTTPClient(ABC):
@@ -9,7 +11,7 @@ class BaseVizqlDataServiceHTTPClient(ABC):
         self,
         url: str,
         headers: Optional[Dict[str, str]] = None,
-        json: Optional[Dict[str, Any]] = None,
+        request: Optional[QueryRequest] = None,
     ) -> Any:
         pass
 
@@ -18,6 +20,6 @@ class BaseVizqlDataServiceHTTPClient(ABC):
         self,
         url: str,
         headers: Optional[Dict[str, str]] = None,
-        json: Optional[Dict[str, Any]] = None,
+        request: Optional[ReadMetadataRequest] = None,
     ) -> Any:
         pass

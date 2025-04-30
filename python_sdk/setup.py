@@ -2,9 +2,10 @@
 Setup configuration for the VizQL Data Service Python Client.
 """
 
-from setuptools import setup, find_packages
-import os
 import json
+import os
+
+from setuptools import find_packages, setup
 
 # To install the library, run the following
 #
@@ -35,6 +36,7 @@ def read_version() -> str:
     except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
         print(f"Error reading version from schema: {e}")
         return "UNKNOWN"
+
 
 def package_files(directory: str) -> list:
     """

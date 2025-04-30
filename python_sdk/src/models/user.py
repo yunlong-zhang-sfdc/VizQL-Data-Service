@@ -47,12 +47,12 @@ class User:
         )
         return f"User: {self.username} (Auth: {auth_method})"
 
-    def get_user_info(self) -> Dict[str, str]:
+    def get_user_info(self) -> Dict[str, str | None]:
         """
         Get a dictionary containing the user's authentication information.
 
         Returns:
-            Dict[str, str]: A dictionary with user authentication details
+            Dict[str, str | None]: A dictionary with user authentication details
         """
         return {
             "userId": self.username,

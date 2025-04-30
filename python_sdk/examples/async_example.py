@@ -3,17 +3,17 @@ import asyncio
 from pprint import pprint
 
 import tableauserverclient as TSC
-from openapi_client import QueryRequest, ReadMetadataRequest
 
+from openapi_client import QueryRequest, ReadMetadataRequest
+from src.api.AsyncHTTPClient import AsyncHTTPClient
 from src.api.EndPoints import EndPoints
 from src.api.HTTPHeaders import default_headers
 from src.utils import file_util
-from src.api.AsyncHTTPClient import AsyncHTTPClient
 
 
 async def main():
     parser = argparse.ArgumentParser(
-        description="Calls the Headless BI query_datasource and read_metadata APIs asynchronously"
+        description="Calls the VizQL Data Service query_datasource and read_metadata APIs asynchronously"
     )
     parser.add_argument("--server", "-s", help="server address")
     parser.add_argument("--site", "-S", help="site name")
@@ -44,15 +44,16 @@ async def main():
         )
         query_request.datasource.datasource_luid = sample_superstore_luid
         response = await client.query_datasource(
-            args.server + "".join(
+            args.server
+            + "".join(
                 [EndPoints.VIZQL_DATA_SERVICE_URL, EndPoints.QUERY_DATASOURCE_ENDPOINT]
             ),
             headers.to_dict(),
-            query_request.to_dict(),
+            query_request,
         )
         if response:
             print("Response for query_datasource request: ")
-            pprint(response.model_dump_json(indent=4))
+            pprint(response.data)
 
         # sample read_metadata
         read_metadata_request = ReadMetadataRequest.from_json(
@@ -60,15 +61,16 @@ async def main():
         )
         read_metadata_request.datasource.datasource_luid = sample_superstore_luid
         response = await client.read_metadata(
-            args.server + "".join(
+            args.server
+            + "".join(
                 [EndPoints.VIZQL_DATA_SERVICE_URL, EndPoints.READ_METADATA_ENDPOINT]
             ),
             headers.to_dict(),
-            read_metadata_request.to_dict(),
+            read_metadata_request,
         )
         if response:
             print("Response for read_metadata request: ")
-            pprint(response.model_dump_json(indent=4))
+            pprint(response.data)
 
 
 if __name__ == "__main__":

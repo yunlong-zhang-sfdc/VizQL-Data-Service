@@ -4,20 +4,20 @@ import sys
 from pprint import pprint
 
 import tableauserverclient as TSC
+
 from openapi_client.models.query_request import QueryRequest
 from openapi_client.models.read_metadata_request import ReadMetadataRequest
-
 from src.api.EndPoints import EndPoints
 from src.api.HTTPHeaders import default_headers
-from src.utils import file_util
 from src.api.SyncHTTPClient import SyncHTTPClient
+from src.utils import file_util
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Calls the Headless BI query_datasource and read_metadata APIs synchronously"
+        description="Calls the VizQL Data Service query_datasource and read_metadata APIs synchronously"
     )
     parser.add_argument("--server", "-s", help="server address")
     parser.add_argument("--site", "-S", help="site name")
@@ -51,7 +51,7 @@ def main():
         )
         if response:
             print("Response for query_datasource request: ")
-            pprint(response.model_dump_json(indent=4))
+            pprint(response.data)
 
         # sample read metadata
         readmetadata_request_json = file_util.read_json(
@@ -66,7 +66,7 @@ def main():
         )
         if response:
             print("Response for read_metadata request: ")
-            pprint(response.model_dump_json(indent=4))
+            pprint(response.data)
 
 
 if __name__ == "__main__":
