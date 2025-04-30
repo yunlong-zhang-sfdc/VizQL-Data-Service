@@ -68,7 +68,7 @@ dev = [
 find = {}
 
 [tool.setuptools.package-data]
-#"vizql-data-service-python-sdk" = ["examples/payloads/*.json"]
+"examples" = ["examples/payloads/*.json"]
 
 
 [tool.isort]
