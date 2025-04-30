@@ -68,7 +68,7 @@ dev = [
 find = {}
 
 [tool.setuptools.package-data]
-"examples" = ["examples/payloads/*.json"]
+examples = ["*.json"]
 
 
 [tool.isort]
