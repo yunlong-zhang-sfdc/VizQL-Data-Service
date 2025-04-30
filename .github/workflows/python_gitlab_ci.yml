@@ -70,9 +70,14 @@ jobs:
         name: generated-client-${{ matrix.python-version }}
         path: python_sdk/openapi_client/
 
-    - name: Run build script
+    - name: Check if pyproject.toml major version matches VizQLDataServiceOpenAPISchema.json version
       run: |
         cd python_sdk
+        chmod +x scripts/check_version.sh
+        bash scripts/check_version.sh
+
+    - name: Run build script
+      run: |
         chmod +x scripts/build.sh
         bash scripts/build.sh
 
