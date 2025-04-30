@@ -40,7 +40,7 @@ async def main():
 
         # sample query_datasource
         query_request = QueryRequest.from_json(
-            file_util.read_json("payloads", "query_request.json")
+            file_util.read_json("./", "query_request.json")
         )
         query_request.datasource.datasource_luid = sample_superstore_luid
         response = await client.query_datasource(
@@ -57,7 +57,7 @@ async def main():
 
         # sample read_metadata
         read_metadata_request = ReadMetadataRequest.from_json(
-            file_util.read_json("payloads", "read_metadata_request.json")
+            file_util.read_json("./", "read_metadata_request.json")
         )
         read_metadata_request.datasource.datasource_luid = sample_superstore_luid
         response = await client.read_metadata(

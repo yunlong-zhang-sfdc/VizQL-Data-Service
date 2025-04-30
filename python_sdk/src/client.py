@@ -63,7 +63,7 @@ class Client:
 
     user=User('test','password',personal_access_token='')
     server=Server('http://localhost','')
-    query_request_json = file_util.read_json('examples/payloads','query_request.json')
+    query_request_json = file_util.read_json('examples','query_request.json')
     query_request = QueryRequest.from_json(query_request_json)
     client=Client(user,server)
     client.query_datasource(query_request)
