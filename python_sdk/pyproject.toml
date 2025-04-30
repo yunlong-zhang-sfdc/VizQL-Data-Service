@@ -53,7 +53,7 @@ keywords = ["vizqldataservice", "tableau"]
 [project.urls]
 "Homepage" = "https://github.com/tableau/VizQL-Data-Service/python_sdk"
 "Bug Tracker" = "https://github.com/tableau/VizQL-Data-Service/issues"
-"Documentation" = ""
+# TODO: add documentation URL "Documentation" = ""
 "Source Code" = "https://github.com/tableau/VizQL-Data-Service/python_sdk"
 
 [project.optional-dependencies]
