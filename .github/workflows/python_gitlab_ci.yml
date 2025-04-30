@@ -78,6 +78,7 @@ jobs:
 
     - name: Run build script
       run: |
+        cd python_sdk
         chmod +x scripts/build.sh
         bash scripts/build.sh
 
