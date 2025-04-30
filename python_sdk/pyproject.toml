@@ -64,9 +64,8 @@ dev = [
     "flake8>=6.0.0",
 ]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["api", "examples", "models"]
+[tool.setuptools.packages]
+find = {}
 
 [tool.setuptools.package-data]
 "*" = ["*.json"]
