@@ -65,12 +65,11 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["python_sdk"]
-include = ["src", "openapi_client"]
+where = ["src"]
+include = ["api", "examples", "models"]
 
 [tool.setuptools.package-data]
-examples = ["src/examples/*.json"]
-
+"*" = ["*.json"]
 
 [tool.isort]
 profile = "black"
