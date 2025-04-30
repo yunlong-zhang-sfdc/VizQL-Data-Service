@@ -7,10 +7,10 @@ set -e
 set -x
 
 # Get pyproject.toml major version
-pyproject_major_version = $(cat pyproject.toml | grep -oP 'version = "\K[0-9]+')
+pyproject_major_version=$(cat pyproject.toml | grep -oP 'version = "\K[0-9]+')
 
 # Get VizQLDataServiceOpenAPISchema.json major version
-schema_major_version = $(cat ../VizQLDataServiceOpenAPISchema.json | grep -oP '"version": "\K[0-9]+')
+schema_major_version=$(cat ../VizQLDataServiceOpenAPISchema.json | grep -oP '"version": "\K[0-9]+')
 
 # Check if pyproject.toml major version matches VizQLDataServiceOpenAPISchema.json major version
 if [ "$pyproject_major_version" != "$schema_major_version" ]; then
