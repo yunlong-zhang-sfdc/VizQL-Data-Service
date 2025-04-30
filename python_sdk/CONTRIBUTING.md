@@ -7,49 +7,77 @@ Thank you for your interest in contributing to the VizQL Data Service Python Cli
 By participating in this project, you agree to abide by our Code of Conduct. Please read it before contributing.
 
 ## How to Contribute
+Contribution can include, but are not limited to, any of the following:
 
-### Reporting Bugs
+* File an Issue
+* Request a Feature
+* Implement a Requested Feature
+* Fix an Issue/Bug
+* Add/Fix documentation
 
-- Use the GitHub issue tracker
-- Include a clear title and description
-- Include steps to reproduce
-- Include expected and actual behavior
-- Include relevant logs and screenshots
-- Include your environment details
+## Issues and Feature Requests
 
-### Suggesting Features
+To submit an issue/bug report, or to request a feature, please submit a [GitHub issue](https://github.com/tableau/VizQL-Data-Service/issues) to the repo.
 
-- Use the GitHub issue tracker
-- Include a clear title and description
-- Explain why this feature would be useful
-- Include any relevant examples
+If you are submitting a bug report, please provide as much information as you can, including clear and concise repro steps, attaching any necessary
+files to assist in the repro.  **Be sure to scrub the files of any potentially sensitive information. Issues are public.**
 
-### Pull Requests
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and linting
-5. Submit a pull request
+For a feature request, please try to describe the scenario you are trying to accomplish that requires the feature. This will help us understand
+the limitations that you are running into, and provide us with a use case to know if we've satisfied your request.
 
 ### Development Setup
 
 1. Fork and clone the repository
-2. Create a virtual environment:
 ```bash
-python -m venv venv
+git clone https://github.com/tableau/VizQL-Data-Service.git
+```
+
+2. Create a virtual environment and install setup dependencies:
+```bash
+cd VizQL-Data-Service/python_sdk
+python -m venv --system-site-packages venv
 source venv/bin/activate  # On Unix/MacOS
 venv\Scripts\activate     # On Windows
+
+pip install .             # Required dependencies
+pip install -e .[dev]     # Including optional depenedencies
 ```
 
-3. Install development dependencies:
+3. Generate OpenAPI client:
 ```bash
-pip install -r test-requirements.txt
+pip install openapi-generator-cli
+openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python-pydantic-v1 --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
 ```
 
-4. Install the package in development mode:
+### Running Examples
+
 ```bash
-pip install -e .
+# Running the existing examples synchronously and asynchronously
+cd examples
+python .\sync_example.py --user=<username> --password=<password> --server="http://localhost" >> out_sync.txt
+python .\async_example.py --user=<username> --password=<password> --server="http://localhost" >> out_async.txt
+```
+
+```python
+# Write a mini python client
+from openapi_client.models.query_request import QueryRequest
+from src.models.user import User
+from src.models.server import Server
+from src.utils import file_util
+from src.client import Client
+
+# Initialize client TODO: revist the auth here
+user = User('<username>', '<password>', '')
+server = Server('http://localhost', '<sitename>')
+
+# Replace datasource LUID and reate query request
+query_request_json = '{"datasource": {"datasourceLuid": "<datasource-luid>"}, "options": {"returnFormat": "OBJECTS"}, "query": {"fields": [{"fieldCaption": "Category"}, {"fieldCaption": "Sales", "function": "SUM"}]}}'
+# OR from file
+# query_request_json = file_util.read_json('examples/payloads', 'query_request.json')
+
+query_request = QueryRequest.from_json(query_request_json)
+client = Client(user, server)
+client.query_datasource(query_request)
 ```
 
 ### Code Style
@@ -58,14 +86,12 @@ We use:
 - Black for code formatting
 - isort for import sorting
 - flake8 for linting
-- mypy for type checking
 
 Run all checks:
 ```bash
 black .
 isort .
-flake8
-mypy .
+flake8 .
 ```
 
 ### Testing
@@ -107,7 +133,3 @@ pytest
 4. Submit a pull request
 5. Address any review comments
 6. Once approved, your PR will be merged
-
-## Questions?
-
-Feel free to open an issue for any questions about contributing. 
