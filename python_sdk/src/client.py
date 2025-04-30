@@ -5,6 +5,8 @@ This module provides a client for interacting with the VizQL Data Service API.
 It handles authentication and provides methods for querying datasources and reading metadata.
 """
 
+from typing import Union
+
 import tableauserverclient as TSC
 
 from openapi_client.models.query_request import QueryRequest
@@ -98,7 +100,7 @@ class Client:
         else:
             raise NotImplementedError("Async client not implemented yet")
 
-    def _build_auth(self) -> TSC.PersonalAccessTokenAuth | TSC.TableauAuth:
+    def _build_auth(self) -> Union[TSC.PersonalAccessTokenAuth, TSC.TableauAuth]:
         """Private method to create Tableau authentication based on user credentials."""
         if self.user.personal_access_token:
             return TSC.PersonalAccessTokenAuth(

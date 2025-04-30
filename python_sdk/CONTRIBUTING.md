@@ -40,7 +40,7 @@ source venv/bin/activate  # On Unix/MacOS
 venv\Scripts\activate     # On Windows
 
 pip install .             # Required dependencies
-pip install -e .[dev]     # Including optional depenedencies
+pip install -e .[dev]     # Required and optional depenedencies
 ```
 
 3. Generate OpenAPI client:
@@ -59,21 +59,25 @@ python .\async_example.py --user=<username> --password=<password> --server="http
 ```
 
 ```python
-# Write a mini python client
+# Write a python client
 from openapi_client.models.query_request import QueryRequest
 from src.models.user import User
 from src.models.server import Server
 from src.utils import file_util
 from src.client import Client
 
-# Initialize client TODO: revist the auth here
-user = User('<username>', '<password>', '')
+# Initialize client with username/password or PAT without affecting user credentials
+# Using password
+user = User.from_password('<username>', '<password>')
+# Using PAT
+user = User.from_pat('<tokenname>', '<pat>')
+
 server = Server('http://localhost', '<sitename>')
 
 # Replace datasource LUID and reate query request
 query_request_json = '{"datasource": {"datasourceLuid": "<datasource-luid>"}, "options": {"returnFormat": "OBJECTS"}, "query": {"fields": [{"fieldCaption": "Category"}, {"fieldCaption": "Sales", "function": "SUM"}]}}'
 # OR from file
-# query_request_json = file_util.read_json('examples/payloads', 'query_request.json')
+# query_request_json = file_util.read_json('src/examples', 'query_request.json')
 
 query_request = QueryRequest.from_json(query_request_json)
 client = Client(user, server)
@@ -86,12 +90,14 @@ We use:
 - Black for code formatting
 - isort for import sorting
 - flake8 for linting
+- mypy for type check
 
 Run all checks:
 ```bash
 black .
 isort .
 flake8 .
+mypy .
 ```
 
 ### Testing
@@ -101,7 +107,8 @@ flake8 .
 - Maintain or improve test coverage
 - Run tests with:
 ```bash
-pytest
+pip install -e ".[dev]"
+pytest tests/ -v
 ```
 
 ### Documentation
