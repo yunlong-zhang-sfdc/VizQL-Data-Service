@@ -8,10 +8,9 @@ set -x
 
 # Install dependencies
 python -m pip install --upgrade pip
-pip install setuptools wheel build
-pip install requests
+python -m pip install --upgrade build
 
 # Build the package
-python setup.py sdist bdist_wheel
+python -m build
 
 echo "Build completed successfully. Packages are in python_sdk/dist/"
