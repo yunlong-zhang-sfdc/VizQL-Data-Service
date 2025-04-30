@@ -54,7 +54,9 @@ def main():
             pprint(response.data)
 
         # sample read metadata
-        readmetadata_request_json = file_util.read_json("./", "read_metadata_request.json")
+        readmetadata_request_json = file_util.read_json(
+            "./", "read_metadata_request.json"
+        )
         read_metadata_request = ReadMetadataRequest.from_json(readmetadata_request_json)
         read_metadata_request.datasource.datasource_luid = sample_superstore_luid
         response = client.read_metadata(

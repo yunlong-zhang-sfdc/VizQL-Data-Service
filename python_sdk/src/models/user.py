@@ -10,52 +10,48 @@ from typing import Dict, Optional
 class User:
     """
     A class that encapsulates user authentication information.
-
-    This class stores and manages user credentials including username, password,
-    and personal access token for authentication with the VizQL Data Service API.
-
-    Attributes:
-        username (str): The user's username
-        password (str): The user's password
-        personal_access_token (str): The user's personal access token
+    Supports creation via password or personal access token (PAT).
     """
 
     def __init__(
-        self, username: str, password: str, personal_access_token: Optional[str] = None
+        self,
+        username: str,
+        password: Optional[str] = None,
+        personal_access_token: Optional[str] = None,
     ):
-        """
-        Initialize a new User instance.
-
-        Args:
-            username: The user's username
-            password: The user's password
-            personal_access_token: Optional personal access token for authentication
-        """
         self.username = username
         self.password = password
         self.personal_access_token = personal_access_token
 
     def __str__(self) -> str:
-        """
-        Return a string representation of the user.
-
-        Returns:
-            str: A string containing the username and authentication method
-        """
         auth_method = (
             "Personal Access Token" if self.personal_access_token else "Password"
         )
         return f"User: {self.username} (Auth: {auth_method})"
 
-    def get_user_info(self) -> Dict[str, str | None]:
-        """
-        Get a dictionary containing the user's authentication information.
+    @classmethod
+    def from_password(cls, username: str, password: str):
+        """Create a User instance with username and password authentication."""
+        return cls(username=username, password=password)
 
-        Returns:
-            Dict[str, str | None]: A dictionary with user authentication details
-        """
-        return {
-            "userId": self.username,
-            "password": self.password,
-            "personal_access_token": self.personal_access_token,
-        }
+    @classmethod
+    def from_pat(cls, token_name: str, personal_access_token: str):
+        """Create a User instance with a Personal Access Token."""
+        return cls(username=token_name, personal_access_token=personal_access_token)
+
+    def get_user_info(self) -> Dict[str, Optional[str]]:
+        """Return a dictionary with the user's authentication details."""
+        if self.personal_access_token:
+            return {
+                "token_name": self.username,  # username field used as token_name for PAT
+                "personal_access_token": self.personal_access_token,
+            }
+        elif self.password:
+            return {
+                "username": self.username,
+                "password": self.password,
+            }
+        else:
+            raise ValueError(
+                "User must have either a password or a personal access token."
+            )

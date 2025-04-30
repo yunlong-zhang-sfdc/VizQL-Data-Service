@@ -20,6 +20,7 @@ echo "Running linting checks..."
 black . --check
 isort .
 flake8 .
+mypy .
 
 echo "Running tests with coverage..."
 pytest tests --disable-warnings --cov

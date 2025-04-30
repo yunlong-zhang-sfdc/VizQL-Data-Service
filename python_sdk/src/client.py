@@ -17,27 +17,6 @@ from src.models.user import User
 
 
 class Client:
-    """
-    A client for interacting with the VizQL Data Service API.
-
-    This client handles authentication via Tableau Server and provides methods
-    for querying datasources and reading metadata.
-
-    Example:
-        ```python
-        from src.models.user import User
-        from src.models.server import Server
-        from src.client import Client
-
-        user = User('test', 'password', personal_access_token='')
-        server = Server('http://localhost', '')
-        client = Client(user, server)
-
-        # Query a datasource
-        response = client.query_datasource(query_request)
-        ```
-    """
-
     def __init__(self, user: User, server: Server):
         """
         Initialize the VizQL Data Service client.
@@ -48,26 +27,6 @@ class Client:
         """
         self.user = user
         self.server = server
-
-    """
-    This is a utility method that can be used for VizQL Data Service APIs.
-    User login happens via the tableau server-client-python library
-    Tableau auth is obtained and used to query the VizQL Data Service apis
-
-    Here is an example usage :
-    from openapi_client.models.query_request import QueryRequest
-    from src.models.user import User
-    from src.models.server import Server
-    from src.utils import file_util
-    from src.client import Client
-
-    user=User('test','password',personal_access_token='')
-    server=Server('http://localhost','')
-    query_request_json = file_util.read_json('examples','query_request.json')
-    query_request = QueryRequest.from_json(query_request_json)
-    client=Client(user,server)
-    client.query_datasource(query_request)
-    """
 
     def __str__(self) -> str:
         """Return a string representation of the client."""
@@ -89,9 +48,7 @@ class Client:
         Raises:
             Exception: If authentication or query fails
         """
-        tableau_auth = TSC.TableauAuth(
-            self.user.username, self.user.password, self.server.site
-        )
+        tableau_auth = self._build_auth()
         server = TSC.Server(self.server.server_name)
         headers = default_headers()
 
@@ -104,7 +61,7 @@ class Client:
                     headers.to_dict(),
                     query_request,
                 )
-                return response.model_dump_json()
+                return response.data
         else:
             raise NotImplementedError("Async client not implemented yet")
 
@@ -124,9 +81,7 @@ class Client:
         Raises:
             Exception: If authentication or metadata request fails
         """
-        tableau_auth = TSC.TableauAuth(
-            self.user.username, self.user.password, self.server.site
-        )
+        tableau_auth = self._build_auth()
         server = TSC.Server(self.server.server_name)
         headers = default_headers()
 
@@ -139,6 +94,25 @@ class Client:
                     headers.to_dict(),
                     read_metadata_request,
                 )
-                return response.model_dump_json()
+                return response.data
         else:
             raise NotImplementedError("Async client not implemented yet")
+
+    def _build_auth(self) -> TSC.PersonalAccessTokenAuth | TSC.TableauAuth:
+        """Private method to create Tableau authentication based on user credentials."""
+        if self.user.personal_access_token:
+            return TSC.PersonalAccessTokenAuth(
+                token_name=self.user.username,  # Used as token_name for PAT
+                personal_access_token=self.user.personal_access_token,
+                site_id=self.server.site,
+            )
+        elif self.user.password:
+            return TSC.TableauAuth(
+                username=self.user.username,
+                password=self.user.password,
+                site_id=self.server.site,
+            )
+        else:
+            raise ValueError(
+                "User must provide either a password or a personal access token."
+            )
