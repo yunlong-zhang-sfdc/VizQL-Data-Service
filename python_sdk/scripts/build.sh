@@ -11,6 +11,6 @@ python -m pip install --upgrade pip
 python -m pip install --upgrade build
 
 # Build the package
-python build
+python -m build
 
 echo "Build completed successfully. Packages are in python_sdk/dist/"
