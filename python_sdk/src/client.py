@@ -11,6 +11,7 @@ import tableauserverclient as TSC
 
 from openapi_client.models.query_request import QueryRequest
 from openapi_client.models.read_metadata_request import ReadMetadataRequest
+from src.api.AsyncHTTPClient import AsyncHTTPClient
 from src.api.EndPoints import EndPoints
 from src.api.HTTPHeaders import default_headers
 from src.api.SyncHTTPClient import SyncHTTPClient
@@ -53,7 +54,7 @@ class Client:
         tableau_auth = self._build_auth()
         server = TSC.Server(self.server.server_name)
         headers = default_headers()
-
+        client: Union[SyncHTTPClient, AsyncHTTPClient]
         if sync_client:
             client = SyncHTTPClient()
             with server.auth.sign_in(tableau_auth):
@@ -65,7 +66,21 @@ class Client:
                 )
                 return response.data
         else:
-            raise NotImplementedError("Async client not implemented yet")
+            client = AsyncHTTPClient()
+
+            async def fetch_data():
+                with server.auth.sign_in(tableau_auth):
+                    headers.set_tableau_auth(server.auth_token)
+                    response = await client.query_datasource(
+                        self.server.server_name
+                        + EndPoints.VIZQL_DATA_SERVICE_URL
+                        + EndPoints.QUERY_DATASOURCE_ENDPOINT,
+                        headers.to_dict(),
+                        query_request,
+                    )
+                    return response.data
+
+            return fetch_data()
 
     def read_metadata(
         self, read_metadata_request: ReadMetadataRequest, sync_client: bool = True
@@ -86,7 +101,7 @@ class Client:
         tableau_auth = self._build_auth()
         server = TSC.Server(self.server.server_name)
         headers = default_headers()
-
+        client: Union[SyncHTTPClient, AsyncHTTPClient]
         if sync_client:
             client = SyncHTTPClient()
             with server.auth.sign_in(tableau_auth):
@@ -98,10 +113,24 @@ class Client:
                 )
                 return response.data
         else:
-            raise NotImplementedError("Async client not implemented yet")
+            client = AsyncHTTPClient()
+
+            async def fetch_data():
+                with server.auth.sign_in(tableau_auth):
+                    headers.set_tableau_auth(server.auth_token)
+                    response = await client.query_datasource(
+                        self.server.server_name
+                        + EndPoints.VIZQL_DATA_SERVICE_URL
+                        + EndPoints.READ_METADATA_ENDPOINT,
+                        headers.to_dict(),
+                        read_metadata_request,
+                    )
+                    return response.data
+
+            return fetch_data()
 
     def _build_auth(self) -> Union[TSC.PersonalAccessTokenAuth, TSC.TableauAuth]:
-        """Private method to create Tableau authentication based on user credentials."""
+        """The method to create Tableau authentication based on user credentials."""
         if self.user.personal_access_token:
             return TSC.PersonalAccessTokenAuth(
                 token_name=self.user.username,  # Used as token_name for PAT
@@ -116,5 +145,5 @@ class Client:
             )
         else:
             raise ValueError(
-                "User must provide either a password or a personal access token."
+                "User must provide either a username/password or a personal access token."
             )

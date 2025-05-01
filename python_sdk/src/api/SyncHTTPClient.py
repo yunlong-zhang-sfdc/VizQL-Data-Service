@@ -25,7 +25,7 @@ class SyncHTTPClient(BaseVizqlDataServiceHTTPClient):
                 query_request=request, _headers=headers
             )
         except openapi_client.ApiException as e:
-            print("Exception when calling  SyncHTTPClient-> query_datasource: %s\n" % e)
+            print("Exception when calling SyncHTTPClient-> query_datasource: %s\n" % e)
         return api_response
 
     def read_metadata(
@@ -43,5 +43,5 @@ class SyncHTTPClient(BaseVizqlDataServiceHTTPClient):
                 read_metadata_request=request, _headers=headers
             )
         except openapi_client.ApiException as e:
-            print("Exception when calling  SyncHTTPClient-> read_metadata: %s\n" % e)
+            print("Exception when calling SyncHTTPClient-> read_metadata: %s\n" % e)
         return api_response

@@ -53,9 +53,14 @@ openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g pytho
 
 ```bash
 # Running the existing examples synchronously and asynchronously
-cd examples
-python .\sync_example.py --user=<username> --password=<password> --server="http://localhost" >> out_sync.txt
-python .\async_example.py --user=<username> --password=<password> --server="http://localhost" >> out_async.txt
+cd src/examples
+# Auth using username and password
+python .\sync_example.py --user="<username>" --password="<password>" --server="http://localhost"
+python .\async_example.py --user="<username>" --password="<password>" --server="http://localhost"
+
+# Auth using personal access token
+python .\sync_example.py --pat-name="<pat-name>" --pat-secret="<pat-secret>" --server="http://localhost"
+python .\async_example.py --pat-name="<pat-name>" --pat-secret="<pat-secret>" --server="http://localhost"
 ```
 
 ```python
@@ -72,7 +77,7 @@ user = User.from_password('<username>', '<password>')
 # Using PAT
 user = User.from_pat('<tokenname>', '<pat>')
 
-server = Server('http://localhost', '<sitename>')
+server = Server('http://localhost', '<sitename>') # Leave empty for default site
 
 # Replace datasource LUID and reate query request
 query_request_json = '{"datasource": {"datasourceLuid": "<datasource-luid>"}, "options": {"returnFormat": "OBJECTS"}, "query": {"fields": [{"fieldCaption": "Category"}, {"fieldCaption": "Sales", "function": "SUM"}]}}'
@@ -81,7 +86,10 @@ query_request_json = '{"datasource": {"datasourceLuid": "<datasource-luid>"}, "o
 
 query_request = QueryRequest.from_json(query_request_json)
 client = Client(user, server)
+# Synchronous request
 client.query_datasource(query_request)
+# Asynchronous request
+asyncio.run(client.query_datasource(query_request, False))
 ```
 
 ### Code Style
