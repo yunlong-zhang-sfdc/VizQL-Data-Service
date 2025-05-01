@@ -39,14 +39,18 @@ python -m venv --system-site-packages venv
 source venv/bin/activate  # On Unix/MacOS
 venv\Scripts\activate     # On Windows
 
-pip install .             # Required dependencies
+pip install -e .          # Required dependencies
 pip install -e .[dev]     # Required and optional dependencies
 ```
 
 3. Generate OpenAPI client:
 ```bash
 pip install openapi-generator-cli
-openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python-pydantic-v1 --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
+
+# TODO: only keep one generator
+openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python-pydantic-v1 -o build/ --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client --openapi-normalizer REFACTOR_ALLOF_WITH_PROPERTIES_ONLY=true
+
+openapi-python-client generate --path ../VizQLDataServiceOpenAPISchema.json --config ./openapi-client.yml
 ```
 
 ### Running Examples
