@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vizql-data-service-python-sdk"
-version = "1.0.0"  # This value is manually updated. The major version must always be the same as the version defined in VizQLDataServiceOpenAPISchema.json
+version = "1.0.0"  # This value is manually updated. The major and minor versions must always be the same as the version defined in VizQLDataServiceOpenAPISchema.json
 
 description = "A Python client library for interacting with the VizQL Data Service API"
 readme = "README.md"
 authors = [{name = "Tableau", email = "github@tableau.com"}]
 maintainers = [{name = "Tableau", email = "github@tableau.com"}]
 license = "MIT"
-license-files = ["./LICENSE.txt"]
+license-files = ["LICENSE.txt"]
 
 requires-python = ">= 3.9"
 dependencies = [
