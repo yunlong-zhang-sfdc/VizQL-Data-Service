@@ -1,5 +1,17 @@
 """
-This is an synchronous http client that can be used to query VizQL Data Service API.
+Synchronous HTTP client for querying VizQL Data Service API.
+
+This module provides a synchronous HTTP client implementation for interacting with
+the VizQL Data Service API. It uses the openapi_client library for making HTTP requests
+and handling responses.
+
+Key Features:
+- query_datasource: Synchronously query data sources
+- read_metadata: Synchronously read metadata
+
+Example Usage:
+    client = SyncHTTPClient()
+    response = client.query_datasource(url, headers, request)
 """
 
 from typing import Any, Dict, Optional

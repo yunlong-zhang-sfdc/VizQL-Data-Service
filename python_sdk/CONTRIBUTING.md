@@ -40,7 +40,7 @@ source venv/bin/activate  # On Unix/MacOS
 venv\Scripts\activate     # On Windows
 
 pip install .             # Required dependencies
-pip install -e .[dev]     # Required and optional depenedencies
+pip install -e .[dev]     # Required and optional dependencies
 ```
 
 3. Generate OpenAPI client:

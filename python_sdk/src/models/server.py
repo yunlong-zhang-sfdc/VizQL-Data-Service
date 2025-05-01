@@ -20,30 +20,11 @@ class Server:
     """
 
     def __init__(self, server_name: str, site: str):
-        """
-        Initialize a new Server instance.
-
-        Args:
-            server_name: The server's URL or hostname
-            site: The site name or identifier
-        """
         self.server_name = server_name
         self.site = site
 
     def __str__(self) -> str:
-        """
-        Return a string representation of the server.
-
-        Returns:
-            str: A formatted string containing server details
-        """
         return f"Server: {self.server_name}\nSite: {self.site}"
 
     def get_server_info(self) -> Dict[str, str]:
-        """
-        Get a dictionary containing the server's configuration information.
-
-        Returns:
-            Dict[str, str]: A dictionary with server configuration details
-        """
         return {"serverName": self.server_name, "site": self.site}

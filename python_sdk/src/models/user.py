@@ -31,16 +31,13 @@ class User:
 
     @classmethod
     def from_password(cls, username: str, password: str):
-        """Create a User instance with username and password authentication."""
         return cls(username=username, password=password)
 
     @classmethod
     def from_pat(cls, token_name: str, personal_access_token: str):
-        """Create a User instance with a Personal Access Token."""
         return cls(username=token_name, personal_access_token=personal_access_token)
 
     def get_user_info(self) -> Dict[str, Optional[str]]:
-        """Return a dictionary with the user's authentication details."""
         if self.personal_access_token:
             return {
                 "token_name": self.username,  # username field used as token_name for PAT

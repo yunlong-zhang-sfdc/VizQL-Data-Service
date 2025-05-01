@@ -1,6 +1,17 @@
 """
-This is an asynchronous http client that can be used to query VizQL Data Service API.
-httpx module is used for these requests
+Asynchronous HTTP client for querying VizQL Data Service API.
+
+This module provides an asynchronous HTTP client implementation using the httpx library for HTTP requests.
+It inherits from BaseVizqlDataServiceHTTPClient and implements asynchronous methods for data source querying
+and metadata reading.
+
+Key Features:
+- query_datasource: Asynchronously query data sources
+- read_metadata: Asynchronously read metadata
+
+Example Usage:
+    client = AsyncHTTPClient()
+    response = await client.query_datasource(url, headers, request)
 """
 
 import json as json_lib
