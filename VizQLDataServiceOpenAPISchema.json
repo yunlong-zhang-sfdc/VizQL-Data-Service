@@ -322,41 +322,44 @@
                     }
                 }
             },
+            "FilterByCaption": {
+                "required": ["fieldCaption"],
+                "additionalProperties": false,
+                "properties": {
+                    "fieldCaption": {
+                        "type": "string",
+                        "description": "The caption of the field to filter on."
+                    }
+                }
+            },
+            "FilterByCaptionFunction": {
+                "required": ["fieldCaption", "function"],
+                "additionalProperties": false,
+                "properties": {
+                    "fieldCaption": {
+                        "type": "string",
+                        "description": "The caption of the field to filter on."
+                    },
+                    "function": {
+                        "$ref": "#/components/schemas/Function"
+                    }
+                }
+            },
+            "FilterByCalculation": {
+                "required": ["calculation"],
+                "additionalProperties": false,
+                "properties": {
+                    "calculation": {
+                        "type": "string",
+                        "description": "A Tableau calculation that will be used to filter on."
+                    }
+                }
+            },
             "FilterField": {
                 "oneOf": [
-                    {
-                        "required": ["fieldCaption"],
-                        "additionalProperties": false,
-                        "properties": {
-                            "fieldCaption": {
-                                "type": "string",
-                                "description": "The caption of the field to filter on."
-                            }
-                        }
-                    },
-                    {
-                        "required": ["fieldCaption", "function"],
-                        "additionalProperties": false,
-                        "properties": {
-                            "fieldCaption": {
-                                "type": "string",
-                                "description": "The caption of the field to filter on."
-                            },
-                            "function": {
-                                "$ref": "#/components/schemas/Function"
-                            }
-                        }
-                    },
-                    {
-                        "required": ["calculation"],
-                        "additionalProperties": false,
-                        "properties": {
-                            "calculation": {
-                                "type": "string",
-                                "description": "A Tableau calculation that will be used to filter on."
-                            }
-                        }
-                    }
+                    { "$ref": "#/components/schemas/FilterByCaption" },
+                    { "$ref": "#/components/schemas/FilterByCaptionFunction" },
+                    { "$ref": "#/components/schemas/FilterByCalculation" }
                 ]
             },
             "Function": {
@@ -451,41 +454,45 @@
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/QuantitativeFilterBase"
-                    }
-                ],
-                "type": "object",
-                "description": "A filter that can be used to find the minimum, maximum, or range of numerical values of a field.",
-                "properties": {
-                    "min": {
-                        "type": "number",
-                        "description": "A numerical value, either integer or floating point, indicating the minimum value to filter upon. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
                     },
-                    "max": {
-                        "type": "number",
-                        "description": "A numerical value, either integer or floating point, indicating the maximum value to filter upon. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
+                    {
+                        "type": "object",
+                        "description": "A filter that can be used to find the minimum, maximum, or range of numerical values of a field.",
+                        "properties": {
+                            "min": {
+                                "type": "number",
+                                "description": "A numerical value, either integer or floating point, indicating the minimum value to filter upon. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
+                            },
+                            "max": {
+                                "type": "number",
+                                "description": "A numerical value, either integer or floating point, indicating the maximum value to filter upon. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
+                            }
+                        }
                     }
-                }
+                ]
             },
             "QuantitativeDateFilter": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/QuantitativeFilterBase"
-                    }
-                ],
-                "type": "object",
-                "description": "A filter that can be used to find the minimum, maximum, or range of date values of a field.",
-                "properties": {
-                    "minDate": {
-                        "type": "string",
-                        "format": "date",
-                        "description": "An RFC 3339 date indicating the earliest date to filter upon. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
                     },
-                    "maxDate": {
-                        "type": "string",
-                        "format": "date",
-                        "description": "An RFC 3339 date indicating the latest date to filter on. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
+                    {
+                        "type": "object",
+                        "description": "A filter that can be used to find the minimum, maximum, or range of date values of a field.",
+                        "properties": {
+                            "minDate": {
+                                "type": "string",
+                                "format": "date",
+                                "description": "An RFC 3339 date indicating the earliest date to filter upon. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
+                            },
+                            "maxDate": {
+                                "type": "string",
+                                "format": "date",
+                                "description": "An RFC 3339 date indicating the latest date to filter on. Required if using quantitativeFilterType RANGE or if using quantitativeFilterType MIN."
+                            }
+                        }
                     }
-                }
+                ]
             },
             "Query": {
                 "description": "The query is the fundamental interface to the VizQL Data Service. It holds the specific semantics to perform against the data source. A query consists of an array of fields to query against, and an optional array of filters to apply to the query.",
@@ -593,24 +600,26 @@
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/Filter"
-                    }
-                ],
-                "type": "object",
-                "description": "A filter that can be used to filter on a specific set of values of a field.",
-                "required": [
-                    "values"
-                ],
-                "properties": {
-                    "values": {
-                        "type": "array",
-                        "items": {},
-                        "description": "An array of values to filter on."
                     },
-                    "exclude": {
-                        "type": "boolean",
-                        "default": false
+                    {
+                        "type": "object",
+                        "description": "A filter that can be used to filter on a specific set of values of a field.",
+                        "required": [
+                            "values"
+                        ],
+                        "properties": {
+                            "values": {
+                                "type": "array",
+                                "items": {},
+                                "description": "An array of values to filter on."
+                            },
+                            "exclude": {
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
                     }
-                }
+                ]
             },
             "SortDirection": {
                 "type": "string",
