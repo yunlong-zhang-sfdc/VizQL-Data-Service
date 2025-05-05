@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class RelativeDateFilterPeriodType(str, Enum):
     DAYS = "DAYS"
     HOURS = "HOURS"

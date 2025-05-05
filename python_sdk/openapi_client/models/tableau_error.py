@@ -1,49 +1,39 @@
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
-
-from ..types import UNSET, Unset
 from dateutil.parser import isoparse
-from typing import cast
-from typing import Union
-import datetime
+
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-  from ..models.tableau_error_debug import TableauErrorDebug
-
-
-
+    from ..models.tableau_error_debug import TableauErrorDebug
 
 
 T = TypeVar("T", bound="TableauError")
 
 
-
 @_attrs_define
 class TableauError:
-    """ 
-        Attributes:
-            error_code (Union[Unset, str]):
-            message (Union[Unset, str]):
-            datetime_ (Union[Unset, datetime.datetime]):
-            debug (Union[Unset, TableauErrorDebug]):
-            tab_error_code (Union[Unset, str]):
-     """
+    """
+    Attributes:
+        error_code (Union[Unset, str]):
+        message (Union[Unset, str]):
+        datetime_ (Union[Unset, datetime.datetime]):
+        debug (Union[Unset, TableauErrorDebug]):
+        tab_error_code (Union[Unset, str]):
+    """
 
     error_code: Union[Unset, str] = UNSET
     message: Union[Unset, str] = UNSET
     datetime_: Union[Unset, datetime.datetime] = UNSET
-    debug: Union[Unset, 'TableauErrorDebug'] = UNSET
+    debug: Union[Unset, "TableauErrorDebug"] = UNSET
     tab_error_code: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.tableau_error_debug import TableauErrorDebug
         error_code = self.error_code
 
         message = self.message
@@ -58,11 +48,9 @@ class TableauError:
 
         tab_error_code = self.tab_error_code
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if error_code is not UNSET:
             field_dict["errorCode"] = error_code
         if message is not UNSET:
@@ -76,11 +64,10 @@ class TableauError:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.tableau_error_debug import TableauErrorDebug
+
         d = dict(src_dict)
         error_code = d.pop("errorCode", UNSET)
 
@@ -88,23 +75,17 @@ class TableauError:
 
         _datetime_ = d.pop("datetime", UNSET)
         datetime_: Union[Unset, datetime.datetime]
-        if isinstance(_datetime_,  Unset):
+        if isinstance(_datetime_, Unset):
             datetime_ = UNSET
         else:
             datetime_ = isoparse(_datetime_)
 
-
-
-
         _debug = d.pop("debug", UNSET)
         debug: Union[Unset, TableauErrorDebug]
-        if isinstance(_debug,  Unset):
+        if isinstance(_debug, Unset):
             debug = UNSET
         else:
             debug = TableauErrorDebug.from_dict(_debug)
-
-
-
 
         tab_error_code = d.pop("tab-error-code", UNSET)
 
@@ -115,7 +96,6 @@ class TableauError:
             debug=debug,
             tab_error_code=tab_error_code,
         )
-
 
         tableau_error.additional_properties = d
         return tableau_error

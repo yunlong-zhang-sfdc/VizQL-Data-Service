@@ -45,11 +45,7 @@ pip install -e .[dev]     # Required and optional dependencies
 
 3. Generate OpenAPI client:
 ```bash
-pip install openapi-generator-cli
-
-# TODO: only keep one generator
-openapi-generator-cli generate -i ../VizQLDataServiceOpenAPISchema.json -g python-pydantic-v1 -o build/ --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client --openapi-normalizer REFACTOR_ALLOF_WITH_PROPERTIES_ONLY=true
-
+pip install openapi-python-client
 openapi-python-client generate --path ../VizQLDataServiceOpenAPISchema.json --config ./openapi-client.yml
 ```
 
@@ -58,42 +54,14 @@ openapi-python-client generate --path ../VizQLDataServiceOpenAPISchema.json --co
 ```bash
 # Running the existing examples synchronously and asynchronously
 cd src/examples
+
 # Auth using username and password
-python .\sync_example.py --user="<username>" --password="<password>" --server="http://localhost"
-python .\async_example.py --user="<username>" --password="<password>" --server="http://localhost"
+python sync_examples.py -u "<username>" -p "<password>" -s "localhost"
+python async_examples.py -u "<username>" -p "<password>" -s "localhost"
 
 # Auth using personal access token
-python .\sync_example.py --pat-name="<pat-name>" --pat-secret="<pat-secret>" --server="http://localhost"
-python .\async_example.py --pat-name="<pat-name>" --pat-secret="<pat-secret>" --server="http://localhost"
-```
-
-```python
-# Write a python client
-from openapi_client.models.query_request import QueryRequest
-from src.models.user import User
-from src.models.server import Server
-from src.utils import file_util
-from src.client import Client
-
-# Initialize client with username/password or PAT without affecting user credentials
-# Using password
-user = User.from_password('<username>', '<password>')
-# Using PAT
-user = User.from_pat('<tokenname>', '<pat>')
-
-server = Server('http://localhost', '<sitename>') # Leave empty for default site
-
-# Replace datasource LUID and reate query request
-query_request_json = '{"datasource": {"datasourceLuid": "<datasource-luid>"}, "options": {"returnFormat": "OBJECTS"}, "query": {"fields": [{"fieldCaption": "Category"}, {"fieldCaption": "Sales", "function": "SUM"}]}}'
-# OR from file
-# query_request_json = file_util.read_json('src/examples', 'query_request.json')
-
-query_request = QueryRequest.from_json(query_request_json)
-client = Client(user, server)
-# Synchronous request
-client.query_datasource(query_request)
-# Asynchronous request
-asyncio.run(client.query_datasource(query_request, False))
+python sync_examples.py -n "<pat-name>" -t "<pat-secret>" -s "localhost"
+python async_examples.py -n "<pat-name>" -t "<pat-secret>" -s "localhost"
 ```
 
 ### Code Style

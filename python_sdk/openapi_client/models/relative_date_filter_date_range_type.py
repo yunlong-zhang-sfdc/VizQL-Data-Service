@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class RelativeDateFilterDateRangeType(str, Enum):
     CURRENT = "CURRENT"
     LAST = "LAST"

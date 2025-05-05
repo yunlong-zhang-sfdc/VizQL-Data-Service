@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class QuantitativeFilterBaseQuantitativeFilterType(str, Enum):
     MAX = "MAX"
     MIN = "MIN"

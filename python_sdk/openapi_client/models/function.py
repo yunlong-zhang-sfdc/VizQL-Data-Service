@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Function(str, Enum):
     AVG = "AVG"
     COLLECT = "COLLECT"

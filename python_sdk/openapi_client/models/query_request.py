@@ -1,49 +1,37 @@
 from collections.abc import Mapping
-from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-from typing import Union
-
 if TYPE_CHECKING:
-  from ..models.datasource import Datasource
-  from ..models.query_datasource_options import QueryDatasourceOptions
-  from ..models.query import Query
-
-
-
+    from ..models.datasource import Datasource
+    from ..models.query import Query
+    from ..models.query_datasource_options import QueryDatasourceOptions
 
 
 T = TypeVar("T", bound="QueryRequest")
 
 
-
 @_attrs_define
 class QueryRequest:
-    """ 
-        Attributes:
-            datasource (Datasource):
-            query (Query): The query is the fundamental interface to the VizQL Data Service. It holds the specific semantics
-                to perform against the data source. A query consists of an array of fields to query against, and an optional
-                array of filters to apply to the query.
-            options (Union[Unset, QueryDatasourceOptions]):
-     """
+    """
+    Attributes:
+        datasource (Datasource):
+        query (Query): The query is the fundamental interface to the VizQL Data Service. It holds the specific semantics
+            to perform against the data source. A query consists of an array of fields to query against, and an optional
+            array of filters to apply to the query.
+        options (Union[Unset, QueryDatasourceOptions]):
+    """
 
-    datasource: 'Datasource'
-    query: 'Query'
-    options: Union[Unset, 'QueryDatasourceOptions'] = UNSET
+    datasource: "Datasource"
+    query: "Query"
+    options: Union[Unset, "QueryDatasourceOptions"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.datasource import Datasource
-        from ..models.query_datasource_options import QueryDatasourceOptions
-        from ..models.query import Query
         datasource = self.datasource.to_dict()
 
         query = self.query.to_dict()
@@ -52,52 +40,42 @@ class QueryRequest:
         if not isinstance(self.options, Unset):
             options = self.options.to_dict()
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "datasource": datasource,
-            "query": query,
-        })
+        field_dict.update(
+            {
+                "datasource": datasource,
+                "query": query,
+            }
+        )
         if options is not UNSET:
             field_dict["options"] = options
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.datasource import Datasource
-        from ..models.query_datasource_options import QueryDatasourceOptions
         from ..models.query import Query
+        from ..models.query_datasource_options import QueryDatasourceOptions
+
         d = dict(src_dict)
         datasource = Datasource.from_dict(d.pop("datasource"))
 
-
-
-
         query = Query.from_dict(d.pop("query"))
-
-
-
 
         _options = d.pop("options", UNSET)
         options: Union[Unset, QueryDatasourceOptions]
-        if isinstance(_options,  Unset):
+        if isinstance(_options, Unset):
             options = UNSET
         else:
             options = QueryDatasourceOptions.from_dict(_options)
-
-
-
 
         query_request = cls(
             datasource=datasource,
             query=query,
             options=options,
         )
-
 
         query_request.additional_properties = d
         return query_request

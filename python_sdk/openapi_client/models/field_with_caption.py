@@ -7,13 +7,12 @@ from attrs import field as _attrs_field
 from ..models.sort_direction import SortDirection
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="FieldBase")
+T = TypeVar("T", bound="FieldWithCaption")
 
 
 @_attrs_define
-class FieldBase:
-    """Common properties of a field. A field represents a column of data in a published data source.
-
+class FieldWithCaption:
+    """
     Attributes:
         field_caption (str): Either the name of a specific Field in the data source, or, in the case of a calculation, a
             user-supplied name for the calculation.
@@ -85,7 +84,7 @@ class FieldBase:
 
         sort_priority = d.pop("sortPriority", UNSET)
 
-        field_base = cls(
+        field_with_caption = cls(
             field_caption=field_caption,
             field_alias=field_alias,
             max_decimal_places=max_decimal_places,
@@ -93,8 +92,8 @@ class FieldBase:
             sort_priority=sort_priority,
         )
 
-        field_base.additional_properties = d
-        return field_base
+        field_with_caption.additional_properties = d
+        return field_with_caption
 
     @property
     def additional_keys(self) -> list[str]:

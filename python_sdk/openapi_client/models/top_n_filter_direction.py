@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TopNFilterDirection(str, Enum):
     BOTTOM = "BOTTOM"
     TOP = "TOP"

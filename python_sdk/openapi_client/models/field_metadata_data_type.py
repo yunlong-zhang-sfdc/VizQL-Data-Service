@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class FieldMetadataDataType(str, Enum):
     BOOLEAN = "BOOLEAN"
     DATE = "DATE"

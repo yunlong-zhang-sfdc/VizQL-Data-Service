@@ -1,14 +1,17 @@
-""" Contains all the data models used in inputs/outputs """
+"""Contains all the data models used in inputs/outputs"""
 
 from .connection import Connection
 from .datasource import Datasource
 from .field_base import FieldBase
 from .field_metadata import FieldMetadata
 from .field_metadata_data_type import FieldMetadataDataType
+from .field_with_calculation import FieldWithCalculation
+from .field_with_caption import FieldWithCaption
+from .field_with_caption_function import FieldWithCaptionFunction
 from .filter_ import Filter
-from .filter_by_calculation import FilterByCalculation
-from .filter_by_caption import FilterByCaption
-from .filter_by_caption_function import FilterByCaptionFunction
+from .filter_field_with_calculation import FilterFieldWithCalculation
+from .filter_field_with_caption import FilterFieldWithCaption
+from .filter_field_with_caption_function import FilterFieldWithCaptionFunction
 from .filter_filter_type import FilterFilterType
 from .function import Function
 from .match_filter import MatchFilter
@@ -40,10 +43,13 @@ __all__ = (
     "FieldBase",
     "FieldMetadata",
     "FieldMetadataDataType",
+    "FieldWithCalculation",
+    "FieldWithCaption",
+    "FieldWithCaptionFunction",
     "Filter",
-    "FilterByCalculation",
-    "FilterByCaption",
-    "FilterByCaptionFunction",
+    "FilterFieldWithCalculation",
+    "FilterFieldWithCaption",
+    "FilterFieldWithCaptionFunction",
     "FilterFilterType",
     "Function",
     "MatchFilter",

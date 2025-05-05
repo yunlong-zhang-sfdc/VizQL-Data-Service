@@ -87,6 +87,14 @@ skip = [
     "build",
     "dist",
     "openapi_client",
-    "setup.py",
     "__init__.py"
 ]
+
+[tool.black]
+exclude = '''
+(
+  /openapi_client/
+  | /build/
+  | /venv/
+)
+'''

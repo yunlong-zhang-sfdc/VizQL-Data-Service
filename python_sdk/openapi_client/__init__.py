@@ -1,5 +1,5 @@
+"""A client library for accessing VizQL Data Service"""
 
-""" A client library for accessing VizQL Data Service """
 from .client import AuthenticatedClient, Client
 
 __all__ = (

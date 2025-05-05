@@ -1,67 +1,59 @@
 from collections.abc import Mapping
-from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.filter_filter_type import FilterFilterType
 from ..models.top_n_filter_direction import TopNFilterDirection
 from ..types import UNSET, Unset
-from typing import cast
-from typing import cast, Union
-from typing import Union
 
 if TYPE_CHECKING:
-  from ..models.filter_by_calculation import FilterByCalculation
-  from ..models.filter_by_caption_function import FilterByCaptionFunction
-  from ..models.filter_by_caption import FilterByCaption
-
-
-
+    from ..models.filter_field_with_calculation import FilterFieldWithCalculation
+    from ..models.filter_field_with_caption import FilterFieldWithCaption
+    from ..models.filter_field_with_caption_function import FilterFieldWithCaptionFunction
 
 
 T = TypeVar("T", bound="TopNFilter")
 
 
-
 @_attrs_define
 class TopNFilter:
-    """ 
-        Attributes:
-            field (Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction']):
-            filter_type (FilterFilterType):
-            context (Union[Unset, bool]): Make the given filter a context filter, meaning that it's an independent filter.
-                Any other filters that you set are defined as dependent filters because they process only the data that passes
-                through the context filter. Default: False.
-            direction (Union[Unset, TopNFilterDirection]): Top (ascending) or Bottom (descending) N. Default:
-                TopNFilterDirection.TOP.
-            how_many (Union[Unset, int]): The number of values from the top or the bottom of the given fieldToMeasure.
-            field_to_measure (Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction', Unset]):
-     """
+    """
+    Attributes:
+        field (Union['FilterFieldWithCalculation', 'FilterFieldWithCaption', 'FilterFieldWithCaptionFunction']):
+        filter_type (FilterFilterType):
+        context (Union[Unset, bool]): Make the given filter a context filter, meaning that it's an independent filter.
+            Any other filters that you set are defined as dependent filters because they process only the data that passes
+            through the context filter. Default: False.
+        direction (Union[Unset, TopNFilterDirection]): Top (ascending) or Bottom (descending) N. Default:
+            TopNFilterDirection.TOP.
+        how_many (Union[Unset, int]): The number of values from the top or the bottom of the given fieldToMeasure.
+        field_to_measure (Union['FilterFieldWithCalculation', 'FilterFieldWithCaption',
+            'FilterFieldWithCaptionFunction', Unset]):
+    """
 
-    field: Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction']
+    field: Union["FilterFieldWithCalculation", "FilterFieldWithCaption", "FilterFieldWithCaptionFunction"]
     filter_type: FilterFilterType
     context: Union[Unset, bool] = False
     direction: Union[Unset, TopNFilterDirection] = TopNFilterDirection.TOP
     how_many: Union[Unset, int] = UNSET
-    field_to_measure: Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction', Unset] = UNSET
+    field_to_measure: Union[
+        "FilterFieldWithCalculation", "FilterFieldWithCaption", "FilterFieldWithCaptionFunction", Unset
+    ] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.filter_by_calculation import FilterByCalculation
-        from ..models.filter_by_caption_function import FilterByCaptionFunction
-        from ..models.filter_by_caption import FilterByCaption
+        from ..models.filter_field_with_caption import FilterFieldWithCaption
+        from ..models.filter_field_with_caption_function import FilterFieldWithCaptionFunction
+
         field: dict[str, Any]
-        if isinstance(self.field, FilterByCaption):
+        if isinstance(self.field, FilterFieldWithCaption):
             field = self.field.to_dict()
-        elif isinstance(self.field, FilterByCaptionFunction):
+        elif isinstance(self.field, FilterFieldWithCaptionFunction):
             field = self.field.to_dict()
         else:
             field = self.field.to_dict()
-
 
         filter_type = self.filter_type.value
 
@@ -71,27 +63,26 @@ class TopNFilter:
         if not isinstance(self.direction, Unset):
             direction = self.direction.value
 
-
         how_many = self.how_many
 
         field_to_measure: Union[Unset, dict[str, Any]]
         if isinstance(self.field_to_measure, Unset):
             field_to_measure = UNSET
-        elif isinstance(self.field_to_measure, FilterByCaption):
+        elif isinstance(self.field_to_measure, FilterFieldWithCaption):
             field_to_measure = self.field_to_measure.to_dict()
-        elif isinstance(self.field_to_measure, FilterByCaptionFunction):
+        elif isinstance(self.field_to_measure, FilterFieldWithCaptionFunction):
             field_to_measure = self.field_to_measure.to_dict()
         else:
             field_to_measure = self.field_to_measure.to_dict()
 
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "field": field,
-            "filterType": filter_type,
-        })
+        field_dict.update(
+            {
+                "field": field,
+                "filterType": filter_type,
+            }
+        )
         if context is not UNSET:
             field_dict["context"] = context
         if direction is not UNSET:
@@ -103,98 +94,82 @@ class TopNFilter:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.filter_by_calculation import FilterByCalculation
-        from ..models.filter_by_caption_function import FilterByCaptionFunction
-        from ..models.filter_by_caption import FilterByCaption
+        from ..models.filter_field_with_calculation import FilterFieldWithCalculation
+        from ..models.filter_field_with_caption import FilterFieldWithCaption
+        from ..models.filter_field_with_caption_function import FilterFieldWithCaptionFunction
+
         d = dict(src_dict)
-        def _parse_field(data: object) -> Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction']:
+
+        def _parse_field(
+            data: object,
+        ) -> Union["FilterFieldWithCalculation", "FilterFieldWithCaption", "FilterFieldWithCaptionFunction"]:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_filter_field_type_0 = FilterByCaption.from_dict(data)
-
-
+                componentsschemas_filter_field_type_0 = FilterFieldWithCaption.from_dict(data)
 
                 return componentsschemas_filter_field_type_0
-            except: # noqa: E722
+            except:  # noqa: E722
                 pass
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_filter_field_type_1 = FilterByCaptionFunction.from_dict(data)
-
-
+                componentsschemas_filter_field_type_1 = FilterFieldWithCaptionFunction.from_dict(data)
 
                 return componentsschemas_filter_field_type_1
-            except: # noqa: E722
+            except:  # noqa: E722
                 pass
             if not isinstance(data, dict):
                 raise TypeError()
-            componentsschemas_filter_field_type_2 = FilterByCalculation.from_dict(data)
-
-
+            componentsschemas_filter_field_type_2 = FilterFieldWithCalculation.from_dict(data)
 
             return componentsschemas_filter_field_type_2
 
         field = _parse_field(d.pop("field"))
 
-
         filter_type = FilterFilterType(d.pop("filterType"))
-
-
-
 
         context = d.pop("context", UNSET)
 
         _direction = d.pop("direction", UNSET)
         direction: Union[Unset, TopNFilterDirection]
-        if isinstance(_direction,  Unset):
+        if isinstance(_direction, Unset):
             direction = UNSET
         else:
             direction = TopNFilterDirection(_direction)
 
-
-
-
         how_many = d.pop("howMany", UNSET)
 
-        def _parse_field_to_measure(data: object) -> Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction', Unset]:
+        def _parse_field_to_measure(
+            data: object,
+        ) -> Union["FilterFieldWithCalculation", "FilterFieldWithCaption", "FilterFieldWithCaptionFunction", Unset]:
             if isinstance(data, Unset):
                 return data
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_filter_field_type_0 = FilterByCaption.from_dict(data)
-
-
+                componentsschemas_filter_field_type_0 = FilterFieldWithCaption.from_dict(data)
 
                 return componentsschemas_filter_field_type_0
-            except: # noqa: E722
+            except:  # noqa: E722
                 pass
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_filter_field_type_1 = FilterByCaptionFunction.from_dict(data)
-
-
+                componentsschemas_filter_field_type_1 = FilterFieldWithCaptionFunction.from_dict(data)
 
                 return componentsschemas_filter_field_type_1
-            except: # noqa: E722
+            except:  # noqa: E722
                 pass
             if not isinstance(data, dict):
                 raise TypeError()
-            componentsschemas_filter_field_type_2 = FilterByCalculation.from_dict(data)
-
-
+            componentsschemas_filter_field_type_2 = FilterFieldWithCalculation.from_dict(data)
 
             return componentsschemas_filter_field_type_2
 
         field_to_measure = _parse_field_to_measure(d.pop("fieldToMeasure", UNSET))
-
 
         top_n_filter = cls(
             field=field,
@@ -204,7 +179,6 @@ class TopNFilter:
             how_many=how_many,
             field_to_measure=field_to_measure,
         )
-
 
         top_n_filter.additional_properties = d
         return top_n_filter

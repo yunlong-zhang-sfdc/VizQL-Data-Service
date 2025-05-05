@@ -3,27 +3,16 @@ from typing import Any, Optional, Union, cast
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
+from ...client import AuthenticatedClient, Client
+from ...types import Response
 
 
-
-
-def _get_kwargs(
-    
-) -> dict[str, Any]:
-    
-
-    
-
-    
-
+def _get_kwargs() -> dict[str, Any]:
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/simple-request",
     }
-
 
     return _kwargs
 
@@ -50,9 +39,8 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-
 ) -> Response[str]:
-    """ Send a simple request
+    """Send a simple request
 
      Sends a request that can be used for testing or doing a health check.
 
@@ -62,12 +50,9 @@ def sync_detailed(
 
     Returns:
         Response[str]
-     """
+    """
 
-
-    kwargs = _get_kwargs(
-        
-    )
+    kwargs = _get_kwargs()
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -75,12 +60,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-
 ) -> Optional[str]:
-    """ Send a simple request
+    """Send a simple request
 
      Sends a request that can be used for testing or doing a health check.
 
@@ -90,20 +75,18 @@ def sync(
 
     Returns:
         str
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-
 ) -> Response[str]:
-    """ Send a simple request
+    """Send a simple request
 
      Sends a request that can be used for testing or doing a health check.
 
@@ -113,25 +96,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[str]
-     """
+    """
 
+    kwargs = _get_kwargs()
 
-    kwargs = _get_kwargs(
-        
-    )
-
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-
 ) -> Optional[str]:
-    """ Send a simple request
+    """Send a simple request
 
      Sends a request that can be used for testing or doing a health check.
 
@@ -141,10 +119,10 @@ async def asyncio(
 
     Returns:
         str
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+        )
+    ).parsed

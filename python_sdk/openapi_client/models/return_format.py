@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class ReturnFormat(str, Enum):
     ARRAYS = "ARRAYS"
     OBJECTS = "OBJECTS"

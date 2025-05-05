@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class FilterFilterType(str, Enum):
     DATE = "DATE"
     MATCH = "MATCH"

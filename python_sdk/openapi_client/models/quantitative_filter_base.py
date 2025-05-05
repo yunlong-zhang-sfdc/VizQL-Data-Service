@@ -1,65 +1,54 @@
 from collections.abc import Mapping
-from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.filter_filter_type import FilterFilterType
 from ..models.quantitative_filter_base_quantitative_filter_type import QuantitativeFilterBaseQuantitativeFilterType
 from ..types import UNSET, Unset
-from typing import cast
-from typing import cast, Union
-from typing import Union
 
 if TYPE_CHECKING:
-  from ..models.filter_by_calculation import FilterByCalculation
-  from ..models.filter_by_caption_function import FilterByCaptionFunction
-  from ..models.filter_by_caption import FilterByCaption
-
-
-
+    from ..models.filter_field_with_calculation import FilterFieldWithCalculation
+    from ..models.filter_field_with_caption import FilterFieldWithCaption
+    from ..models.filter_field_with_caption_function import FilterFieldWithCaptionFunction
 
 
 T = TypeVar("T", bound="QuantitativeFilterBase")
 
 
-
 @_attrs_define
 class QuantitativeFilterBase:
-    """ 
-        Attributes:
-            field (Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction']):
-            filter_type (FilterFilterType):
-            quantitative_filter_type (QuantitativeFilterBaseQuantitativeFilterType):
-            context (Union[Unset, bool]): Make the given filter a context filter, meaning that it's an independent filter.
-                Any other filters that you set are defined as dependent filters because they process only the data that passes
-                through the context filter. Default: False.
-            include_nulls (Union[Unset, bool]): Should nulls be returned or not. Only applies to RANGE, MIN, and MAX
-                filters. If not provided, the default is to not include null values.
-     """
+    """
+    Attributes:
+        field (Union['FilterFieldWithCalculation', 'FilterFieldWithCaption', 'FilterFieldWithCaptionFunction']):
+        filter_type (FilterFilterType):
+        quantitative_filter_type (QuantitativeFilterBaseQuantitativeFilterType):
+        context (Union[Unset, bool]): Make the given filter a context filter, meaning that it's an independent filter.
+            Any other filters that you set are defined as dependent filters because they process only the data that passes
+            through the context filter. Default: False.
+        include_nulls (Union[Unset, bool]): Should nulls be returned or not. Only applies to RANGE, MIN, and MAX
+            filters. If not provided, the default is to not include null values.
+    """
 
-    field: Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction']
+    field: Union["FilterFieldWithCalculation", "FilterFieldWithCaption", "FilterFieldWithCaptionFunction"]
     filter_type: FilterFilterType
     quantitative_filter_type: QuantitativeFilterBaseQuantitativeFilterType
     context: Union[Unset, bool] = False
     include_nulls: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.filter_by_calculation import FilterByCalculation
-        from ..models.filter_by_caption_function import FilterByCaptionFunction
-        from ..models.filter_by_caption import FilterByCaption
+        from ..models.filter_field_with_caption import FilterFieldWithCaption
+        from ..models.filter_field_with_caption_function import FilterFieldWithCaptionFunction
+
         field: dict[str, Any]
-        if isinstance(self.field, FilterByCaption):
+        if isinstance(self.field, FilterFieldWithCaption):
             field = self.field.to_dict()
-        elif isinstance(self.field, FilterByCaptionFunction):
+        elif isinstance(self.field, FilterFieldWithCaptionFunction):
             field = self.field.to_dict()
         else:
             field = self.field.to_dict()
-
 
         filter_type = self.filter_type.value
 
@@ -69,14 +58,15 @@ class QuantitativeFilterBase:
 
         include_nulls = self.include_nulls
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "field": field,
-            "filterType": filter_type,
-            "quantitativeFilterType": quantitative_filter_type,
-        })
+        field_dict.update(
+            {
+                "field": field,
+                "filterType": filter_type,
+                "quantitativeFilterType": quantitative_filter_type,
+            }
+        )
         if context is not UNSET:
             field_dict["context"] = context
         if include_nulls is not UNSET:
@@ -84,55 +74,44 @@ class QuantitativeFilterBase:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.filter_by_calculation import FilterByCalculation
-        from ..models.filter_by_caption_function import FilterByCaptionFunction
-        from ..models.filter_by_caption import FilterByCaption
+        from ..models.filter_field_with_calculation import FilterFieldWithCalculation
+        from ..models.filter_field_with_caption import FilterFieldWithCaption
+        from ..models.filter_field_with_caption_function import FilterFieldWithCaptionFunction
+
         d = dict(src_dict)
-        def _parse_field(data: object) -> Union['FilterByCalculation', 'FilterByCaption', 'FilterByCaptionFunction']:
+
+        def _parse_field(
+            data: object,
+        ) -> Union["FilterFieldWithCalculation", "FilterFieldWithCaption", "FilterFieldWithCaptionFunction"]:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_filter_field_type_0 = FilterByCaption.from_dict(data)
-
-
+                componentsschemas_filter_field_type_0 = FilterFieldWithCaption.from_dict(data)
 
                 return componentsschemas_filter_field_type_0
-            except: # noqa: E722
+            except:  # noqa: E722
                 pass
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_filter_field_type_1 = FilterByCaptionFunction.from_dict(data)
-
-
+                componentsschemas_filter_field_type_1 = FilterFieldWithCaptionFunction.from_dict(data)
 
                 return componentsschemas_filter_field_type_1
-            except: # noqa: E722
+            except:  # noqa: E722
                 pass
             if not isinstance(data, dict):
                 raise TypeError()
-            componentsschemas_filter_field_type_2 = FilterByCalculation.from_dict(data)
-
-
+            componentsschemas_filter_field_type_2 = FilterFieldWithCalculation.from_dict(data)
 
             return componentsschemas_filter_field_type_2
 
         field = _parse_field(d.pop("field"))
 
-
         filter_type = FilterFilterType(d.pop("filterType"))
 
-
-
-
         quantitative_filter_type = QuantitativeFilterBaseQuantitativeFilterType(d.pop("quantitativeFilterType"))
-
-
-
 
         context = d.pop("context", UNSET)
 
@@ -145,7 +124,6 @@ class QuantitativeFilterBase:
             context=context,
             include_nulls=include_nulls,
         )
-
 
         quantitative_filter_base.additional_properties = d
         return quantitative_filter_base

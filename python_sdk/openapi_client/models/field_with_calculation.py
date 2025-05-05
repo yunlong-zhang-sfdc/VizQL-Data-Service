@@ -7,16 +7,16 @@ from attrs import field as _attrs_field
 from ..models.sort_direction import SortDirection
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="FieldBase")
+T = TypeVar("T", bound="FieldWithCalculation")
 
 
 @_attrs_define
-class FieldBase:
-    """Common properties of a field. A field represents a column of data in a published data source.
-
+class FieldWithCalculation:
+    """
     Attributes:
         field_caption (str): Either the name of a specific Field in the data source, or, in the case of a calculation, a
             user-supplied name for the calculation.
+        calculation (str): A Tableau calculation that will be returned as a Field in the query.
         field_alias (Union[Unset, str]): An alternative name to give the field. Will only be used in object format
             output.
         max_decimal_places (Union[Unset, int]): The maximum number of decimal places. Any trailing 0s will be dropped.
@@ -30,6 +30,7 @@ class FieldBase:
     """
 
     field_caption: str
+    calculation: str
     field_alias: Union[Unset, str] = UNSET
     max_decimal_places: Union[Unset, int] = UNSET
     sort_direction: Union[Unset, SortDirection] = UNSET
@@ -38,6 +39,8 @@ class FieldBase:
 
     def to_dict(self) -> dict[str, Any]:
         field_caption = self.field_caption
+
+        calculation = self.calculation
 
         field_alias = self.field_alias
 
@@ -54,6 +57,7 @@ class FieldBase:
         field_dict.update(
             {
                 "fieldCaption": field_caption,
+                "calculation": calculation,
             }
         )
         if field_alias is not UNSET:
@@ -72,6 +76,8 @@ class FieldBase:
         d = dict(src_dict)
         field_caption = d.pop("fieldCaption")
 
+        calculation = d.pop("calculation")
+
         field_alias = d.pop("fieldAlias", UNSET)
 
         max_decimal_places = d.pop("maxDecimalPlaces", UNSET)
@@ -85,16 +91,17 @@ class FieldBase:
 
         sort_priority = d.pop("sortPriority", UNSET)
 
-        field_base = cls(
+        field_with_calculation = cls(
             field_caption=field_caption,
+            calculation=calculation,
             field_alias=field_alias,
             max_decimal_places=max_decimal_places,
             sort_direction=sort_direction,
             sort_priority=sort_priority,
         )
 
-        field_base.additional_properties = d
-        return field_base
+        field_with_calculation.additional_properties = d
+        return field_with_calculation
 
     @property
     def additional_keys(self) -> list[str]:
