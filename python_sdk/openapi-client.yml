@@ -1,3 +1,3 @@
-project_name_override: openapi_client
+project_name_override: temp_project
 package_name_override: openapi_client
-docstrings_on_attributes: false
+generate_aliases: true
