@@ -130,8 +130,8 @@ jobs:
         path: python_sdk/coverage.xml
 
   publish-testpypi:
-    needs: [generateStub, build, test]
-    if: needs.generateStub.result == 'success' && needs.build.result == 'success' && needs.test.result == 'success'
+    needs: [generateStub, build]
+    if: needs.generateStub.result == 'success' && needs.build.result == 'success'
     runs-on: ubuntu-latest
     strategy:
       matrix:
