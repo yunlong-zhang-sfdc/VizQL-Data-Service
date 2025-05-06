@@ -159,6 +159,7 @@ jobs:
     - name: Publish distribution to Test PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
+        packages-dir: python_sdk/dist/
         repository-url: https://test.pypi.org/legacy/
 
   publish-pypi:
@@ -190,3 +191,5 @@ jobs:
 
     - name: Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        packages-dir: python_sdk/dist/
