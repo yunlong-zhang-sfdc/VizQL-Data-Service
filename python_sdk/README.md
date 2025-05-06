@@ -19,32 +19,6 @@ pip install vizql-data-service-python-sdk
 
 ## 🚀 Quick start
 
-```python
-from openapi_client.models.query_request import QueryRequest
-from src.models.user import User
-from src.models.server import Server
-from src.utils import file_util
-from src.client import Client
-
-# Using Tableau server password auth
-user = User.from_password('<username>', '<password>')
-# Using Tableau server PAT auth
-user = User.from_pat('<tokenname>', '<pat>')
-server = Server('http://localhost', '<sitename>') # Leave empty for default site
-
-# Replace datasource LUID and create query request
-query_request_json = '{"datasource": {"datasourceLuid": "<datasource-luid>"}, "options": {"returnFormat": "OBJECTS"}, "query": {"fields": [{"fieldCaption": "Category"}, {"fieldCaption": "Sales", "function": "SUM"}]}}'
-# OR from file
-# query_request_json = file_util.read_json('src/examples', 'query_request.json')
-
-query_request = QueryRequest.from_json(query_request_json)
-client = Client(user, server)
-# Synchronous request
-client.query_datasource(query_request)
-# Asynchronous request
-asyncio.run(client.query_datasource(query_request, False))
-```
-
 ## 📘 Supported Features
 - ✅ Query published datasources with selectable fields and filters
 - ✅ Read metadata of published Tableau datasources

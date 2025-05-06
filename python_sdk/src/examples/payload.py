@@ -1,11 +1,9 @@
 from datetime import date
 
 from openapi_client.models import (
-    SimpleField,
     AggregatedField,
-    CalculatedField,
-    SimpleFilterField,
     AggregatedFilterField,
+    CalculatedField,
     FilterFilterType,
     Function,
     MatchFilter,
@@ -17,6 +15,8 @@ from openapi_client.models import (
     RelativeDateFilterDateRangeType,
     RelativeDateFilterPeriodType,
     SetFilter,
+    SimpleField,
+    SimpleFilterField,
     TopNFilter,
     TopNFilterDirection,
 )
@@ -81,12 +81,8 @@ def create_quantitative_range_filter():
 def create_quantitative_date_filter():
     return Query(
         fields=[
-            AggregatedField(
-                field_caption="Order Date", function=Function.YEAR
-            ),
-            AggregatedField(
-                field_caption="Order Date", function=Function.QUARTER
-            ),
+            AggregatedField(field_caption="Order Date", function=Function.YEAR),
+            AggregatedField(field_caption="Order Date", function=Function.QUARTER),
             AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
