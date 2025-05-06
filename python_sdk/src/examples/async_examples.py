@@ -20,38 +20,32 @@ async def main():
     server = TSC.Server(args.server, use_server_version=True)
 
     with server.auth.sign_in(tableau_auth):
-        print("\n=== Authentication Info ===")
-        print(f"Server Auth Token: {server.auth_token}")
-        print(f"Token Type: {type(server.auth_token)}")
-
         datasource_luid = common.list_datasources_and_get_luid(server)
-        print(f"\nSelected Datasource LUID: {datasource_luid}")
-
         client = common.create_authenticated_client(server, args)
         datasource = common.create_datasource(datasource_luid)
 
         # Read metadata example
         try:
-            print("\n=== Reading Metadata ===")
+            print("\n=== ReadMetadata Query ===")
             metadata_request = ReadMetadataRequest(datasource=datasource)
             print(f"Request Body: {metadata_request.to_dict()}")
 
             metadata_response = await read_metadata.asyncio_detailed(
                 client=client, body=metadata_request
             )
-            common.handle_response(metadata_response, "Metadata Query")
+            common.handle_response(metadata_response, "ReadMetadata Query")
         except Exception as e:
-            common.handle_error(e, "Metadata Query")
+            common.handle_error(e, "ReadMetadata Query")
 
         # Query data source examples
         for query_func in QUERY_FUNCTIONS:
             try:
-                print(f"\n=== Executing Query: {query_func.__name__} ===")
+                print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 # Create query request
                 query_request = QueryRequest(query=query_func(), datasource=datasource)
                 print(f"Request Body: {query_request.to_dict()}")
 
-                print("\nSending query request...")
+                print("\nSending ExecuteQuery request...")
                 response = await query_datasource.asyncio_detailed(
                     client=client, body=query_request
                 )

@@ -158,82 +158,72 @@
                     }
                 }
             },
-            "FieldWithCaption": {
-                "allOf": [
+            "Field": {
+                "oneOf": [
                     {
-                        "$ref": "#/components/schemas/FieldBase"
-                    },
-                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FieldBase"
+                            }
+                        ],
                         "type": "object",
+                        "additionalProperties": false,
                         "properties": {
                             "fieldCaption": {},
                             "fieldAlias": {},
                             "maxDecimalPlaces": {},
                             "sortDirection": {},
                             "sortPriority": {}
-                        },
-                        "additionalProperties": false
+                        }
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FieldBase"
+                            }
+                        ],
+                        "type": "object",
+                        "required": [
+                            "function"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                            "function": {
+                                "$ref": "#/components/schemas/Function"
+                            },
+                            "fieldCaption": {},
+                            "fieldAlias": {},
+                            "maxDecimalPlaces": {},
+                            "sortDirection": {},
+                            "sortPriority": {}
+                        }
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FieldBase"
+                            }
+                        ],
+                        "type": "object",
+                        "required": [
+                            "calculation"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                            "calculation": {
+                                "type": "string",
+                                "description": "A Tableau calculation that will be returned as a Field in the query."
+                            },
+                            "fieldCaption": {},
+                            "fieldAlias": {},
+                            "maxDecimalPlaces": {},
+                            "sortDirection": {},
+                            "sortPriority": {}
+                        }
                     }
                 ]
-              },
-              "FieldWithCaptionFunction": {
-                    "allOf": [
-                        {
-                            "$ref": "#/components/schemas/FieldBase"
-                        },
-                        {
-                            "type": "object",
-                            "required": ["function"],
-                            "properties": {
-                                "function": {
-                                    "$ref": "#/components/schemas/Function"
-                                },
-                                "fieldCaption": {},
-                                "fieldAlias": {},
-                                "maxDecimalPlaces": {},
-                                "sortDirection": {},
-                                "sortPriority": {}
-                            },
-                            "additionalProperties": false
-                        }
-                    ]
-                },
-                "FieldWithCalculation": {
-                    "allOf": [
-                        {
-                            "$ref": "#/components/schemas/FieldBase"
-                        },
-                        {
-                            "type": "object",
-                            "required": ["calculation"],
-                            "properties": {
-                                "calculation": {
-                                    "type": "string",
-                                    "description": "A Tableau calculation that will be returned as a Field in the query."
-                                },
-                                "fieldCaption": {},
-                                "fieldAlias": {},
-                                "maxDecimalPlaces": {},
-                                "sortDirection": {},
-                                "sortPriority": {}
-                            },
-                            "additionalProperties": false
-                        }   
-                    ]
-              },
-              "Field": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/FieldWithCaption"
-                  },
-                  {
-                    "$ref": "#/components/schemas/FieldWithCaptionFunction"
-                  },
-                  {
-                    "$ref": "#/components/schemas/FieldWithCalculation"
-                  }
-                ]
-              },
+
+            },
             "FieldMetadata": {
                 "type": "object",
                 "description": "Describes a field in the data source that can be used to create queries.",
@@ -332,44 +322,41 @@
                     }
                 }
             },
-            "FilterFieldWithCaption": {
-                "required": ["fieldCaption"],
-                "additionalProperties": false,
-                "properties": {
-                    "fieldCaption": {
-                        "type": "string",
-                        "description": "The caption of the field to filter on."
-                    }
-                }
-            },
-            "FilterFieldWithCaptionFunction": {
-                "required": ["fieldCaption", "function"],
-                "additionalProperties": false,
-                "properties": {
-                    "fieldCaption": {
-                        "type": "string",
-                        "description": "The caption of the field to filter on."
-                    },
-                    "function": {
-                        "$ref": "#/components/schemas/Function"
-                    }
-                }
-            },
-            "FilterFieldWithCalculation": {
-                "required": ["calculation"],
-                "additionalProperties": false,
-                "properties": {
-                    "calculation": {
-                        "type": "string",
-                        "description": "A Tableau calculation that will be used to filter on."
-                    }
-                }
-            },
             "FilterField": {
                 "oneOf": [
-                    { "$ref": "#/components/schemas/FilterFieldWithCaption" },
-                    { "$ref": "#/components/schemas/FilterFieldWithCaptionFunction" },
-                    { "$ref": "#/components/schemas/FilterFieldWithCalculation" }
+                    {
+                        "required": ["fieldCaption"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "fieldCaption": {
+                                "type": "string",
+                                "description": "The caption of the field to filter on."
+                            }
+                        }
+                    },
+                    {
+                        "required": ["fieldCaption", "function"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "fieldCaption": {
+                                "type": "string",
+                                "description": "The caption of the field to filter on."
+                            },
+                            "function": {
+                                "$ref": "#/components/schemas/Function"
+                            }
+                        }
+                    },
+                    {
+                        "required": ["calculation"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "calculation": {
+                                "type": "string",
+                                "description": "A Tableau calculation that will be used to filter on."
+                            }
+                        }
+                    }
                 ]
             },
             "Function": {

@@ -30,7 +30,7 @@ def list_datasources_and_get_luid(server):
     all_datasources, pagination_item = server.datasources.get()
     print(f"\nThere are {pagination_item.total_available} datasources on site:")
     for ds in all_datasources:
-        print(f"- {ds.name} (luid: {ds.id})")
+        print(f"- {ds.name} (LUID: {ds.id})")
 
     matching_datasources = [ds for ds in all_datasources if ds.name == target_name]
     if not matching_datasources:
@@ -66,26 +66,17 @@ def create_authenticated_client(
         args.server if args.server.startswith("http") else f"http://{args.server}"
     )
     base_url = f"{server_url}{API_SUBDOMAIN}"
-
     print("\n=== Client Configuration ===")
     print(f"Server URL: {server_url}")
     print(f"Base URL: {base_url}")
     print(f"Auth Token: {server.auth_token}")
     print(f"Auth Header: {X_TABLEAU_AUTH}")
-
-    client = AuthenticatedClient(
+    return AuthenticatedClient(
         base_url=base_url,
         token=server.auth_token,
         prefix="",
         auth_header_name=X_TABLEAU_AUTH,
     )
-
-    print("\n=== Client Created ===")
-    print(f"Client Base URL: {client._base_url}")
-    print(f"Client Token: {client.token}")
-    print(f"Client Auth Header: {client.auth_header_name}")
-
-    return client
 
 
 def create_datasource(luid: str) -> Datasource:
@@ -100,7 +91,8 @@ def handle_response(response, operation_name: str = "Operation"):
         response: The API response
         operation_name: Name of the operation for logging
     """
-    print(f"\nResponse Status: {response.status_code}")
+    print(f"\n=== Response Details for {operation_name} ===")
+    print(f"Response Status: {response.status_code}")
     print(f"Response Headers: {response.headers}")
     print(f"Response Body: {response.parsed}")
 
@@ -110,10 +102,6 @@ def handle_response(response, operation_name: str = "Operation"):
         print("1. Token format is correct")
         print("2. Token is not expired")
         print("3. Token has correct permissions")
-        print("4. Token has correct permissions")
-        print(
-            "5. Make sure all API calls are executed within the 'with server.auth.sign_in(tableau_auth):' scope"
-        )
     elif response.status_code != 200:
         print(f"\nRequest failed with status code: {response.status_code}")
 
@@ -139,8 +127,6 @@ def print_exception_details(e):
     print(f"Exception Message: {str(e)}")
     print("\n=== Full Traceback ===")
     traceback.print_exc()
-
-    # Print the current frame information
     frame = inspect.currentframe()
     if frame:
         print("\n=== Current Frame Info ===")

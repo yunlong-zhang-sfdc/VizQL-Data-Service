@@ -1,11 +1,11 @@
 from datetime import date
 
 from openapi_client.models import (
-    FieldWithCalculation,
-    FieldWithCaption,
-    FieldWithCaptionFunction,
-    FilterFieldWithCaption,
-    FilterFieldWithCaptionFunction,
+    SimpleField,
+    AggregatedField,
+    CalculatedField,
+    SimpleFilterField,
+    AggregatedFilterField,
     FilterFilterType,
     Function,
     MatchFilter,
@@ -25,8 +25,8 @@ from openapi_client.models import (
 def create_simple_query():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Category"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="Category"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ]
     )
 
@@ -34,7 +34,7 @@ def create_simple_query():
 def create_custom_calculation():
     return Query(
         fields=[
-            FieldWithCalculation(
+            CalculatedField(
                 field_caption="AOV", calculation="SUM([Profit])/COUNTD([Order ID])"
             ),
         ]
@@ -44,12 +44,12 @@ def create_custom_calculation():
 def create_dimension_filter():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Ship Mode"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="Ship Mode"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             SetFilter(
-                field=FilterFieldWithCaption(field_caption="Ship Mode"),
+                field=SimpleFilterField(field_caption="Ship Mode"),
                 filter_type=FilterFilterType.SET,
                 values=["First Class", "Standard Class"],
                 exclude=False,
@@ -61,12 +61,12 @@ def create_dimension_filter():
 def create_quantitative_range_filter():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Ship Mode"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="Ship Mode"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             QuantitativeNumericalFilter(
-                field=FilterFieldWithCaptionFunction(
+                field=AggregatedFilterField(
                     field_caption="Sales", function=Function.SUM
                 ),
                 filter_type=FilterFilterType.QUANTITATIVE_NUMERICAL,
@@ -81,17 +81,17 @@ def create_quantitative_range_filter():
 def create_quantitative_date_filter():
     return Query(
         fields=[
-            FieldWithCaptionFunction(
+            AggregatedField(
                 field_caption="Order Date", function=Function.YEAR
             ),
-            FieldWithCaptionFunction(
+            AggregatedField(
                 field_caption="Order Date", function=Function.QUARTER
             ),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             QuantitativeDateFilter(
-                field=FilterFieldWithCaption(field_caption="Order Date"),
+                field=SimpleFilterField(field_caption="Order Date"),
                 filter_type=FilterFilterType.QUANTITATIVE_DATE,
                 quantitative_filter_type=QuantitativeFilterBaseQuantitativeFilterType.MIN,
                 min_date=date(2020, 1, 1),
@@ -103,17 +103,17 @@ def create_quantitative_date_filter():
 def create_relative_date_filter():
     return Query(
         fields=[
-            FieldWithCaptionFunction(
+            AggregatedField(
                 field_caption="Order Date", function=Function.YEAR, sort_priority=1
             ),
-            FieldWithCaptionFunction(
+            AggregatedField(
                 field_caption="Order Date", function=Function.MONTH, sort_priority=2
             ),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             RelativeDateFilter(
-                field=FilterFieldWithCaption(field_caption="Order Date"),
+                field=SimpleFilterField(field_caption="Order Date"),
                 filter_type=FilterFilterType.DATE,
                 period_type=RelativeDateFilterPeriodType.MONTHS,
                 date_range_type=RelativeDateFilterDateRangeType.CURRENT,
@@ -126,12 +126,12 @@ def create_relative_date_filter():
 def create_match_filter():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="State/Province"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="State/Province"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             MatchFilter(
-                field=FilterFieldWithCaption(field_caption="State/Province"),
+                field=SimpleFilterField(field_caption="State/Province"),
                 filter_type=FilterFilterType.MATCH,
                 starts_with="A",
                 ends_with="a",
@@ -145,15 +145,15 @@ def create_match_filter():
 def create_top_n_filter():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="State/Province"),
-            FieldWithCaptionFunction(field_caption="Profit", function=Function.SUM),
+            SimpleField(field_caption="State/Province"),
+            AggregatedField(field_caption="Profit", function=Function.SUM),
         ],
         filters=[
             TopNFilter(
-                field=FilterFieldWithCaption(field_caption="State/Province"),
+                field=SimpleFilterField(field_caption="State/Province"),
                 filter_type=FilterFilterType.TOP,
                 how_many=10,
-                field_to_measure=FilterFieldWithCaptionFunction(
+                field_to_measure=AggregatedFilterField(
                     field_caption="Profit", function=Function.SUM
                 ),
                 direction=TopNFilterDirection.TOP,
@@ -165,19 +165,19 @@ def create_top_n_filter():
 def create_multiple_dimension_filters():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Ship Mode"),
-            FieldWithCaption(field_caption="Segment"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="Ship Mode"),
+            SimpleField(field_caption="Segment"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             SetFilter(
-                field=FilterFieldWithCaption(field_caption="Ship Mode"),
+                field=SimpleFilterField(field_caption="Ship Mode"),
                 filter_type=FilterFilterType.SET,
                 values=["First Class", "Standard Class"],
                 exclude=False,
             ),
             SetFilter(
-                field=FilterFieldWithCaption(field_caption="Segment"),
+                field=SimpleFilterField(field_caption="Segment"),
                 filter_type=FilterFilterType.SET,
                 values=["Consumer"],
                 exclude=True,
@@ -189,13 +189,13 @@ def create_multiple_dimension_filters():
 def create_multiple_min_max_numeric_filters():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Ship Mode"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
-            FieldWithCaptionFunction(field_caption="Profit", function=Function.SUM),
+            SimpleField(field_caption="Ship Mode"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
+            AggregatedField(field_caption="Profit", function=Function.SUM),
         ],
         filters=[
             QuantitativeNumericalFilter(
-                field=FilterFieldWithCaptionFunction(
+                field=AggregatedFilterField(
                     field_caption="Sales", function=Function.SUM
                 ),
                 filter_type=FilterFilterType.QUANTITATIVE_NUMERICAL,
@@ -203,7 +203,7 @@ def create_multiple_min_max_numeric_filters():
                 min_=266839,
             ),
             QuantitativeNumericalFilter(
-                field=FilterFieldWithCaptionFunction(
+                field=AggregatedFilterField(
                     field_caption="Profit", function=Function.SUM
                 ),
                 filter_type=FilterFilterType.QUANTITATIVE_NUMERICAL,
@@ -217,18 +217,18 @@ def create_multiple_min_max_numeric_filters():
 def create_dimension_numeric_filters():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Ship Mode"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="Ship Mode"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             SetFilter(
-                field=FilterFieldWithCaption(field_caption="Ship Mode"),
+                field=SimpleFilterField(field_caption="Ship Mode"),
                 filter_type=FilterFilterType.SET,
                 values=["First Class", "Standard Class"],
                 exclude=True,
             ),
             QuantitativeNumericalFilter(
-                field=FilterFieldWithCaptionFunction(
+                field=AggregatedFilterField(
                     field_caption="Profit", function=Function.SUM
                 ),
                 filter_type=FilterFilterType.QUANTITATIVE_NUMERICAL,
@@ -242,21 +242,21 @@ def create_dimension_numeric_filters():
 def create_context_filter():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Sub-Category"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="Sub-Category"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
         ],
         filters=[
             TopNFilter(
-                field=FilterFieldWithCaption(field_caption="Sub-Category"),
+                field=SimpleFilterField(field_caption="Sub-Category"),
                 filter_type=FilterFilterType.TOP,
                 how_many=10,
-                field_to_measure=FilterFieldWithCaptionFunction(
+                field_to_measure=AggregatedFilterField(
                     field_caption="Sales", function=Function.SUM
                 ),
                 direction=TopNFilterDirection.TOP,
             ),
             SetFilter(
-                field=FilterFieldWithCaption(field_caption="Category"),
+                field=SimpleFilterField(field_caption="Category"),
                 filter_type=FilterFilterType.SET,
                 values=["Furniture"],
                 exclude=False,
@@ -269,13 +269,13 @@ def create_context_filter():
 def create_numeric_date_dimension_filters():
     return Query(
         fields=[
-            FieldWithCaption(field_caption="Order Date"),
-            FieldWithCaptionFunction(field_caption="Sales", function=Function.SUM),
-            FieldWithCaption(field_caption="Ship Mode"),
+            SimpleField(field_caption="Order Date"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
+            SimpleField(field_caption="Ship Mode"),
         ],
         filters=[
             QuantitativeNumericalFilter(
-                field=FilterFieldWithCaptionFunction(
+                field=AggregatedFilterField(
                     field_caption="Sales", function=Function.SUM
                 ),
                 filter_type=FilterFilterType.QUANTITATIVE_NUMERICAL,
@@ -284,7 +284,7 @@ def create_numeric_date_dimension_filters():
                 max_=63,
             ),
             RelativeDateFilter(
-                field=FilterFieldWithCaption(field_caption="Order Date"),
+                field=SimpleFilterField(field_caption="Order Date"),
                 filter_type=FilterFilterType.DATE,
                 period_type=RelativeDateFilterPeriodType.MONTHS,
                 date_range_type=RelativeDateFilterDateRangeType.NEXTN,
@@ -292,7 +292,7 @@ def create_numeric_date_dimension_filters():
                 anchor_date=date(2020, 1, 1),
             ),
             SetFilter(
-                field=FilterFieldWithCaption(field_caption="Ship Mode"),
+                field=SimpleFilterField(field_caption="Ship Mode"),
                 filter_type=FilterFilterType.SET,
                 values=["First Class"],
                 exclude=False,

@@ -6,10 +6,14 @@ set -e
 # Print commands as they are executed
 set -x
 
+# Convert schema
+python scripts/convert_schema.py
+
 # Generate client code
-openapi-generator-cli generate \
-    -i ../VizQLDataServiceOpenAPISchema.json \
-    -g python-pydantic-v1 \
-    --additional-properties=generateSourceCodeOnly=true,packageName=openapi_client,projectName=openapi_client
+openapi-python-client generate --path build/temp_schema.json --config ./openapi-client.yml --overwrite
+
+rm -rf openapi_client
+mv temp_project/openapi_client ./openapi_client
+rm -r temp_project
 
 echo "OpenAPI client generation completed successfully"

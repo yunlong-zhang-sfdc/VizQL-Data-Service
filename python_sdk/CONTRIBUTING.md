@@ -46,7 +46,7 @@ pip install -e .[dev]     # Required and optional dependencies
 3. Generate OpenAPI client:
 ```bash
 pip install openapi-python-client
-openapi-python-client generate --path ../VizQLDataServiceOpenAPISchema.json --config ./openapi-client.yml
+bash scripts/generate.sh
 ```
 
 ### Running Examples
@@ -56,12 +56,12 @@ openapi-python-client generate --path ../VizQLDataServiceOpenAPISchema.json --co
 cd src/examples
 
 # Auth using username and password
-python sync_examples.py -u "<username>" -p "<password>" -s "localhost"
-python async_examples.py -u "<username>" -p "<password>" -s "localhost"
+python sync_examples.py -u "<username>" -p "<password>" -s "<server>"
+python async_examples.py -u "<username>" -p "<password>" -s "<server>"
 
 # Auth using personal access token
-python sync_examples.py -n "<pat-name>" -t "<pat-secret>" -s "localhost"
-python async_examples.py -n "<pat-name>" -t "<pat-secret>" -s "localhost"
+python sync_examples.py -n "<pat-name>" -t "<pat-secret>" -s "<server>"
+python async_examples.py -n "<pat-name>" -t "<pat-secret>" -s "<server>"
 ```
 
 ### Code Style
