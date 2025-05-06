@@ -32,7 +32,7 @@ user = User.from_password('<username>', '<password>')
 user = User.from_pat('<tokenname>', '<pat>')
 server = Server('http://localhost', '<sitename>') # Leave empty for default site
 
-# Replace datasource LUID and reate query request
+# Replace datasource LUID and create query request
 query_request_json = '{"datasource": {"datasourceLuid": "<datasource-luid>"}, "options": {"returnFormat": "OBJECTS"}, "query": {"fields": [{"fieldCaption": "Category"}, {"fieldCaption": "Sales", "function": "SUM"}]}}'
 # OR from file
 # query_request_json = file_util.read_json('src/examples', 'query_request.json')
