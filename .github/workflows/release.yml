@@ -139,7 +139,7 @@ jobs:
     environment:
       name: testpypi
     permissions:
-      id-token: write
+      id-token: write # IMPORTANT: mandatory for trusted publishing
     
     steps:
     - name: Check out repository
@@ -161,6 +161,7 @@ jobs:
       with:
         packages-dir: python_sdk/dist/
         repository-url: https://test.pypi.org/legacy/
+        verbose: true
 
   publish-pypi:
     needs: [generateStub, build, test]
