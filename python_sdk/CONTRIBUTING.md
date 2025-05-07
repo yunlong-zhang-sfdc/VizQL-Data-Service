@@ -45,9 +45,10 @@ pip install -e .[dev]     # Required and optional dependencies
 
 3. Generate OpenAPI client:
 ```bash
-pip install openapi-python-client
 bash scripts/generate.sh
 ```
+See [OpenAPI Generated Models](docs/openapi_models.md) for detailed information about the generated model classes, their properties, and usage examples.
+
 
 ### Running Examples
 

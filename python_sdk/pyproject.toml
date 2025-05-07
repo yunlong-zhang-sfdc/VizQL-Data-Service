@@ -97,3 +97,27 @@ exclude = '''
   | /venv/
 )
 '''
+
+[tool.pydoc-markdown]
+
+[[tool.pydoc-markdown.loaders]]
+type = 'python'
+search_path = ['./openapi_client']
+
+[[tool.pydoc-markdown.processors]]
+type = "filter"
+expression = "not '__init__' in name and not '__enter__' in name and not '__exit__' in name and not '__aexit__' in name and not '__aenter__' in name and not '_unstable' in name and default()"
+skip_empty_modules = true
+
+[[tool.pydoc-markdown.processors]]
+type = "smart"
+
+[[tool.pydoc-markdown.processors]]
+type = "crossref"
+
+[tool.pydoc-markdown.renderer]
+type = 'markdown'
+filename = "openapi_client.md"
+render_toc = true
+
+
