@@ -1,4 +1,5 @@
 import json
+import os
 
 
 def get_component_by_ref(schema, ref_path):
@@ -73,6 +74,9 @@ def convert_schema(input_file, output_file):
 
     schema["components"]["schemas"].update(new_components)
     del schema["components"]["schemas"]["FieldBase"]
+
+    # Create build directory if it doesn't exist
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
     with open(output_file, "w") as f:
         json.dump(schema, f, indent=4)
