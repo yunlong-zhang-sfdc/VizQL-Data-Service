@@ -12,7 +12,7 @@ source venv/bin/activate
 
 ls dist -al
 
-python -m pip install dist/vizql_data_service_python_sdk*.whl
+python -m pip install dist/vizqldataservicepythonsdk*.whl
 python -m pip install --upgrade pip
 pip install -e .[dev]
 
