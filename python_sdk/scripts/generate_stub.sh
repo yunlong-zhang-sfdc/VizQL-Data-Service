@@ -17,6 +17,12 @@ rm -rf openapi_client
 mv temp_project/openapi_client ./openapi_client
 rm -r temp_project
 
+# Skip if running in GitHub Actions
+if [ "$GITHUB_ACTIONS" = "true" ]; then
+    echo "Skipping documentation generation in GitHub Actions"
+    exit 0
+fi
+
 python scripts/add_enum_docstrings.py
 pydoc-markdown
 
