@@ -39,7 +39,7 @@ def list_datasources_and_get_luid(server: Server):
 
 def create_datasource(luid: str) -> Datasource:
     """Create a Datasource object with the given LUID."""
-    return Datasource(datasource_luid=luid)
+    return Datasource(datasource_luid=luid)  # type: ignore
 
 
 def handle_response(response, operation_name: str = "Operation"):

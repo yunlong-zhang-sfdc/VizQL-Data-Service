@@ -43,7 +43,7 @@ class Client:
             prefix="",
             auth_header_name=X_TABLEAU_AUTH,
             headers={"User-Agent": f"python-sdk/{VERSION}"},
-        )
+        )  # type: ignore
 
     @property
     def client(self) -> AuthenticatedClient:

@@ -8,7 +8,13 @@ set -x
 
 rm -rf venv
 python -m venv venv
-source venv/bin/activate
+
+# Detect OS and activate virtual environment
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+    source venv/Scripts/activate
+else
+    source venv/bin/activate
+fi
 
 ls dist -al
 
