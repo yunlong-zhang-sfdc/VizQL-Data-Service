@@ -12,7 +12,7 @@ from .server import Server
 
 API_SUBDOMAIN = "/api/v1/vizql-data-service"
 X_TABLEAU_AUTH = "X-Tableau-Auth"
-
+VERSION="1.0.0" # hardcoded for now
 
 class Client:
     """Client for VizQL Data Service API."""
@@ -41,6 +41,7 @@ class Client:
             token=self.server.get_auth_token(),
             prefix="",
             auth_header_name=X_TABLEAU_AUTH,
+            headers={"User-Agent": f"python-sdk/{VERSION}"},
         )
 
     @property
