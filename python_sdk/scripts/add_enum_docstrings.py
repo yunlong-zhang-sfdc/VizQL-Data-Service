@@ -13,7 +13,7 @@ def find_enum_classes(file_path: str) -> List[Tuple[str, List[str], int]]:
 
     enum_classes = []
     current_class = None
-    values = []
+    values: list[str] = []
     class_line = 0
 
     for i, line in enumerate(lines):

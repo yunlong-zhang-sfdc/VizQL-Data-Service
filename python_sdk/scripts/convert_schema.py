@@ -53,6 +53,9 @@ def convert_schema(input_file, output_file):
         ]
     }
 
+    # Reverse oneOf array
+    schema["components"]["schemas"]["Field"]["oneOf"].reverse()
+
     filter_field_oneof = schema["components"]["schemas"]["FilterField"]["oneOf"]
 
     for i, option in enumerate(filter_field_oneof):
@@ -66,6 +69,7 @@ def convert_schema(input_file, output_file):
             for i in range(len(filter_field_oneof))
         ]
     }
+    schema["components"]["schemas"]["FilterField"]["oneOf"].reverse()
 
     schema["components"]["schemas"].update(new_components)
     del schema["components"]["schemas"]["FieldBase"]

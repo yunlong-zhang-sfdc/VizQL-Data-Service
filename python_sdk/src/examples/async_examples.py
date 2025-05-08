@@ -5,33 +5,35 @@ import sys
 # Add project root to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-import tableauserverclient as TSC
-
+import src as sdk
 import src.examples.common as common
-from openapi_client.api.default import query_datasource, read_metadata
-from openapi_client.models import QueryRequest, ReadMetadataRequest
 from src.examples.payload import QUERY_FUNCTIONS
 
 
 async def main():
-    # Create authenticated client
     args = common.parse_arguments()
-    tableau_auth = common.construct_tableau_auth(args)
-    server = TSC.Server(args.server, use_server_version=True)
+    server = sdk.Server(
+        url=args.server,
+        username=args.user,
+        password=args.password,
+        pat_name=args.pat_name,
+        pat_secret=args.pat_secret,
+        site_id=args.site,
+    )
 
-    with server.auth.sign_in(tableau_auth):
+    with server.sign_in():
         datasource_luid = common.list_datasources_and_get_luid(server)
-        client = common.create_authenticated_client(server, args)
         datasource = common.create_datasource(datasource_luid)
+        client = sdk.VizQLDataServiceClient(server)
 
         # Read metadata example
         try:
             print("\n=== ReadMetadata Query ===")
-            metadata_request = ReadMetadataRequest(datasource=datasource)
+            metadata_request = sdk.ReadMetadataRequest(datasource=datasource)
             print(f"Request Body: {metadata_request.to_dict()}")
 
-            metadata_response = await read_metadata.asyncio_detailed(
-                client=client, body=metadata_request
+            metadata_response = await sdk.read_metadata.asyncio_detailed(
+                client=client.client, body=metadata_request
             )
             common.handle_response(metadata_response, "ReadMetadata Query")
         except Exception as e:
@@ -42,12 +44,14 @@ async def main():
             try:
                 print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 # Create query request
-                query_request = QueryRequest(query=query_func(), datasource=datasource)
+                query_request = sdk.QueryRequest(
+                    query=query_func(), datasource=datasource
+                )
                 print(f"Request Body: {query_request.to_dict()}")
 
                 print("\nSending ExecuteQuery request...")
-                response = await query_datasource.asyncio_detailed(
-                    client=client, body=query_request
+                response = await sdk.query_datasource.asyncio_detailed(
+                    client=client.client, body=query_request
                 )
                 common.handle_response(response, f"Query {query_func.__name__}")
             except Exception as e:
