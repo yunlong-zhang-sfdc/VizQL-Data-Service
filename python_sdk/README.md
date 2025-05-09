@@ -14,7 +14,7 @@ Consider reading VizQL Data Service in the following order:
 
 ## 🔧 Installation
 ```bash
-pip install vizql-data-service-python-sdk
+pip install vizqldataservicepythonsdk
 ```
 
 ## 🚀 Quick start

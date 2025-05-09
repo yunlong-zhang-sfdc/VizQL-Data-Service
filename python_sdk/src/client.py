@@ -12,7 +12,7 @@ from .server import Server
 
 API_SUBDOMAIN = "/api/v1/vizql-data-service"
 X_TABLEAU_AUTH = "X-Tableau-Auth"
-VERSION = "1.0.0"  # hardcoded for now
+VERSION = "1.0.1"  # hardcoded for now
 
 
 class Client:
