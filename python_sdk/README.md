@@ -18,6 +18,57 @@ pip install vizqldataservicepythonsdk
 ```
 
 ## 🚀 Quick start
+```python
+from vizqldataservicepythonsdk import (
+    QueryRequest,
+    Datasource,
+    VizQLDataServiceClient,
+    Server,
+    query_datasource,
+    SimpleField,
+    AggregatedField,
+    Function,
+    Query
+)
+
+server = Server(
+    url="<server-url>",
+    # user password authentication
+    username="<user>",
+    password="<password>"
+    # ---- OR ----
+    # PAT authentication
+    pat_name="<name>",
+    pat_secret="<secret>"
+)
+datasource_luid = "<superstore-datasource-luid>"
+with server.sign_in():
+    datasource = Datasource(datasource_luid=datasource_luid)
+    query = Query(
+        fields=[
+            SimpleField(field_caption="Category"),
+            AggregatedField(field_caption="Sales", function=Function.SUM),
+        ]
+    )
+    client = VizQLDataServiceClient(server)
+    query_request = QueryRequest(
+        query=query, datasource=datasource
+    )
+    response = query_datasource.sync_detailed(
+        client=client.client, body=query_request
+    )
+    print(f"Response: {response.parsed}")
+```
+
+This SDK is built using `openapi-python-cli` to generate all VizQL Data Service models. For detailed API documentation and model specifications, please refer to the [openapi_client.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/openapi_client.md) file. 
+
+> **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python objects to construct requests. This approach offers several advantages:
+> - Type safety and validation at compile time
+> - Better IDE support with autocompletion
+> - Consistent request structure
+> - Easier maintenance and debugging
+>
+> For comprehensive examples demonstrating various query patterns and filter combinations, please check the `src/examples` directory.
 
 ## 📘 Supported Features
 - ✅ Query published datasources with selectable fields and filters
@@ -26,8 +77,10 @@ pip install vizqldataservicepythonsdk
 - ✅ Authentication using Tableau username/password or Personal Access Token (PAT)
 - ✅ Works with both Tableau Cloud and Tableau Server (on-prem)
 
-## 🛠️ Requirement
+## 🛠️ Requirements
 - Python 3.9+
+- pip 20.0+
+- Tableau Server 2022.1+ or Tableau Cloud
 
 ## 🤝 Contributing
 To contribute, see our [CONTRIBUTING.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTING.md) Guide. A list of all our contributors to date is in [CONTRIBUTORS.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTORS.md).

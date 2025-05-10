@@ -6,8 +6,7 @@ This module provides the Client class for handling API authentication and reques
 
 from typing import Optional
 
-from openapi_client.client import AuthenticatedClient
-
+from . import AuthenticatedClient
 from .server import Server
 
 API_SUBDOMAIN = "/api/v1/vizql-data-service"

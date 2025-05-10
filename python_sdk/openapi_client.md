@@ -33,11 +33,6 @@
   * [sync](#api.default.read_metadata.sync)
   * [asyncio\_detailed](#api.default.read_metadata.asyncio_detailed)
   * [asyncio](#api.default.read_metadata.asyncio)
-* [api.default.simple\_request](#api.default.simple_request)
-  * [sync\_detailed](#api.default.simple_request.sync_detailed)
-  * [sync](#api.default.simple_request.sync)
-  * [asyncio\_detailed](#api.default.simple_request.asyncio_detailed)
-  * [asyncio](#api.default.simple_request.asyncio)
 * [models.aggregated\_field](#models.aggregated_field)
   * [AggregatedField](#models.aggregated_field.AggregatedField)
 * [models.aggregated\_filter\_field](#models.aggregated_filter_field)
@@ -627,101 +622,6 @@ fields, such as field names, data types, and descriptions.
 **Returns**:
 
   MetadataOutput
-
-<a id="api.default.simple_request"></a>
-
-# api.default.simple\_request
-
-<a id="api.default.simple_request.sync_detailed"></a>
-
-#### sync\_detailed
-
-```python
-def sync_detailed(*, client: Union[AuthenticatedClient,
-                                   Client]) -> Response[str]
-```
-
-Send a simple request
-
-Sends a request that can be used for testing or doing a health check.
-
-**Raises**:
-
-- `errors.UnexpectedStatus` - If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-- `httpx.TimeoutException` - If the request takes longer than Client.timeout.
-  
-
-**Returns**:
-
-  Response[str]
-
-<a id="api.default.simple_request.sync"></a>
-
-#### sync
-
-```python
-def sync(*, client: Union[AuthenticatedClient, Client]) -> Optional[str]
-```
-
-Send a simple request
-
-Sends a request that can be used for testing or doing a health check.
-
-**Raises**:
-
-- `errors.UnexpectedStatus` - If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-- `httpx.TimeoutException` - If the request takes longer than Client.timeout.
-  
-
-**Returns**:
-
-  str
-
-<a id="api.default.simple_request.asyncio_detailed"></a>
-
-#### asyncio\_detailed
-
-```python
-async def asyncio_detailed(
-        *, client: Union[AuthenticatedClient, Client]) -> Response[str]
-```
-
-Send a simple request
-
-Sends a request that can be used for testing or doing a health check.
-
-**Raises**:
-
-- `errors.UnexpectedStatus` - If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-- `httpx.TimeoutException` - If the request takes longer than Client.timeout.
-  
-
-**Returns**:
-
-  Response[str]
-
-<a id="api.default.simple_request.asyncio"></a>
-
-#### asyncio
-
-```python
-async def asyncio(*, client: Union[AuthenticatedClient,
-                                   Client]) -> Optional[str]
-```
-
-Send a simple request
-
-Sends a request that can be used for testing or doing a health check.
-
-**Raises**:
-
-- `errors.UnexpectedStatus` - If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-- `httpx.TimeoutException` - If the request takes longer than Client.timeout.
-  
-
-**Returns**:
-
-  str
 
 <a id="models.aggregated_field"></a>
 

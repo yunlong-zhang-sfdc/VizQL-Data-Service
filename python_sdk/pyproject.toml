@@ -65,12 +65,10 @@ dev = [
     "mypy>=1.0.0",
 ]
 
-[tool.setuptools.packages]
-find = {}
-
-# Include sample json payload files in src/examples/
-[tool.setuptools.package-data]
-"*" = ["*.json"]
+[tool.setuptools]
+packages = ["vizqldataservicepythonsdk", "vizqldataservicepythonsdk.openapi_client"]
+package-dir."vizqldataservicepythonsdk" = "src"
+package-dir."vizqldataservicepythonsdk.openapi_client" = "openapi_client"
 
 [tool.isort]
 profile = "black"
