@@ -24,6 +24,9 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Debug environment
+      run: env | sort
+      
     - name: Run generate script
       run: |
         cd python_sdk
