@@ -11,7 +11,7 @@ pip install openapi-python-client pydoc-markdown
 python scripts/convert_schema.py
 
 # Generate client code
-openapi-python-client generate --path build/temp_schema.json --config ./openapi-client.yml --overwrite
+openapi-python-client generate --path build/temp_schema.json --config ./openapi-client.yml --overwrite --meta poetry
 
 rm -rf openapi_client
 mv temp_project/openapi_client ./openapi_client
