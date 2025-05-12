@@ -10,7 +10,7 @@ description = "A Python client library for interacting with the VizQL Data Servi
 readme = "README.md"
 authors = [{name = "Tableau", email = "github@tableau.com"}]
 maintainers = [{name = "Tableau", email = "github@tableau.com"}]
-license = "MIT"
+license = "Apache-2.0"
 
 requires-python = ">= 3.9"
 dependencies = [
