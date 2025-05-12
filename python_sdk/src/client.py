@@ -28,11 +28,12 @@ class Client:
 
     def _create_client(self) -> AuthenticatedClient:
         """Create an authenticated client with proper server URL."""
-        server_url = (
-            self.server.url
-            if self.server.url.startswith("http")
-            else f"http://{self.server.url}"
-        )
+        # Handle server URL protocol and domain
+        server_url = self.server.url
+        if "online.tableau.com" in server_url and not server_url.startswith("https"):
+            server_url = f"https://{server_url}"
+        elif not server_url.startswith("http"):
+            server_url = f"http://{server_url}"
         base_url = f"{server_url}{API_SUBDOMAIN}"
 
         print(f"Server URL: {base_url}")
