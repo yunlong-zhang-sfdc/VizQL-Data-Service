@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vizqldataservicepythonsdk"
-version = "1.0.2"  # This value is manually updated. The major and minor versions must always be the same as the version defined in VizQLDataServiceOpenAPISchema.json
+version = "1.0.3"  # This value is manually updated. The major and minor versions must always be the same as the version defined in VizQLDataServiceOpenAPISchema.json
 
 description = "A Python client library for interacting with the VizQL Data Service API"
 readme = "README.md"
@@ -105,7 +105,7 @@ search_path = ['./openapi_client']
 
 [[tool.pydoc-markdown.processors]]
 type = "filter"
-expression = "not '__init__' in name and not '__enter__' in name and not '__exit__' in name and not '__aexit__' in name and not '__aenter__' in name and not '_unstable' in name and default()"
+expression = "not '__init__' in name and not '__enter__' in name and not '__exit__' in name and not '__aexit__' in name and not '__aenter__' in name and not '_unstable' in name and not 'simple_request' in name and default()"
 skip_empty_modules = true
 
 [[tool.pydoc-markdown.processors]]
