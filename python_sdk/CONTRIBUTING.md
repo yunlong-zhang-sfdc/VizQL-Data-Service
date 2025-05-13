@@ -65,13 +65,14 @@ python -m venv --system-site-packages venv
 source venv/bin/activate  # On Unix/MacOS
 venv\Scripts\activate     # On Windows
 
+python -m pip install --upgrade pip # Upgrade pip
 pip install -e .          # Required dependencies
 pip install -e .[dev]     # Required and optional dependencies
 ```
 
 3. Generate OpenAPI client:
 ```bash
-bash scripts/generate.sh
+bash scripts/generate_stub.sh
 ```
 See [OpenAPI Generated Models](docs/openapi_models.md) for detailed information about the generated model classes, their properties, and usage examples.
 
