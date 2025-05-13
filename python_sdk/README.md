@@ -1,8 +1,8 @@
 # VizQL Data Service Python SDK 
 
 [![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg)](https://www.tableau.com/support-levels-it-and-developer-tools)
-[![GitHub](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/Tableau/TabPy/master/LICENSE)
-[![Python SDK CI Configuration](https://github.com/tableau/VizQL-Data-Service/actions/workflows/python_gitlab_ci.yml/badge.svg)](https://github.com/tableau/VizQL-Data-Service/actions/workflows/python_gitlab_ci.yml)
+[![GitHub](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square.svg)](https://raw.githubusercontent.com/Tableau/TabPy/master/LICENSE)
+[![Python SDK CI Configuration](https://github.com/tableau/VizQL-Data-Service/actions/workflows/release.yml/badge.svg)](https://github.com/tableau/VizQL-Data-Service/actions/workflows/release.yml)
 
 The VizQL Data Service Python SDK is a lightweight client library that enables interaction with Tableau's VizQL Data Service APIs. It supports both cloud and on-premises deployments, offering both synchronous and asynchronous methods for querying the VizQL Data Service APIs.
 
@@ -106,15 +106,15 @@ with server.sign_in():
     print(f"Query Datasource Response: {query_response.parsed}")
 ```
 
-This SDK is built using `openapi-python-cli` to generate all VizQL Data Service models. For detailed API documentation and model specifications, please refer to the [openapi_client.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/openapi_client.md) file. 
+This SDK is built using `openapi-python-cli` to generate all VizQL Data Service models. For detailed API documentation and model specifications, please refer to the [openapi_client.md](openapi_client.md) file. 
 
 > **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python objects to construct requests. This approach offers several advantages:
 > - Type safety and validation at compile time
 > - Better IDE support with autocompletion
 > - Consistent request structure
 > - Easier maintenance and debugging
->
-> For comprehensive examples demonstrating various query patterns and filter combinations, please check the `src/examples` directory.
+
+For comprehensive examples demonstrating various query patterns and filter combinations, please check the `src/examples` directory.
 
 ## 📘 Supported Features
 - ✅ Read metadata of published Tableau datasources
@@ -129,4 +129,4 @@ This SDK is built using `openapi-python-cli` to generate all VizQL Data Service 
 - Tableau Server 2025.1+ or Tableau Cloud
 
 ## 🤝 Contributing
-To contribute, see our [CONTRIBUTING.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTING.md) Guide. A list of all our contributors to date is in [CONTRIBUTORS.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTORS.md).
+To contribute, see our [CONTRIBUTING.md](CONTRIBUTING.md) Guide. A list of all our contributors to date is in [CONTRIBUTORS.md](CONTRIBUTORS.md).
