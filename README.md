@@ -6,4 +6,4 @@ The OpenAPI schema does NOT accept pull requests.
 
 - The source code for Tableau's VizQL Data Service Python SDK, a Python client library that enables interaction with Tableau's VizQL Data Service APIs. 
 
-The Python client library DOES accept pull requests; see the [README.md](github.com/yunlong-zhang-sfdc/VizQL-Data-Service/python_sdk/README.md)
+The Python client library DOES accept pull requests; see the [README.md](python_sdk/README.md)
