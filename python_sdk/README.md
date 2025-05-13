@@ -106,7 +106,7 @@ with server.sign_in():
     print(f"Query Datasource Response: {query_response.parsed}")
 ```
 
-This SDK is built using `openapi-python-cli` to generate all VizQL Data Service models. For detailed API documentation and model specifications, please refer to the [openapi_client.md](openapi_client.md) file. 
+This SDK is built using `openapi-python-cli` to generate all VizQL Data Service models. For detailed API documentation and model specifications, please refer to the [openapi_client.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/openapi_client.md) file. 
 
 > **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python objects to construct requests. This approach offers several advantages:
 > - Type safety and validation at compile time
@@ -129,4 +129,4 @@ For comprehensive examples demonstrating various query patterns and filter combi
 - Tableau Server 2025.1+ or Tableau Cloud
 
 ## 🤝 Contributing
-To contribute, see our [CONTRIBUTING.md](CONTRIBUTING.md) Guide. A list of all our contributors to date is in [CONTRIBUTORS.md](CONTRIBUTORS.md).
+To contribute, see our [CONTRIBUTING.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTING.md) Guide. A list of all our contributors to date is in [CONTRIBUTORS.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTORS.md).
