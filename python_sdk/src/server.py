@@ -9,6 +9,8 @@ from typing import Dict, List, Optional, Tuple
 
 import tableauserverclient as TSC
 
+from .utils import format_server_url
+
 
 @dataclass
 class Server:
@@ -33,7 +35,7 @@ class Server:
                 "Either username/password or PAT name/secret must be provided"
             )
 
-        self.server = TSC.Server(self.url)
+        self.server = TSC.Server(format_server_url(self.url))
 
     def sign_in(self):
         """Sign in to the server."""

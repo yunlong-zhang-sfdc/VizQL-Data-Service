@@ -4,10 +4,9 @@ Client Module
 This module provides the Client class for handling API authentication and requests.
 """
 
-from typing import Optional
-
 from . import AuthenticatedClient
 from .server import Server
+from .utils import format_server_url
 
 API_SUBDOMAIN = "/api/v1/vizql-data-service"
 X_TABLEAU_AUTH = "X-Tableau-Auth"
@@ -24,19 +23,13 @@ class Client:
             server: The server instance to use for authentication.
         """
         self.server = server
-        self._client: Optional[AuthenticatedClient] = None
+        self._client: AuthenticatedClient = self._create_client()
 
     def _create_client(self) -> AuthenticatedClient:
         """Create an authenticated client with proper server URL."""
-        # Handle server URL protocol and domain
-        server_url = self.server.url
-        if "online.tableau.com" in server_url and not server_url.startswith("https"):
-            server_url = f"https://{server_url}"
-        elif not server_url.startswith("http"):
-            server_url = f"http://{server_url}"
-        base_url = f"{server_url}{API_SUBDOMAIN}"
-
+        base_url = format_server_url(self.server.url, API_SUBDOMAIN)
         print(f"Server URL: {base_url}")
+
         return AuthenticatedClient(
             base_url=base_url,
             token=self.server.get_auth_token(),
@@ -55,8 +48,6 @@ class Client:
         Raises:
             RuntimeError: If not signed in.
         """
-        if not self._client:
-            self._client = self._create_client()
         return self._client
 
     def __str__(self) -> str:
