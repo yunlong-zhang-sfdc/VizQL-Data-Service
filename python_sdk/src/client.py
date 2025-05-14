@@ -14,6 +14,7 @@ API_SUBDOMAIN = "/api/v1/vizql-data-service"
 X_TABLEAU_AUTH = "X-Tableau-Auth"
 VERSION = version("vizqldataservicepythonsdk")  # Read version from package metadata
 
+
 class Client:
     """Client for VizQL Data Service API."""
 
