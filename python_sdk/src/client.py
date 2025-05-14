@@ -4,13 +4,15 @@ Client Module
 This module provides the Client class for handling API authentication and requests.
 """
 
+from importlib.metadata import version
+
 from . import AuthenticatedClient
 from .server import Server
 from .utils import format_server_url
 
 API_SUBDOMAIN = "/api/v1/vizql-data-service"
 X_TABLEAU_AUTH = "X-Tableau-Auth"
-VERSION = "1.0.2"  # hardcoded for now
+VERSION = version("vizqldataservicepythonsdk")  # Read version from package metadata
 
 
 class Client:
