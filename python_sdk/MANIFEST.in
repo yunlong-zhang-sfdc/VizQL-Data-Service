@@ -1,7 +1,5 @@
-include src/*.py
-include openapi_client/*.py
-include openapi_client/models/*.py
-include openapi_client/api/*.py
+recursive-include src *.py
+recursive-include openapi_client *.py
 
 global-exclude src/examples/*
 global-exclude venv/
