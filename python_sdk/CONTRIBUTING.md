@@ -110,9 +110,12 @@ python async_examples.py -n "<pat-name>" -t "<pat-secret>" -s "<server>" -S "<si
   pip install -e ".[dev]"
   pytest tests/ -v
   ```
+- [x] Versioning
+  - The major and minor numbers of the "version" in pyproject.toml must always be the same as the major and minor numbers of the "version" in VizQLDataServiceOpenAPISchema.json. If these values aren't the same, then the build pipeline will fail. Example: If VizQLDataServiceOpenAPISchema.json has a "version" value of "1.0", then the pyproject.toml "version" needs to be "1.0.x".
+  - The patch number for the "version" in pyproject.toml must always be increased by 1 per pull request. This is to ensure proper versioning for publishing to PyPi. If this conventioned isn't followed, the publish to PyPi step will fail. Example: If pyproject.toml had a "version" value of "1.1.11", then the new pull request must have a new "version" value of "1.1.12".
 - [x] Dependencies
-  - Minimize number of dependencies.
-  - Prefer Apache 2.0, BSD3, MIT, ISC and MPL licenses.
+  - Minimize number of dependencies
+  - New dependencies need to have their licenses vetted and approved before merge
 - [x] Reviews
   - Changes must be approved via peer code review
 - [x] Documentation
@@ -127,12 +130,14 @@ python async_examples.py -n "<pat-name>" -t "<pat-secret>" -s "<server>" -S "<si
 2. **Clone** the forked repo to your machine.
 3. **Create** a new branch to contain your work (e.g. `git br fix-issue-11`)
 4. **Run** tests and linting
-5. **Update** documentation (e.g. README.md) with details if needed.
-6. **Commit** changes to your own branch.
-7. **Push** your work back up to your fork. (e.g. `git push fix-issue-11`)
-8. **Submit** a Pull Request against the `main` branch and refer to the issue(s) you are fixing. Try not to pollute your pull request with unintended changes. Keep it simple and small.
-9. **Sign** the Salesforce CLA (you will be prompted to do so when submitting the Pull Request)
-10. **Address** any review comments
+5. **Verify** that the major and minor numbers for the "version" in pyproject.toml are the same as the major and minor numbers for the "version" in VizQLDataServiceOpenAPISchema.json. If they aren't the same, the build will fail.
+6. **Bump** the patch number for the "version" in pyproject.toml. This will trigger a new release to PyPi upon merge to main.
+7. **Update** documentation (e.g. README.md) with details if needed.
+8. **Commit** changes to your own branch.
+9. **Push** your work back up to your fork. (e.g. `git push fix-issue-11`)
+10. **Submit** a Pull Request against the `main` branch and refer to the issue(s) you are fixing. Try not to pollute your pull request with unintended changes. Keep it simple and small.
+11. **Sign** the Salesforce CLA (you will be prompted to do so when submitting the Pull Request)
+12. **Address** any review comments
 
 > **NOTE**: Be sure to [sync your fork](https://help.github.com/articles/syncing-a-fork/) before making a pull request.
 
