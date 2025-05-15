@@ -285,7 +285,7 @@ def create_numeric_date_dimension_filters():
                 period_type=RelativeDateFilterPeriodType.MONTHS,
                 date_range_type=RelativeDateFilterDateRangeType.NEXTN,
                 range_n=3,
-                anchor_date=date(2020, 1, 1),
+                anchor_date=date(2021, 1, 1),
             ),
             SetFilter(
                 field=SimpleFilterField(field_caption="Ship Mode"),
