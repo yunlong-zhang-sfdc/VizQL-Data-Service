@@ -66,9 +66,16 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["vizqldataservicepythonsdk", "vizqldataservicepythonsdk.openapi_client"]
+packages = [
+    "vizqldataservicepythonsdk",
+    "vizqldataservicepythonsdk.openapi_client",
+    "vizqldataservicepythonsdk.openapi_client.api",
+    "vizqldataservicepythonsdk.openapi_client.models"
+]
 package-dir."vizqldataservicepythonsdk" = "src"
 package-dir."vizqldataservicepythonsdk.openapi_client" = "openapi_client"
+package-dir."vizqldataservicepythonsdk.openapi_client.api" = "openapi_client/api"
+package-dir."vizqldataservicepythonsdk.openapi_client.models" = "openapi_client/models"
 
 [tool.isort]
 profile = "black"
