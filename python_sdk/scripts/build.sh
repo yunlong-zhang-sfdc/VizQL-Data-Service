@@ -16,7 +16,6 @@ python -m build
 echo "Check Tar content"
 tar -tzf dist/vizqldataservicepythonsdk-1.0.10.tar.gz
 
-cd ..
 echo "Check client folder"
-ls openapi_cient
+ls openapi_client -alR
 echo "Build completed successfully. Packages are in python_sdk/dist/"
