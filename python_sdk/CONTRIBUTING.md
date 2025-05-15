@@ -56,9 +56,16 @@ pip install -e .[dev]     # Required and optional dependencies
 ```
 
 3. Generate OpenAPI client:
+If on a linux-based OS,
 ```bash
 bash scripts/generate_stub.sh
 ```
+
+If on Windows,
+```bash
+scripts\generate_stub.bat
+```
+
 See [OpenAPI Generated Models](docs/openapi_models.md) for detailed information about the generated model classes, their properties, and usage examples.
 
 ### Running Examples
