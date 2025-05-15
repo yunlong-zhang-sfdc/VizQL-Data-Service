@@ -10,7 +10,11 @@ set -x
 python -m pip install --upgrade pip
 python -m pip install --upgrade build
 
-# Build the package
+# Clean build the package
+rm -rf build dist *.egg-info src/*.egg-info
 python -m build
+
+echo "Show vizqldataservicepythonsdk tar file content"
+tar -tzf dist/vizqldataservicepythonsdk-*.tar.gz
 
 echo "Build completed successfully. Packages are in python_sdk/dist/"
