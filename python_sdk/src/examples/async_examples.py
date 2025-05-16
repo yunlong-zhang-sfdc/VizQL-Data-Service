@@ -5,14 +5,20 @@ import sys
 # Add project root to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-import src as sdk
-import python_sdk.src.examples.helpers.common as common
-from src.examples.payload import QUERY_FUNCTIONS
+import src.examples.helpers.common as common
+from src.api.openapi_api import (
+    ReadMetadataRequest,
+    QueryRequest
+)
+from src.api import query_datasource, read_metadata
+from src.examples.helpers.server import Server
+from src.examples.helpers.client import Client
+from src.examples.payload_new import QUERY_FUNCTIONS
 
 
 async def main():
     args = common.parse_arguments()
-    server = sdk.Server(
+    server = Server(
         url=args.server,
         username=args.user,
         password=args.password,
@@ -24,15 +30,15 @@ async def main():
     with server.sign_in():
         datasource_luid = common.list_datasources_and_get_luid(server)
         datasource = common.create_datasource(datasource_luid)
-        client = sdk.VizQLDataServiceClient(server)
+        client = Client(server)
 
         # Read metadata example
         try:
             print("\n=== ReadMetadata Query ===")
-            metadata_request = sdk.ReadMetadataRequest(datasource=datasource)
-            print(f"Request Body: {metadata_request.to_dict()}")
+            metadata_request = ReadMetadataRequest(datasource=datasource)
+            print(f"Request Body: {metadata_request}")
 
-            metadata_response = await sdk.read_metadata.asyncio_detailed(
+            metadata_response = await read_metadata.asyncio_detailed(
                 client=client.client, body=metadata_request
             )
             common.handle_response(metadata_response, "ReadMetadata Query")
@@ -44,13 +50,13 @@ async def main():
             try:
                 print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 # Create query request
-                query_request = sdk.QueryRequest(
+                query_request = QueryRequest(
                     query=query_func(), datasource=datasource
                 )
-                print(f"Request Body: {query_request.to_dict()}")
+                print(f"Request Body: {query_request}")
 
                 print("\nSending ExecuteQuery request...")
-                response = await sdk.query_datasource.asyncio_detailed(
+                response = await query_datasource.asyncio_detailed(
                     client=client.client, body=query_request
                 )
                 common.handle_response(response, f"Query {query_func.__name__}")
