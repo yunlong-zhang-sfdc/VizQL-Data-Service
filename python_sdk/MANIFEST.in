@@ -1,5 +1,4 @@
 recursive-include src *.py
-recursive-include openapi_client *.py
 
 global-exclude src/examples/*
 global-exclude venv/

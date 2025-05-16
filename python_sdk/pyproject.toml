@@ -19,9 +19,7 @@ dependencies = [
     "python-dateutil>=2.8.2",
     "httpx>=0.23.3",
     "urllib3>=1.25.3,<3.0.0",
-    "pydantic<2",
-    "typing-extensions>=4.7.1",
-    "attrs>=23.1.0",
+    "typing-extensions>=4.7.1"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -52,9 +50,8 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["vizqldataservicepythonsdk", "vizqldataservicepythonsdk.openapi_client"]
+packages = ["vizqldataservicepythonsdk"]
 package-dir."vizqldataservicepythonsdk" = "src"
-package-dir."vizqldataservicepythonsdk.openapi_client" = "openapi_client"
 
 [tool.isort]
 profile = "black"
@@ -70,37 +67,15 @@ skip = [
     ".env",
     "build",
     "dist",
-    "openapi_client",
+    "openapi_client.py",
     "__init__.py"
 ]
 
 [tool.black]
 exclude = '''
 (
-  /openapi_client/
+  /openapi_client.py
   | /build/
   | /venv/
 )
 '''
-
-[tool.pydoc-markdown]
-
-[[tool.pydoc-markdown.loaders]]
-type = 'python'
-search_path = ['./openapi_client']
-
-[[tool.pydoc-markdown.processors]]
-type = "filter"
-expression = "not '__init__' in name and not '__enter__' in name and not '__exit__' in name and not '__aexit__' in name and not '__aenter__' in name and not '_unstable' in name and not 'simple_request' in name and default()"
-skip_empty_modules = true
-
-[[tool.pydoc-markdown.processors]]
-type = "smart"
-
-[[tool.pydoc-markdown.processors]]
-type = "crossref"
-
-[tool.pydoc-markdown.renderer]
-type = 'markdown'
-filename = "openapi_client.md"
-render_toc = true

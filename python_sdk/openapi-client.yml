@@ -1,4 +1,0 @@
-project_name_override: temp_project
-package_name_override: openapi_client
-generate_aliases: true
-meta: poetry

@@ -8,27 +8,12 @@ REM Print commands as they are executed
 echo on
 
 REM Install required packages
-pip install openapi-python-client pydoc-markdown
-
-REM Convert schema
-python scripts/convert_schema.py
+pip install datamodel-code-generator
 
 REM Generate client code
-openapi-python-client generate --path build/temp_schema.json --config ./openapi-client.yml --overwrite --meta poetry
+datamodel-codegen --input ../VizQLDataServiceOpenAPISchema.json --output-model-type pydantic_v2.BaseModel --input-file-type openapi --output src/openapi_client-raw.py --use-annotated --allow-population-by-field-name
 
-REM Clean up and move files
-if exist openapi_client rmdir /s /q openapi_client
-move temp_project\openapi_client .\openapi_client
-rmdir /s /q temp_project
-
-REM Skip if running in GitHub Actions
-if "%GITHUB_ACTIONS%"=="true" (
-    echo Skipping documentation generation in GitHub Actions
-    exit /b 0
-)
-
-REM Generate documentation
-python scripts/add_enum_docstrings.py
-pydoc-markdown
+echo Starting post-processing...
+python scripts/post_process.py
 
 echo OpenAPI client generation completed successfully 

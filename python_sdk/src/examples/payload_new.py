@@ -2,23 +2,23 @@ from datetime import date
 
 from OpenApiClient import (
     AggregatedField,
-    FilterAggregatedField,
     CalculatedField,
+    DateRangeType,
+    Direction,
+    FilterAggregatedField,
+    FilterSimpleField,
     FilterType,
     Function,
     MatchFilter,
+    PeriodType,
     QuantitativeDateFilter,
     QuantitativeFilterType,
     QuantitativeNumericalFilter,
     Query,
     RelativeDateFilter,
-    DateRangeType,
-    PeriodType,
     SetFilter,
     SimpleField,
-    FilterSimpleField,
     TopNFilter,
-    Direction,
 )
 
 

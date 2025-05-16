@@ -2,7 +2,6 @@ from http import HTTPStatus
 from typing import Any, Optional, Union
 
 import httpx
-
 from OpenApiClient import QueryOutput, QueryRequest
 
 from .client import AuthenticatedClient, Client

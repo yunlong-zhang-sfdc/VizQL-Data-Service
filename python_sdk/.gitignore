@@ -173,4 +173,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-openapi_client/
+openapi_client.py
