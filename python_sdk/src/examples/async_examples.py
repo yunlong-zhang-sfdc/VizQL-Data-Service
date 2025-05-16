@@ -6,7 +6,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 import src as sdk
-import src.examples.common as common
+import python_sdk.src.examples.helpers.common as common
 from src.examples.payload import QUERY_FUNCTIONS
 
 

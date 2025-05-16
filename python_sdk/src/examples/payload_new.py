@@ -1,6 +1,6 @@
 from datetime import date
 
-from OpenApiClient import (
+from src.api.openapi_api import (
     AggregatedField,
     CalculatedField,
     DateRangeType,

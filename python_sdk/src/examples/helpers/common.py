@@ -2,7 +2,8 @@ import argparse
 import inspect
 import traceback
 
-from src import Datasource, Server
+from .server import Server
+from src.api.openapi_api import Datasource
 
 SAMPLE_DATASOURCE = "Superstore Datasource"
 
@@ -39,7 +40,7 @@ def list_datasources_and_get_luid(server: Server):
 
 def create_datasource(luid: str) -> Datasource:
     """Create a Datasource object with the given LUID."""
-    return Datasource(datasource_luid=luid)  # type: ignore
+    return Datasource(datasourceLuid=luid)  # type: ignore
 
 
 def handle_response(response, operation_name: str = "Operation"):

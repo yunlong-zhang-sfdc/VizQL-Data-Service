@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import Any, Optional, Union
 
 import httpx
-from OpenApiClient import MetadataOutput, ReadMetadataRequest
+from .openapi_api import MetadataOutput, ReadMetadataRequest
 
 from .client import AuthenticatedClient, Client
 from .errors import UnexpectedStatus

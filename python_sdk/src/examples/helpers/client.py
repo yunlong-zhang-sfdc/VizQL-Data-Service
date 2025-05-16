@@ -6,7 +6,7 @@ This module provides the Client class for handling API authentication and reques
 
 from importlib.metadata import version
 
-from . import AuthenticatedClient
+from src.api.client import AuthenticatedClient
 from .server import Server
 from .utils import format_server_url
 
