@@ -118,7 +118,7 @@ jobs:
 
   publish-testpypi:
     needs: [generateStub, build, test]
-    if: needs.generateStub.result == 'success' && needs.build.result == 'success' && needs.test.result == 'success' && github.repository == 'yunlong-zhang-sfdc/VizQL-Data-Service'
+    if: needs.generateStub.result == 'success' && needs.build.result == 'success' && needs.test.result == 'success' && github.repository == 'tableau/VizQL-Data-Service'
     runs-on: ubuntu-latest
     strategy:
       matrix:
