@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vizqldataservicepythonsdk"
-version = "1.0.11"  # This value is manually updated. The major and minor versions must always be the same as the version defined in VizQLDataServiceOpenAPISchema.json
+version = "1.0.13"  # This value is manually updated. The major and minor versions must always be the same as the version defined in VizQLDataServiceOpenAPISchema.json
 
 description = "A Python client library for interacting with the VizQL Data Service API"
 readme = "README.md"
@@ -14,26 +14,12 @@ license = "Apache-2.0"
 
 requires-python = ">= 3.9"
 dependencies = [
-    "certifi>=2025.1.31",
-    "charset-normalizer>=3.4.1",
-    "defusedxml>=0.7.1",
-    "distlib>=0.3.6",
-    "filelock>=3.10.7",
-    "future>=0.17.1",
-    "idna>=3.10",
-    "packaging>=24.2",
-    "platformdirs>=2.6.2",
-    "requests>=2.32.3",
     "setuptools>=58.4.0",
-    "six>=1.16.0",
     "tableauserverclient>=0.36",
-    "virtualenv>=20.15.1",
-    "wheel>=0.37.0",
     "python-dateutil>=2.8.2",
     "httpx>=0.23.3",
     "urllib3>=1.25.3,<3.0.0",
     "pydantic<2",
-    "aenum >= 3.1.11",
     "typing-extensions>=4.7.1",
     "attrs>=23.1.0",
 ]
