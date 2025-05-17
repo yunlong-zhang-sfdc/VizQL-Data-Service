@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-import json
 
 import httpx
 from .openapi_api import MetadataOutput, ReadMetadataRequest
