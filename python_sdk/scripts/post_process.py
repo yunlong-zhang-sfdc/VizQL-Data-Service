@@ -65,5 +65,5 @@ class TabFilter(RootModel[Union[
 
 
 if __name__ == "__main__":
-    convert_file("src/api/openapi_api-raw.py", "src/api/openapi_api.py")
-    os.remove("src/api/openapi_api-raw.py")
+    convert_file("src/openapi_client-raw.py", "src/openapi_client.py")
+    os.remove("src/openapi_client-raw.py")

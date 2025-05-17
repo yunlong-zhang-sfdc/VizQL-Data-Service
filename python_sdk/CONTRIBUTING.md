@@ -73,14 +73,18 @@ See [OpenAPI Generated Models](docs/openapi_models.md) for detailed information 
 # Running the existing examples synchronously and asynchronously
 cd src/examples
 
-# Auth using username and password, doesnt work for Tableau Cloud
-python sync_examples.py -u "<username>" -p "<password>" -s "<server>"
-python async_examples.py -u "<username>" -p "<password>" -s "<server>"
+python examples --help
 
-# Auth using personal access token
-# If siteId is left out, this will run against a default site that your PAT works for
-python sync_examples.py -n "<pat-name>" -t "<pat-secret>" -s "<server>" -S "<siteId>"
-python async_examples.py -n "<pat-name>" -t "<pat-secret>" -s "<server>" -S "<siteId>"
+# If `site` argument is left out, this will run against a default site that your token works for
+# If `async` argument is left out, the default examples run synchrounously
+# Auth using username and password
+python examples.py --user "<username>" --password "<password>" --server "<server>"
+
+# Auth using personal access token (PAT)
+python examples.py --pat-name "<pat-name>" --pat-secret "<pat-secret>" --server "<server>" --site "<site-id>" -async
+
+# Auth using JWT
+python examples.py --jwt "<jwt-token>" --server "<server>" --site "<site-id>" -async
 ```
 
 # Contribution Checklist

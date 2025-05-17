@@ -1,10 +1,10 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any, Optional
 
 import httpx
-from .openapi_api import MetadataOutput, ReadMetadataRequest
 
-from .client import AuthenticatedClient, Client
+from ..openapi_client import MetadataOutput, ReadMetadataRequest
+from .client import AuthenticatedClient
 from .errors import UnexpectedStatus
 from .types import Response
 
@@ -22,7 +22,7 @@ def _get_kwargs(
 
     _body = body.model_dump_json(exclude_none=True)
 
-    _kwargs['data'] = _body
+    _kwargs["data"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
@@ -30,10 +30,10 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+    *, client: AuthenticatedClient, response: httpx.Response
 ) -> Optional[MetadataOutput]:
     if response.status_code == 200:
-        response_200 = MetadataOutput.parse_raw(response.content)
+        response_200 = MetadataOutput.model_validate_json(response.content)
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -43,7 +43,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+    *, client: AuthenticatedClient, response: httpx.Response
 ) -> Response[MetadataOutput]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -55,7 +55,7 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Response[MetadataOutput]:
     """Request data source metadata
@@ -87,7 +87,7 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Optional[MetadataOutput]:
     """Request data source metadata
@@ -114,7 +114,7 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Response[MetadataOutput]:
     """Request data source metadata
@@ -144,7 +144,7 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Optional[MetadataOutput]:
     """Request data source metadata

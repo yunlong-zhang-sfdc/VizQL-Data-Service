@@ -1,6 +1,6 @@
 import pytest
 
-from src.utils import format_server_url
+from src.api.utils import format_server_url
 
 
 def test_format_server_url_with_online_tableau():

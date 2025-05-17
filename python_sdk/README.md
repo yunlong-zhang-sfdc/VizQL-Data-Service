@@ -37,37 +37,22 @@ from vizqldataservicepythonsdk import (
 ```
 
 ### Setting Up Server Connection
+Please read the Tableau Server Client (python) [Sign In out Out document](https://tableau.github.io/server-client-python/docs/sign-in-out) for on how to create Server and Auth instances.
 > **Note**: Authentication methods differ between Tableau Cloud and On-premises:
-> - Tableau Cloud: Only supports Personal Access Token (PAT) authentication
-> - Tableau Onprem: Supports both PAT and username/password authentication
-```python
-# Initialize server with either user credentials or PAT (Personal Access Token)
-server = Server(
-    # For Tableau Cloud (online.tableau.com), HTTPS will be automatically added
-    # For other servers, HTTP will be added if no protocol is specified
-    url="<server-url>",
-    # Option 1: User password authentication
-    username="<user>",
-    password="<password>"
-    # ---- OR ----
-    # Option 2: PAT authentication
-    pat_name="<name>",
-    pat_secret="<secret>",
-    # Required for tableau cloud
-    site_id="<site-name>"
-)
-```
+> - Tableau Cloud: Only supports JWT, PAT authentication
+> - Tableau Onprem: Supports JWT, PAT and username/password authentication
+
 
 ### Configuring Data Source
 ```python
 # Create a data source instance with optional connection parameters
 datasource = Datasource(
-    datasource_luid="<datasource-luid>",
+    datasourceLuid="<datasource-luid>",
     # Optional: Configure connections for external data sources
     connections=[
         Connection(
-            connection_username="<connection-username>",
-            connection_password="<connection-password>"
+            connectionUsername="<connection-username>",
+            connectionPassword="<connection-password>"
         )
     ]
 )
@@ -75,17 +60,25 @@ datasource = Datasource(
 
 ### Sign in, Read metadata and query data sources
 ```python
-with server.sign_in():
+import tableauserverclient as TSC
+
+# Choose one of these auth mechanism
+tableau_auth = TSC.PersonalAccessTokenAuth('TOKEN_NAME', 'TOKEN_VALUE', 'SITENAME')
+# tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', 'SITENAME')
+# tableau_auth = TSC.JWTAuth('JWT', 'SITENAME')
+
+server = TSC.Server('https://SERVER_URL')
+client = VizQLDataServiceClient(server)
+
+with server.auth.sign_in(tableau_auth):
     # Define your query fields
     query = Query(
         # Example using Super Store dataset
         fields=[
-            SimpleField(field_caption="Category"),
-            AggregatedField(field_caption="Sales", function=Function.SUM),
+            SimpleField(fieldCaption="Category"),
+            AggregatedField(fieldCaption="Sales", function=Function.SUM),
         ]
     )
-    client = VizQLDataServiceClient(server)
-
     # Step 1: Read metadata
     read_metadata_request = ReadMetadataRequest(
         datasource=datasource
@@ -105,22 +98,23 @@ with server.sign_in():
     print(f"Query Datasource Response: {query_response.parsed}")
 ```
 
-This SDK is built using `openapi-python-cli` to generate all VizQL Data Service models. For detailed API documentation and model specifications, please refer to the [openapi_client.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/openapi_client.md) file. 
+This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic V2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema..json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
 
-> **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python objects to construct requests. This approach offers several advantages:
+> **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python pydantic v2 objects to construct requests. This approach offers several advantages:
 > - Type safety and validation at compile time
 > - Better IDE support with autocompletion
 > - Consistent request structure
 > - Easier maintenance and debugging
 
-For comprehensive examples demonstrating various query patterns and filter combinations, please check the `src/examples` directory.
+For comprehensive examples demonstrating various query patterns and filter combinations, please check the [examples](https://github.com/tableau/VizQL-Data-Service/python_sdk/src/examples) directory.
 
 ## 📘 Supported Features
-- ✅ Read metadata of published Tableau datasources
+- ✅ Read metadata of Tableau published datasources
 - ✅ Query published datasources with selectable fields and queires supports various filters
 - ✅ Synchronous and asynchronous Python client support in examples
-- ✅ Authentication using Tableau username/password or Personal Access Token (PAT)
+- ✅ Authentication using Tableau username/password, JWT OR PAT
 - ✅ Works with both Tableau Cloud and Tableau Server (on-prem)
+- ✅ OpenAPI schema generated Python Pydantic v2 models for type-safe API interactions
 
 ## 🛠️ Requirements
 - Python 3.9+
