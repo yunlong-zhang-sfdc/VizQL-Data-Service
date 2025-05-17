@@ -1,5 +1,6 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
+import json
 
 import httpx
 from .openapi_api import MetadataOutput, ReadMetadataRequest
@@ -20,9 +21,9 @@ def _get_kwargs(
         "url": "/read-metadata",
     }
 
-    _body = body.json()
+    _body = body.model_dump_json(exclude_none=True)
 
-    _kwargs["json"] = _body
+    _kwargs['data'] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
@@ -33,7 +34,7 @@ def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[MetadataOutput]:
     if response.status_code == 200:
-        response_200 = MetadataOutput.parse_raw(response.json())
+        response_200 = MetadataOutput.parse_raw(response.content)
 
         return response_200
     if client.raise_on_unexpected_status:

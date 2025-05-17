@@ -63,6 +63,7 @@ def handle_response(response, operation_name: str = "Operation"):
         print("3. Token has correct permissions")
     elif response.status_code != 200:
         print(f"\nRequest failed with status code: {response.status_code}")
+        print(f"{response}")
 
 
 def handle_error(e, operation_name: str = "Operation"):
