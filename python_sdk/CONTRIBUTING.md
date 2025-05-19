@@ -66,7 +66,7 @@ If on Windows,
 scripts\generate_stub.bat
 ```
 
-See [OpenAPI Generated Models](docs/openapi_models.md) for detailed information about the generated model classes, their properties, and usage examples.
+See generated `openapi_client.py` python class for detailed information about the generated model classes, their properties.
 
 ### Running Examples
 ```bash
