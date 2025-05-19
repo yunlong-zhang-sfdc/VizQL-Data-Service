@@ -26,7 +26,6 @@ from vizqldataservicepythonsdk import (
     Datasource,
     Connection,
     VizQLDataServiceClient,
-    Server,
     read_metadata,
     query_datasource,
     SimpleField,
@@ -67,13 +66,15 @@ tableau_auth = TSC.PersonalAccessTokenAuth('TOKEN_NAME', 'TOKEN_VALUE', 'SITENAM
 # tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', 'SITENAME')
 # tableau_auth = TSC.JWTAuth('JWT', 'SITENAME')
 
-server = TSC.Server('https://SERVER_URL')
-client = VizQLDataServiceClient(server)
+server_url = 'https://SERVER_URL'
+server = TSC.Server(server_url)
 
 with server.auth.sign_in(tableau_auth):
+    client = VizQLDataServiceClient(server_url, server, tableau_auth)
     # Define your query fields
     query = Query(
-        # Example using Super Store dataset
+        # Example: sample Superstore data source
+        # Aggregate SUM(Sales) by Category
         fields=[
             SimpleField(fieldCaption="Category"),
             AggregatedField(fieldCaption="Sales", function=Function.SUM),
@@ -100,7 +101,7 @@ with server.auth.sign_in(tableau_auth):
 
 This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic V2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema..json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
 
-> **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python pydantic v2 objects to construct requests. This approach offers several advantages:
+> **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python pydantic V2 objects to construct requests. This approach offers several advantages:
 > - Type safety and validation at compile time
 > - Better IDE support with autocompletion
 > - Consistent request structure

@@ -20,9 +20,9 @@ def _get_kwargs(
         "url": "/query-datasource",
     }
 
-    _body = body.model_dump_json(exclude_none=True)
+    _body = body.model_dump(mode="json", exclude_none=True)
 
-    _kwargs["data"] = _body
+    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
@@ -165,3 +165,9 @@ async def asyncio(
             body=body,
         )
     ).parsed
+
+
+__all__ = [
+    "sync_detailed",
+    "asyncio_detailed",
+]

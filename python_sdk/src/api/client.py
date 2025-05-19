@@ -6,7 +6,7 @@ import httpx
 import tableauserverclient as TSC
 from attrs import define, evolve, field
 
-from src.api.utils import format_server_url
+from .utils import format_server_url
 
 API_SUBDOMAIN = "/api/v1/vizql-data-service"
 X_TABLEAU_AUTH = "X-Tableau-Auth"
