@@ -29,7 +29,9 @@ def print_help():
     print("  -j, --jwt-token TOKEN      JWT token")
 
     print("\nOptional Arguments:")
-    print("  -S, --site SITE_NAME       Tableau Server site name, or the default site if unspecified")
+    print(
+        "  -S, --site SITE_NAME       Tableau Server site name, or the default site if unspecified"
+    )
     print("  -v, --verbose              Print detailed request response information")
     print("  -h, --help                 Show this help message")
 
