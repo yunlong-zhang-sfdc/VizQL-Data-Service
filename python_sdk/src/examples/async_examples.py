@@ -1,4 +1,4 @@
-import asyncio
+# import asyncio
 import os
 import sys
 
@@ -54,7 +54,7 @@ async def execute(args):
                 print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 if args.verbose:
                     print(f"Request Body: {query_request}")
-                
+
                 response = await query_datasource.asyncio_detailed(
                     client=client.client, body=query_request
                 )

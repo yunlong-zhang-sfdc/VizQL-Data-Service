@@ -113,7 +113,7 @@ def create_relative_date_filter():
                 filterType=FilterType.DATE,
                 periodType=PeriodType.MONTHS,
                 dateRangeType=DateRangeType.CURRENT,
-                anchorDate=date(2021, 1, 1),
+                anchorDate=date(2022, 1, 1),
             )
         ],
     )
@@ -229,7 +229,7 @@ def create_dimension_numeric_filters():
                 ),
                 filterType=FilterType.QUANTITATIVE_NUMERICAL,
                 quantitativeFilterType=QuantitativeFilterType.MIN,
-                min=400000,
+                min=40000,
             ),
         ],
     )
@@ -285,7 +285,7 @@ def create_numeric_date_dimension_filters():
                 periodType=PeriodType.MONTHS,
                 dateRangeType=DateRangeType.NEXTN,
                 rangeN=3,
-                anchorDate=date(2020, 1, 1),
+                anchorDate=date(2022, 1, 1),
             ),
             SetFilter(
                 field=FilterSimpleField(fieldCaption="Ship Mode"),
