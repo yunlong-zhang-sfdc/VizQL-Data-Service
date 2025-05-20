@@ -8,7 +8,6 @@ body:
     attributes:
       label: Summary
       placeholder: e.g., Add dark mode support
-      required: true
 
   - type: dropdown
     id: priority
@@ -18,14 +17,13 @@ body:
         - Low
         - Medium
         - High
-      default: Medium
+      default: 1
 
   - type: textarea
     id: details
     attributes:
       label: Feature Details
       placeholder: What should this feature do? How would it help?
-      required: true
 
   - type: textarea
     id: additional

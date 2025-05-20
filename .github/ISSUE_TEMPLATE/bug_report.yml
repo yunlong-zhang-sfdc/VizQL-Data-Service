@@ -1,0 +1,46 @@
+name: Bug report
+description: Create a bug report or request for help
+title: ''
+labels: ''
+assignees: ''
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **NOTE:** Be careful not to post user names, passwords, auth tokens or any other private or sensitive information.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is
+      placeholder: Please describe the bug...
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Details of your environment
+      placeholder: |
+        - Tableau Server version (or note if using Tableau Online)
+        - Python version
+        - VizQL Data service SDK and TSC library version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        Steps to reproduce the behavior. Please include a code snippet where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Results
+      description: What are the results or error messages received?
+      placeholder: Please provide the results or error messages...
+    validations:
+      required: true
