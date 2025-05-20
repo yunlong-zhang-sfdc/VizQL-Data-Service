@@ -51,12 +51,13 @@ async def execute(args):
         async def execute_query(query_func):
             try:
                 query_request = QueryRequest(query=query_func(), datasource=datasource)
-                response = await query_datasource.asyncio_detailed(
-                    client=client.client, body=query_request
-                )
                 print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 if args.verbose:
                     print(f"Request Body: {query_request}")
+                
+                response = await query_datasource.asyncio_detailed(
+                    client=client.client, body=query_request
+                )
                 common.handle_response(
                     response, f"Query {query_func.__name__}", args.verbose
                 )
@@ -64,6 +65,10 @@ async def execute(args):
                 print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 common.handle_error(e, f"Query {query_func.__name__}", args.verbose)
 
-        # Execute all queries concurrently
-        tasks = [execute_query(func) for func in QUERY_FUNCTIONS]
-        await asyncio.gather(*tasks)
+        # TODO: Execute all queries concurrently cause VDS GetLockedSession() issue
+        # tasks = [execute_query(func) for func in QUERY_FUNCTIONS]
+        # await asyncio.gather(*tasks)
+
+        # Execute queries sequentially
+        for query_func in QUERY_FUNCTIONS:
+            await execute_query(query_func)

@@ -99,9 +99,9 @@ with server.auth.sign_in(tableau_auth):
     print(f"Query Datasource Response: {query_response.parsed}")
 ```
 
-This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic V2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema..json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
+This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic v2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema..json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
 
-> **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python pydantic V2 objects to construct requests. This approach offers several advantages:
+> **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python pydantic v2 objects to construct requests. This approach offers several advantages:
 > - Type safety and validation at compile time
 > - Better IDE support with autocompletion
 > - Consistent request structure
@@ -111,9 +111,9 @@ For comprehensive examples demonstrating various query patterns and filter combi
 
 ## 📘 Supported Features
 - ✅ Read metadata of Tableau published datasources
-- ✅ Query published datasources with selectable fields and queires supports various filters
+- ✅ Query published datasources with selectable fields and queries supports various filters
 - ✅ Synchronous and asynchronous Python client support in examples
-- ✅ Authentication using Tableau username/password, JWT OR PAT
+- ✅ Authentication using Tableau username/password, JWT or PAT
 - ✅ Works with both Tableau Cloud and Tableau Server (on-prem)
 - ✅ OpenAPI schema generated Python Pydantic v2 models for type-safe API interactions
 
