@@ -47,12 +47,12 @@ git clone https://github.com/tableau/VizQL-Data-Service.git
 ```bash
 cd VizQL-Data-Service/python_sdk
 python -m venv --system-site-packages venv
-source venv/bin/activate  # On Unix/MacOS
-venv\Scripts\activate     # On Windows
+source venv/bin/activate    # On Unix/MacOS
+venv\Scripts\activate       # On Windows
 
 python -m pip install --upgrade pip # Upgrade pip
-pip install -e .          # Required dependencies
-pip install -e .[dev]     # Required and optional dependencies
+pip install -e .            # Required dependencies
+# pip install -e .[dev]     # Required and optional dependencies
 ```
 
 3. Generate OpenAPI client:
@@ -66,25 +66,25 @@ If on Windows,
 scripts\generate_stub.bat
 ```
 
-See generated `openapi_client.py` python class for detailed information about the generated model classes, their properties.
+See generated `src\openapi_client.py` python class for detailed information about the generated model classes, their properties.
 
 ### Running Examples
 ```bash
 # Running the existing examples synchronously and asynchronously
 cd src/examples
 
-python examples --help
+python examples.py --help
 
 # If `site` argument is left out, this will run against a default site that your token works for
-# If `async` argument is left out, the default examples run synchrounously
+# If `async` argument is left out, the default examples run synchronously
 # Auth using username and password
 python examples.py --user "<username>" --password "<password>" --server "<server>"
 
 # Auth using personal access token (PAT)
-python examples.py --pat-name "<pat-name>" --pat-secret "<pat-secret>" --server "<server>" --site "<site-id>" -async
+python examples.py --pat-name "<pat-name>" --pat-secret "<pat-secret>" --server "<server>" --site "<site-id>" --async
 
 # Auth using JWT
-python examples.py --jwt "<jwt-token>" --server "<server>" --site "<site-id>" -async
+python examples.py --jwt-token "<jwt-token>" --server "<server>" --site "<site-id>" --async
 ```
 
 # Contribution Checklist
