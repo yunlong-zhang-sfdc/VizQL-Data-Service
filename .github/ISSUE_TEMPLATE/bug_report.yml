@@ -1,8 +1,8 @@
 name: Bug report
 description: Create a bug report or request for help
-title: ''
-labels: ''
-assignees: ''
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
 body:
   - type: markdown
     attributes:
