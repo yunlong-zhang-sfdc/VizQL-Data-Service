@@ -1,7 +1,15 @@
 # VizQL Data Service Python SDK 
 
 [![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg)](https://www.tableau.com/support-levels-it-and-developer-tools)
-[![GitHub](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square.svg)](https://raw.githubusercontent.com/Tableau/TabPy/master/LICENSE)
+[![GitHub](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square.svg)](https://raw.githubusercontent.com/tableau/VizQL-Data-Service/refs/heads/main/python_sdk/LICENSE.txt)
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
+<!-- Enable after publish in production
+[![PyPI Version](https://img.shields.io/pypi/v/vizqldataservicepythonsdk.svg)](https://pypi.org/project/vizqldataservicepythonsdk/)
+[![Downloads](https://img.shields.io/pypi/dm/vizqldataservicepythonsdk.svg)](https://pypi.org/project/vizqldataservicepythonsdk/)
+[![Build](https://github.com/tableau/VizQL-Data-Service/actions/workflows/push.yml/badge.svg)](https://github.com/tableau/VizQL-Data-Service/actions/workflows/push.yml)
+Add code coverage
+-->
+[![OpenAPI](https://img.shields.io/badge/OpenAPI-3.0.3-green.svg)](https://raw.githubusercontent.com/tableau/VizQL-Data-Service/refs/heads/main/VizQLDataServiceOpenAPISchema.json)
 
 The VizQL Data Service Python SDK is a lightweight client library that enables interaction with Tableau's VizQL Data Service APIs. It supports both cloud and on-premises deployments, offering both synchronous and asynchronous methods for querying the VizQL Data Service APIs.
 

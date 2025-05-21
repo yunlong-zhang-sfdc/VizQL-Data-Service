@@ -1,4 +1,4 @@
-name: Python SDK CI Configuration
+name: Python SDK Main Branch CI
 
 on:
   push:

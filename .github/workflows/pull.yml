@@ -1,4 +1,4 @@
-name: Python SDK CI Configuration
+name: Python SDK Pull Request CI
 
 on:
   pull_request:
