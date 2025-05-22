@@ -10,7 +10,7 @@ from .utils import format_server_url
 
 API_SUBDOMAIN = "/api/v1/vizql-data-service"
 X_TABLEAU_AUTH = "X-Tableau-Auth"
-VERSION = version("vizqldataservicepythonsdk")  # Read version from package metadata
+VERSION = version("vizql-data-service-py")  # Read version from package metadata
 
 
 @define

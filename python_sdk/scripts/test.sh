@@ -18,7 +18,7 @@ fi
 
 ls dist -al
 
-python -m pip install dist/vizqldataservicepythonsdk*.whl
+python -m pip install dist/vizql_data_service_py*.whl
 python -m pip install --upgrade pip
 pip install -e .[dev]
 

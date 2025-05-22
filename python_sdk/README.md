@@ -4,8 +4,8 @@
 [![GitHub](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square.svg)](https://raw.githubusercontent.com/tableau/VizQL-Data-Service/refs/heads/main/python_sdk/LICENSE.txt)
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 <!-- Enable after publish in production
-[![PyPI Version](https://img.shields.io/pypi/v/vizqldataservicepythonsdk.svg)](https://pypi.org/project/vizqldataservicepythonsdk/)
-[![Downloads](https://img.shields.io/pypi/dm/vizqldataservicepythonsdk.svg)](https://pypi.org/project/vizqldataservicepythonsdk/)
+[![PyPI Version](https://img.shields.io/pypi/v/vizql-data-service-py.svg)](https://pypi.org/project/vizql-data-service-py/)
+[![Downloads](https://img.shields.io/pypi/dm/vizql-data-service-py.svg)](https://pypi.org/project/vizql-data-service-py/)
 [![Build](https://github.com/tableau/VizQL-Data-Service/actions/workflows/push.yml/badge.svg)](https://github.com/tableau/VizQL-Data-Service/actions/workflows/push.yml)
 Add code coverage
 -->
@@ -21,14 +21,14 @@ Consider reading VizQL Data Service in the following order:
 
 ## 🔧 Installation
 ```bash
-pip install vizqldataservicepythonsdk
+pip install vizql-data-service-py
 ```
 
 ## 🚀 Quick Start
 
 ### Importing Required Modules
 ```python
-from vizqldataservicepythonsdk import (
+from vizql_data_service_py import (
     ReadMetadataRequest,
     QueryRequest,
     Datasource,
