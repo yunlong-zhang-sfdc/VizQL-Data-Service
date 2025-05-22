@@ -25,6 +25,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.async_mode:
+        if sys.platform == "win32":
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         asyncio.run(async_examples.execute(args))
     else:
         sync_examples.execute(args)
