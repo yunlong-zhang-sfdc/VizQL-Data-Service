@@ -54,7 +54,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: generated-client-${{ matrix.python-version }}
-        path: python_sdk/src
+        path: python_sdk/src/api
 
     - name: Check if pyproject.toml major and minor versions match VizQLDataServiceOpenAPISchema.json major and minor versions
       run: |
@@ -95,7 +95,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: generated-client-${{ matrix.python-version }}
-        path: python_sdk/src
+        path: python_sdk/src/api
 
     - name: Download package artifacts
       uses: actions/download-artifact@v4
