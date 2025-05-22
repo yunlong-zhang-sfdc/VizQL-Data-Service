@@ -10,8 +10,8 @@ import tableauserverclient as TSC
 import src.examples.common as common
 from src.api import query_datasource, read_metadata
 from src.api.client import VizQLDataServiceClient
+from src.api.openapi_generated import QueryRequest, ReadMetadataRequest
 from src.examples.payload import QUERY_FUNCTIONS
-from src.openapi_client import QueryRequest, ReadMetadataRequest
 
 
 async def execute(args):

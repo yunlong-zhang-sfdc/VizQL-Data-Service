@@ -3,9 +3,9 @@ from typing import Any, Optional
 
 import httpx
 
-from ..openapi_client import QueryOutput, QueryRequest
 from .client import AuthenticatedClient
 from .errors import UnexpectedStatus
+from .openapi_generated import QueryOutput, QueryRequest
 from .types import Response
 
 

@@ -2,7 +2,7 @@ import datetime
 
 import pytest
 
-from src.openapi_client import (
+from src.api.openapi_generated import (
     AggregatedField,
     DataType,
     DateRangeType,

@@ -1,4 +1,4 @@
-from .openapi_client import (
+from .api.openapi_generated import (
     TableauError,
     DataType,
     FieldMetadata,
