@@ -66,7 +66,7 @@ If on Windows,
 scripts\generate_stub.bat
 ```
 
-See generated `src\openapi_client.py` python class for detailed information about the generated model classes, their properties.
+See generated `src\api\openapi_generated.py` python class for detailed information about the generated model classes, their properties.
 
 ### Running Examples
 ```bash

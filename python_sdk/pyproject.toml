@@ -70,14 +70,14 @@ skip = [
     ".env",
     "build",
     "dist",
-    "openapi_client.py",
+    "openapi_generated.py",
     "__init__.py"
 ]
 
 [tool.black]
 exclude = '''
 (
-  /openapi_client.py
+  openapi_generated.py
   | /build/
   | /venv/
 )

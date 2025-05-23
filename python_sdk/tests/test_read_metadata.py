@@ -3,8 +3,8 @@ from unittest.mock import AsyncMock, Mock
 import pytest
 
 from src.api.client import AuthenticatedClient
+from src.api.openapi_generated import Datasource, MetadataOutput, ReadMetadataRequest
 from src.api.read_metadata import asyncio, asyncio_detailed, sync, sync_detailed
-from src.openapi_client import Datasource, MetadataOutput, ReadMetadataRequest
 
 
 @pytest.fixture
