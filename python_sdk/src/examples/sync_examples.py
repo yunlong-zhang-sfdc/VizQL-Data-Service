@@ -1,16 +1,27 @@
 import os
 import sys
 
-# Add project root to sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-
 import tableauserverclient as TSC
 
-import src.examples.common as common
-from src.api import query_datasource, read_metadata
-from src.api.client import VizQLDataServiceClient
-from src.api.openapi_generated import QueryRequest, ReadMetadataRequest
-from src.examples.payload import QUERY_FUNCTIONS
+# Add project root to sys.path
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+sys.path.insert(0, root_dir)
+
+# Determine if we're in development or production environment
+is_development = os.path.basename(root_dir) == "python_sdk"
+
+if is_development:
+    import src.examples.common as common
+    from src.api import query_datasource, read_metadata
+    from src.api.client import VizQLDataServiceClient
+    from src.api.openapi_generated import QueryRequest, ReadMetadataRequest
+    from src.examples.payload import QUERY_FUNCTIONS
+else:
+    import vizql_data_service_py.examples.common as common  # type: ignore
+    from vizql_data_service_py.api import query_datasource, read_metadata  # type: ignore
+    from vizql_data_service_py.api.client import VizQLDataServiceClient  # type: ignore
+    from vizql_data_service_py.api.openapi_generated import QueryRequest, ReadMetadataRequest  # type: ignore
+    from vizql_data_service_py.examples.payload import QUERY_FUNCTIONS  # type: ignore
 
 
 def execute(args):

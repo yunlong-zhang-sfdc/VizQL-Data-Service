@@ -1,12 +1,25 @@
 import argparse
 import inspect
+import os
+import sys
 import traceback
 from typing import Optional, Union
 
 import tableauserverclient as TSC
 
-from src.api.openapi_generated import Datasource
-from src.api.utils import format_server_url
+# Add project root to sys.path
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+sys.path.insert(0, root_dir)
+
+# Determine if we're in development or production environment
+is_development = os.path.basename(root_dir) == "python_sdk"
+
+if is_development:
+    from src.api.openapi_generated import Datasource
+    from src.api.utils import format_server_url
+else:
+    from vizql_data_service_py.api.openapi_generated import Datasource  # type: ignore
+    from vizql_data_service_py.api.utils import format_server_url  # type: ignore
 
 SAMPLE_DATASOURCE = "Superstore Datasource"
 
