@@ -1,6 +1,7 @@
 recursive-include src *.py
 
-global-exclude src/examples/*
+global-exclude src/*
+global-exclude tests/*
 global-exclude venv/
 global-exclude .venv/
 global-exclude tests/
