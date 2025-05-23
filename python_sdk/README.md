@@ -21,6 +21,10 @@ Consider reading VizQL Data Service in the following order:
 
 ## 🔧 Installation
 ```bash
+python -m venv --system-site-packages venv # Use a virtual environment
+source venv/bin/activate    # On Unix/MacOS
+venv\Scripts\activate       # On Windows
+
 pip install vizql-data-service-py
 ```
 

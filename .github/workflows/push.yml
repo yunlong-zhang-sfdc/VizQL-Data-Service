@@ -125,7 +125,7 @@ jobs:
     environment:
       name: pypi
     permissions:
-      id-token: write
+      id-token: write # IMPORTANT: mandatory for trusted publishing
     
     steps:
     - name: Check out repository
@@ -146,3 +146,4 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         packages-dir: python_sdk/dist/
+        verbose: true
