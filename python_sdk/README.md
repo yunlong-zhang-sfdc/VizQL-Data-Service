@@ -21,9 +21,9 @@ Consider reading VizQL Data Service in the following order:
 
 ## 🔧 Installation
 ```bash
-python -m venv --system-site-packages venv # Use a virtual environment
-source venv/bin/activate    # On Unix/MacOS
-venv\Scripts\activate       # On Windows
+python -m venv --system-site-packages venv # Optional command: set up a python virtual environment before installing the vizql_data_service_py package
+source venv/bin/activate    # A continuation of the first command for Unix/MacOS users. This activates the virtual environment for Unix/MacOS
+venv\Scripts\activate       # A continuation of the first command for Windows users. This activates the virtual environment for Windows
 
 pip install vizql-data-service-py
 ```
