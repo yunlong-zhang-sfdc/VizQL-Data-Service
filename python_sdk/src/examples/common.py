@@ -5,8 +5,8 @@ from typing import Optional, Union
 
 import tableauserverclient as TSC
 
+from src.api.openapi_generated import Datasource
 from src.api.utils import format_server_url
-from src.openapi_client import Datasource
 
 SAMPLE_DATASOURCE = "Superstore Datasource"
 

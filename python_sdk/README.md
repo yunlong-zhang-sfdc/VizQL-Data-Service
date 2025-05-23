@@ -44,11 +44,11 @@ from vizql_data_service_py import (
 ```
 
 ### Setting Up Server Connection
-Please read the Tableau Server Client (python) [Sign In out Out document](https://tableau.github.io/server-client-python/docs/sign-in-out) for on how to create Server and Auth instances.
-> **Note**: Authentication methods differ between Tableau Cloud and On-premises:
-> - Tableau Cloud: Only supports JWT, PAT authentication
-> - Tableau Onprem: Supports JWT, PAT and username/password authentication
+To create Server and Auth instances, please refer to the [Tableau Server Client (Python) Authentication Guide](https://tableau.github.io/server-client-python/docs/sign-in-out). For JWT authentication setup, see the [Configure Connected Apps with Direct Trust](https://help.tableau.com/current/online/en-us/connected_apps_direct.htm) documentation.
 
+> **Note**: Authentication methods vary between Tableau Cloud and On-premises deployments:
+> - Tableau Cloud: Supports JWT and Personal Access Token (PAT) authentication
+> - Tableau On-premises: Supports JWT, PAT, and username/password authentication
 
 ### Configuring Data Source
 ```python

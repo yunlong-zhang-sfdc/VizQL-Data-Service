@@ -3,9 +3,9 @@ from typing import Any, Optional
 
 import httpx
 
-from ..openapi_client import MetadataOutput, ReadMetadataRequest
 from .client import AuthenticatedClient
 from .errors import UnexpectedStatus
+from .openapi_generated import MetadataOutput, ReadMetadataRequest
 from .types import Response
 
 

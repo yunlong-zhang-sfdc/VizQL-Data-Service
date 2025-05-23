@@ -3,8 +3,7 @@ from unittest.mock import AsyncMock, Mock
 import pytest
 
 from src.api.client import AuthenticatedClient
-from src.api.query_datasource import asyncio, asyncio_detailed, sync, sync_detailed
-from src.openapi_client import (
+from src.api.openapi_generated import (
     Datasource,
     Query,
     QueryOutput,
@@ -12,6 +11,7 @@ from src.openapi_client import (
     SimpleField,
     TabField,
 )
+from src.api.query_datasource import asyncio, asyncio_detailed, sync, sync_detailed
 
 
 @pytest.fixture

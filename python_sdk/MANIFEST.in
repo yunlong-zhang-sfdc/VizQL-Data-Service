@@ -1,6 +1,4 @@
-recursive-include src *.py
-
-global-exclude src/examples/*
+global-exclude tests/*
 global-exclude venv/
 global-exclude .venv/
 global-exclude tests/
@@ -17,3 +15,8 @@ global-exclude *.yml
 global-exclude *.ini
 global-exclude *.xml
 global-exclude *.coverage 
+
+recursive-include src *.py
+recursive-include src/api *.py
+include src/__init__.py
+include src/api/__init__.py 
