@@ -75,10 +75,6 @@ async def execute(args):
                 print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 common.handle_error(e, f"Query {query_func.__name__}", args.verbose)
 
-        # TODO: Execute all queries concurrently cause VDS GetLockedSession() issue
-        # tasks = [execute_query(func) for func in QUERY_FUNCTIONS]
-        # await asyncio.gather(*tasks)
-
         # Execute queries sequentially
         for query_func in QUERY_FUNCTIONS:
             await execute_query(query_func)

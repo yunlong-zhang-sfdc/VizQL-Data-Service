@@ -96,19 +96,19 @@ with server.auth.sign_in(tableau_auth):
     read_metadata_request = ReadMetadataRequest(
         datasource=datasource
     )
-    read_metadata_response = read_metadata.sync_detailed(
+    read_metadata_response = read_metadata.sync(
         client=client.client, body=read_metadata_request
     )
-    print(f"Read Metadata Response: {read_metadata_response.parsed}")
+    print(f"Read Metadata Response: {read_metadata_response}")
 
     # Step 2: Execute query
     query_request = QueryRequest(
         query=query, datasource=datasource
     )
-    query_response = query_datasource.sync_detailed(
+    query_response = query_datasource.sync(
         client=client.client, body=query_request
     )
-    print(f"Query Datasource Response: {query_response.parsed}")
+    print(f"Query Datasource Response: {query_response}")
 ```
 
 This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic v2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema..json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
@@ -124,7 +124,7 @@ For comprehensive examples demonstrating various query patterns and filter combi
 ## 📘 Supported Features
 - ✅ Read metadata of Tableau published datasources
 - ✅ Query published datasources with selectable fields and queries supports various filters
-- ✅ Synchronous and asynchronous Python client support in examples
+- ✅ Synchronous and Asynchronous Python client support
 - ✅ Authentication using Tableau username/password, JWT or PAT
 - ✅ Works with both Tableau Cloud and Tableau Server (on-prem)
 - ✅ OpenAPI schema generated Python Pydantic v2 models for type-safe API interactions
