@@ -1,7 +1,7 @@
 ## Contributors
 
 ## Core Team
-* Akhilesh Jonnavittula
+* [Akhilesh Jonnavittula](https://github.com/joviakhil)
 * [Cate Guyman](https://github.com/categuyman)
 * [Joe Chirilov](https://github.com/joechirilov)
 * [Laurel Haeger](https://github.com/laurel-haeger)

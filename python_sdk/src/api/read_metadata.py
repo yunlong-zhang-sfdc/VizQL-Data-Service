@@ -57,20 +57,25 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Response[MetadataOutput]:
-    """Request data source metadata
+    """Request data source metadata with detailed response information
 
-     Requests metadata for a specific data source. The metadata provides information about the data
-    fields, such as field names, data types, and descriptions.
+     Requests metadata for a specific data source and returns a detailed response containing:
+     - The metadata information (MetadataOutput)
+     - HTTP status code
+     - Response headers
+     - Raw response content
+
+     The metadata provides information about the data fields, such as field names, data types, and descriptions.
 
     Args:
-        body (ReadMetadataRequest):
+        body (ReadMetadataRequest): The metadata request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MetadataOutput]
+        Response[MetadataOutput]: A response object containing both the metadata and response metadata
     """
 
     kwargs = _get_kwargs(
@@ -89,20 +94,22 @@ def sync(
     client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Optional[MetadataOutput]:
-    """Request data source metadata
+    """Request data source metadata and get only the metadata information
 
-     Requests metadata for a specific data source. The metadata provides information about the data
-    fields, such as field names, data types, and descriptions.
+     Requests metadata for a specific data source and returns only the metadata information without response metadata.
+     This is a convenience wrapper around sync_detailed() that returns only the parsed metadata.
+
+     The metadata provides information about the data fields, such as field names, data types, and descriptions.
 
     Args:
-        body (ReadMetadataRequest):
+        body (ReadMetadataRequest): The metadata request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MetadataOutput
+        Optional[MetadataOutput]: The metadata information, or None if the request was unsuccessful
     """
 
     return sync_detailed(
@@ -116,20 +123,25 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Response[MetadataOutput]:
-    """Request data source metadata
+    """Request data source metadata asynchronously with detailed response information
 
-     Requests metadata for a specific data source. The metadata provides information about the data
-    fields, such as field names, data types, and descriptions.
+     Asynchronously requests metadata for a specific data source and returns a detailed response containing:
+     - The metadata information (MetadataOutput)
+     - HTTP status code
+     - Response headers
+     - Raw response content
+
+     The metadata provides information about the data fields, such as field names, data types, and descriptions.
 
     Args:
-        body (ReadMetadataRequest):
+        body (ReadMetadataRequest): The metadata request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[MetadataOutput]
+        Response[MetadataOutput]: A response object containing both the metadata and response metadata
     """
 
     kwargs = _get_kwargs(
@@ -146,20 +158,22 @@ async def asyncio(
     client: AuthenticatedClient,
     body: ReadMetadataRequest,
 ) -> Optional[MetadataOutput]:
-    """Request data source metadata
+    """Request data source metadata asynchronously and get only the metadata information
 
-     Requests metadata for a specific data source. The metadata provides information about the data
-    fields, such as field names, data types, and descriptions.
+     Asynchronously requests metadata for a specific data source and returns only the metadata information without response metadata.
+     This is a convenience wrapper around asyncio_detailed() that returns only the parsed metadata.
+
+     The metadata provides information about the data fields, such as field names, data types, and descriptions.
 
     Args:
-        body (ReadMetadataRequest):
+        body (ReadMetadataRequest): The metadata request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        MetadataOutput
+        Optional[MetadataOutput]: The metadata information, or None if the request was unsuccessful
     """
 
     return (
@@ -171,6 +185,8 @@ async def asyncio(
 
 
 __all__ = [
+    "sync",
     "sync_detailed",
+    "asyncio",
     "asyncio_detailed",
 ]

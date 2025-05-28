@@ -58,19 +58,23 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: QueryRequest,
 ) -> Response[QueryOutput]:
-    """Query data source
+    """Query data source with detailed response information
 
-     Queries a specific data source and returns the resulting data.
+     Queries a specific data source and returns a detailed response containing:
+     - The query results (QueryOutput)
+     - HTTP status code
+     - Response headers
+     - Raw response content
 
     Args:
-        body (QueryRequest):
+        body (QueryRequest): The query request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[QueryOutput]
+        Response[QueryOutput]: A response object containing both the query results and response metadata
     """
 
     kwargs = _get_kwargs(
@@ -89,19 +93,20 @@ def sync(
     client: AuthenticatedClient,
     body: QueryRequest,
 ) -> Optional[QueryOutput]:
-    """Query data source
+    """Query data source and get only the query results
 
-     Queries a specific data source and returns the resulting data.
+     Queries a specific data source and returns only the query results without response metadata.
+     This is a convenience wrapper around sync_detailed() that returns only the parsed query results.
 
     Args:
-        body (QueryRequest):
+        body (QueryRequest): The query request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        QueryOutput
+        Optional[QueryOutput]: The query results, or None if the request was unsuccessful
     """
 
     return sync_detailed(
@@ -115,19 +120,23 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: QueryRequest,
 ) -> Response[QueryOutput]:
-    """Query data source
+    """Query data source asynchronously with detailed response information
 
-     Queries a specific data source and returns the resulting data.
+     Asynchronously queries a specific data source and returns a detailed response containing:
+     - The query results (QueryOutput)
+     - HTTP status code
+     - Response headers
+     - Raw response content
 
     Args:
-        body (QueryRequest):
+        body (QueryRequest): The query request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[QueryOutput]
+        Response[QueryOutput]: A response object containing both the query results and response metadata
     """
 
     kwargs = _get_kwargs(
@@ -144,19 +153,20 @@ async def asyncio(
     client: AuthenticatedClient,
     body: QueryRequest,
 ) -> Optional[QueryOutput]:
-    """Query data source
+    """Query data source asynchronously and get only the query results
 
-     Queries a specific data source and returns the resulting data.
+     Asynchronously queries a specific data source and returns only the query results without response metadata.
+     This is a convenience wrapper around asyncio_detailed() that returns only the parsed query results.
 
     Args:
-        body (QueryRequest):
+        body (QueryRequest): The query request parameters
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        QueryOutput
+        Optional[QueryOutput]: The query results, or None if the request was unsuccessful
     """
 
     return (
@@ -168,6 +178,8 @@ async def asyncio(
 
 
 __all__ = [
+    "sync",
     "sync_detailed",
+    "asyncio",
     "asyncio_detailed",
 ]
