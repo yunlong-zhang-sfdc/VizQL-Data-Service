@@ -11,17 +11,16 @@ is_development = os.path.basename(root_dir) == "python_sdk"
 
 if is_development:
     from src.api.openapi_generated import (
-        MeasureField,
         CalculatedField,
         DateRangeType,
-        Direction,
-        MeasureFilterField,
+        DimensionField,
         DimensionFilterField,
-        MeasureFilterField,
-        CalculatedFilterField,
+        Direction,
         FilterType,
         Function,
         MatchFilter,
+        MeasureField,
+        MeasureFilterField,
         PeriodType,
         QuantitativeDateFilter,
         QuantitativeFilterType,
@@ -29,21 +28,20 @@ if is_development:
         Query,
         RelativeDateFilter,
         SetFilter,
-        DimensionField,
         TopNFilter,
     )
 else:
     from vizql_data_service_py.api.openapi_generated import (  # type: ignore
-        MeasureField,
         CalculatedField,
         DateRangeType,
-        Direction,
-        MeasureFilterField,
+        DimensionField,
         DimensionFilterField,
-        CalculatedFilterField,
+        Direction,
         FilterType,
         Function,
         MatchFilter,
+        MeasureField,
+        MeasureFilterField,
         PeriodType,
         QuantitativeDateFilter,
         QuantitativeFilterType,
@@ -51,7 +49,6 @@ else:
         Query,
         RelativeDateFilter,
         SetFilter,
-        DimensionField,
         TopNFilter,
     )
 
@@ -100,9 +97,7 @@ def create_quantitative_range_filter():
         ],
         filters=[
             QuantitativeNumericalFilter(
-                field=MeasureFilterField(
-                    fieldCaption="Sales", function=Function.SUM
-                ),
+                field=MeasureFilterField(fieldCaption="Sales", function=Function.SUM),
                 filterType=FilterType.QUANTITATIVE_NUMERICAL,
                 quantitativeFilterType=QuantitativeFilterType.RANGE,
                 min=266839,
@@ -225,17 +220,13 @@ def create_multiple_min_max_numeric_filters():
         ],
         filters=[
             QuantitativeNumericalFilter(
-                field=MeasureFilterField(
-                    fieldCaption="Sales", function=Function.SUM
-                ),
+                field=MeasureFilterField(fieldCaption="Sales", function=Function.SUM),
                 filterType=FilterType.QUANTITATIVE_NUMERICAL,
                 quantitativeFilterType=QuantitativeFilterType.MIN,
                 min=266839,
             ),
             QuantitativeNumericalFilter(
-                field=MeasureFilterField(
-                    fieldCaption="Profit", function=Function.SUM
-                ),
+                field=MeasureFilterField(fieldCaption="Profit", function=Function.SUM),
                 filterType=FilterType.QUANTITATIVE_NUMERICAL,
                 quantitativeFilterType=QuantitativeFilterType.MAX,
                 max=164098,
@@ -258,9 +249,7 @@ def create_dimension_numeric_filters():
                 exclude=True,
             ),
             QuantitativeNumericalFilter(
-                field=MeasureFilterField(
-                    fieldCaption="Profit", function=Function.SUM
-                ),
+                field=MeasureFilterField(fieldCaption="Profit", function=Function.SUM),
                 filterType=FilterType.QUANTITATIVE_NUMERICAL,
                 quantitativeFilterType=QuantitativeFilterType.MIN,
                 min=40000,
@@ -305,9 +294,7 @@ def create_numeric_date_dimension_filters():
         ],
         filters=[
             QuantitativeNumericalFilter(
-                field=MeasureFilterField(
-                    fieldCaption="Sales", function=Function.SUM
-                ),
+                field=MeasureFilterField(fieldCaption="Sales", function=Function.SUM),
                 filterType=FilterType.QUANTITATIVE_NUMERICAL,
                 quantitativeFilterType=QuantitativeFilterType.RANGE,
                 min=10,

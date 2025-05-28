@@ -6,10 +6,10 @@ def convert_file(input_file, output_file):
     with open(input_file, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Regex replacements 
+    # Regex replacements
     replacementsRegex = {
         r"\bField\b": "PydanticField",
-        r"    model_config = ConfigDict\(\n        extra=\'forbid\',\n    \)\n": ""
+        r"    model_config = ConfigDict\(\n        extra=\'forbid\',\n    \)\n": "",
     }
 
     for old, new in replacementsRegex.items():
@@ -20,7 +20,7 @@ def convert_file(input_file, output_file):
         "FieldModel": "Field",
         "Optional[List[Filter]]": "Optional[List[TabFilter]]",
         "from pydantic import ConfigDict, PydanticField, RootModel": "from pydantic import Field as PydanticField, RootModel",
-        "import TableauModel": "from .tableau_model import TableauModel"
+        "import TableauModel": "from .tableau_model import TableauModel",
     }
 
     for old, new in replacements.items():
@@ -38,6 +38,7 @@ class TabFilter(RootModel[Union[
     # Write to output file
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(content)
+
 
 if __name__ == "__main__":
     convert_file("src/api/openapi_generated-raw.py", "src/api/openapi_generated.py")
