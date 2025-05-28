@@ -533,13 +533,6 @@
                         "items": {
                             "$ref": "#/components/schemas/Filter"
                         }
-                    },
-                    "parameters": {
-                        "description": "An optional array of parameters to apply to the query.",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Parameter"
-                        }
                     }
                 },
                 "additionalProperties": false
@@ -571,10 +564,6 @@
                     "debug": {
                         "type": "boolean",
                         "default": false
-                    },
-                    "useMetadataCache": {
-                        "type": "boolean",
-                        "default": true
                     }
                 }
             },
@@ -740,20 +729,6 @@
                         }
                     }
                 ]
-            },
-            "Parameter": {
-                "type": "object",
-                "description": "Use Parameters to override the default value of an existing parameter on the published datasource.",
-                "required": ["parameterCaption", "value"],
-                "properties": {
-                    "parameterCaption": {
-                        "type": "string",
-                        "description": "The caption of the parameter to set."
-                    },
-                    "value": {
-                        "description": "The value to set for the parameter. The type of the value must match the type of the parameter."
-                    }
-                }
             }
         },
         "securitySchemes": {
