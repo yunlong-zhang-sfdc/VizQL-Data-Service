@@ -3,7 +3,7 @@ import datetime
 import pytest
 
 from src.api.openapi_generated import (
-    AggregatedField,
+    MeasureField,
     DataType,
     DateRangeType,
     FilterType,
@@ -149,7 +149,7 @@ def test_query_request_from_dict(sample_query_request):
     assert len(request.query.fields) == 3
     assert isinstance(request.query.fields[0].root, SimpleField)
     assert request.query.fields[0].root.fieldCaption == "Order Date"
-    assert isinstance(request.query.fields[1].root, AggregatedField)
+    assert isinstance(request.query.fields[1].root, MeasureField)
     assert request.query.fields[1].root.fieldCaption == "Sales"
     assert request.query.fields[1].root.function == Function.SUM
     assert isinstance(request.query.fields[2].root, SimpleField)
