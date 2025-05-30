@@ -11,14 +11,14 @@ from src.api.client import VizQLDataServiceClient
 from src.api.openapi_generated import (
     Datasource,
     DataType,
+    DimensionField,
+    Field,
     FieldMetadata,
     MetadataOutput,
     Query,
     QueryOutput,
     QueryRequest,
     ReadMetadataRequest,
-    DimensionField,
-    Field,
 )
 
 
