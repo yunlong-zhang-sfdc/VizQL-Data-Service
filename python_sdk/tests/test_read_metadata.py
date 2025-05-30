@@ -32,7 +32,7 @@ def test_sync_detailed_success(mock_client, mock_metadata_request):
     # Mock successful response
     mock_response = Mock()
     mock_response.status_code = 200
-    mock_response.content = b'{"fields": [{"name": "id", "type": "integer"}, {"name": "name", "type": "string"}]}'
+    mock_response.content = b'{"data": [{"fieldName": "id", "dataType": "INTEGER"}, {"fieldName": "name", "dataType": "STRING"}]}'
     mock_response.headers = {}
 
     mock_client.get_httpx_client.return_value.request.return_value = mock_response
@@ -43,7 +43,7 @@ def test_sync_detailed_success(mock_client, mock_metadata_request):
     assert isinstance(response.parsed, MetadataOutput)
     assert (
         response.content
-        == b'{"fields": [{"name": "id", "type": "integer"}, {"name": "name", "type": "string"}]}'
+        == b'{"data": [{"fieldName": "id", "dataType": "INTEGER"}, {"fieldName": "name", "dataType": "STRING"}]}'
     )
 
 
@@ -51,7 +51,7 @@ def test_sync_success(mock_client, mock_metadata_request):
     # Mock successful response
     mock_response = Mock()
     mock_response.status_code = 200
-    mock_response.content = b'{"fields": [{"name": "id", "type": "integer"}, {"name": "name", "type": "string"}]}'
+    mock_response.content = b'{"data": [{"fieldName": "id", "dataType": "INTEGER"}, {"fieldName": "name", "dataType": "STRING"}]}'
     mock_response.headers = {}
 
     mock_client.get_httpx_client.return_value.request.return_value = mock_response
@@ -66,7 +66,7 @@ async def test_asyncio_detailed_success(mock_async_client, mock_metadata_request
     # Mock successful response
     mock_response = Mock()
     mock_response.status_code = 200
-    mock_response.content = b'{"fields": [{"name": "id", "type": "integer"}, {"name": "name", "type": "string"}]}'
+    mock_response.content = b'{"data": [{"fieldName": "id", "dataType": "INTEGER"}, {"fieldName": "name", "dataType": "STRING"}]}'
     mock_response.headers = {}
 
     mock_async_client.get_async_httpx_client.return_value.request.return_value = (
@@ -81,7 +81,7 @@ async def test_asyncio_detailed_success(mock_async_client, mock_metadata_request
     assert isinstance(response.parsed, MetadataOutput)
     assert (
         response.content
-        == b'{"fields": [{"name": "id", "type": "integer"}, {"name": "name", "type": "string"}]}'
+        == b'{"data": [{"fieldName": "id", "dataType": "INTEGER"}, {"fieldName": "name", "dataType": "STRING"}]}'
     )
 
 
@@ -90,7 +90,7 @@ async def test_asyncio_success(mock_async_client, mock_metadata_request):
     # Mock successful response
     mock_response = Mock()
     mock_response.status_code = 200
-    mock_response.content = b'{"fields": [{"name": "id", "type": "integer"}, {"name": "name", "type": "string"}]}'
+    mock_response.content = b'{"data": [{"fieldName": "id", "dataType": "INTEGER"}, {"fieldName": "name", "dataType": "STRING"}]}'
     mock_response.headers = {}
 
     mock_async_client.get_async_httpx_client.return_value.request.return_value = (

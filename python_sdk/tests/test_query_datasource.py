@@ -5,11 +5,11 @@ import pytest
 from src.api.client import AuthenticatedClient
 from src.api.openapi_generated import (
     Datasource,
+    DimensionField,
+    Field,
     Query,
     QueryOutput,
     QueryRequest,
-    SimpleField,
-    TabField,
 )
 from src.api.query_datasource import asyncio, asyncio_detailed, sync, sync_detailed
 
@@ -36,8 +36,8 @@ def mock_query_request():
         datasource=Datasource(datasourceLuid="test_datasource"),
         query=Query(
             fields=[
-                TabField(root=SimpleField(fieldCaption="id")),
-                TabField(root=SimpleField(fieldCaption="name")),
+                Field(root=DimensionField(fieldCaption="id")),
+                Field(root=DimensionField(fieldCaption="name")),
             ]
         ),
     )

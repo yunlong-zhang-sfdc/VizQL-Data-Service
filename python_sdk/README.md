@@ -40,8 +40,8 @@ from vizql_data_service_py import (
     VizQLDataServiceClient,
     read_metadata,
     query_datasource,
-    SimpleField,
-    AggregatedField,
+    DimensionField,
+    MeasureField,
     Function,
     Query
 )
@@ -88,8 +88,8 @@ with server.auth.sign_in(tableau_auth):
         # Example: sample Superstore data source
         # Aggregate SUM(Sales) by Category
         fields=[
-            SimpleField(fieldCaption="Category"),
-            AggregatedField(fieldCaption="Sales", function=Function.SUM),
+            DimensionField(fieldCaption="Category"),
+            MeasureField(fieldCaption="Sales", function=Function.SUM),
         ]
     )
     # Step 1: Read metadata

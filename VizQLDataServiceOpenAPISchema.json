@@ -3,7 +3,7 @@
     "info": {
         "title": "VizQL Data Service",
         "description": "An API to query Tableau published data sources",
-        "version": "1.0"
+        "version": "1.1"
     },
     "servers": [
         {
@@ -13,6 +13,7 @@
     "paths": {
         "/read-metadata": {
             "post": {
+                "tags": ["HeadlessBI"],
                 "operationId": "ReadMetadata",
                 "summary": "Request data source metadata",
                 "description": "Requests metadata for a specific data source. The metadata provides information about the data fields, such as field names, data types, and descriptions.",
@@ -51,6 +52,7 @@
         },
         "/query-datasource": {
           "post": {
+            "tags": ["HeadlessBI"],
             "operationId": "QueryDatasource",
             "summary": "Query data source",
             "description": "Queries a specific data source and returns the resulting data.",
@@ -89,6 +91,7 @@
         },
         "/simple-request": {
             "get": {
+                "tags": ["HeadlessBI"],
                 "operationId": "SimpleRequest",
                 "summary": "Send a simple request",
                 "description": "Sends a request that can be used for testing or doing a health check.",
@@ -161,68 +164,76 @@
             "Field": {
                 "oneOf": [
                     {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/FieldBase"
-                            }
-                        ],
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                            "fieldCaption": {},
-                            "fieldAlias": {},
-                            "maxDecimalPlaces": {},
-                            "sortDirection": {},
-                            "sortPriority": {}
-                        }
+                        "$ref": "#/components/schemas/DimensionField"
                     },
                     {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/FieldBase"
-                            }
-                        ],
-                        "type": "object",
-                        "required": [
-                            "function"
-                        ],
-                        "additionalProperties": false,
-                        "properties": {
-                            "function": {
-                                "$ref": "#/components/schemas/Function"
-                            },
-                            "fieldCaption": {},
-                            "fieldAlias": {},
-                            "maxDecimalPlaces": {},
-                            "sortDirection": {},
-                            "sortPriority": {}
-                        }
+                        "$ref": "#/components/schemas/MeasureField"
                     },
                     {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/FieldBase"
-                            }
-                        ],
-                        "type": "object",
-                        "required": [
-                            "calculation"
-                        ],
-                        "additionalProperties": false,
-                        "properties": {
-                            "calculation": {
-                                "type": "string",
-                                "description": "A Tableau calculation that will be returned as a Field in the query."
-                            },
-                            "fieldCaption": {},
-                            "fieldAlias": {},
-                            "maxDecimalPlaces": {},
-                            "sortDirection": {},
-                            "sortPriority": {}
-                        }
+                        "$ref": "#/components/schemas/CalculatedField"
                     }
                 ]
-
+            },
+            "DimensionField": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/FieldBase"
+                    }
+                ],
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "fieldCaption": {},
+                    "fieldAlias": {},
+                    "maxDecimalPlaces": {},
+                    "sortDirection": {},
+                    "sortPriority": {}
+                }
+            },
+            "MeasureField": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/FieldBase"
+                    }
+                ],
+                "type": "object",
+                "required": [
+                    "function"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                    "function": {
+                        "$ref": "#/components/schemas/Function"
+                    },
+                    "fieldCaption": {},
+                    "fieldAlias": {},
+                    "maxDecimalPlaces": {},
+                    "sortDirection": {},
+                    "sortPriority": {}
+                }
+            },
+            "CalculatedField": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/FieldBase"
+                    }
+                ],
+                "type": "object",
+                "required": [
+                    "calculation"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                    "calculation": {
+                        "type": "string",
+                        "description": "A Tableau calculation that will be returned as a Field in the query."
+                    },
+                    "fieldCaption": {},
+                    "fieldAlias": {},
+                    "maxDecimalPlaces": {},
+                    "sortDirection": {},
+                    "sortPriority": {}
+                }
             },
             "FieldMetadata": {
                 "type": "object",
@@ -246,6 +257,9 @@
                             "SPATIAL",
                             "UNKNOWN"
                         ]
+                    },
+                    "defaultAggregation": {
+                        "$ref": "#/components/schemas/Function"
                     },
                     "logicalTableId": {
                         "type": "string"
@@ -325,39 +339,48 @@
             "FilterField": {
                 "oneOf": [
                     {
-                        "required": ["fieldCaption"],
-                        "additionalProperties": false,
-                        "properties": {
-                            "fieldCaption": {
-                                "type": "string",
-                                "description": "The caption of the field to filter on."
-                            }
-                        }
+                        "$ref": "#/components/schemas/DimensionFilterField"
                     },
                     {
-                        "required": ["fieldCaption", "function"],
-                        "additionalProperties": false,
-                        "properties": {
-                            "fieldCaption": {
-                                "type": "string",
-                                "description": "The caption of the field to filter on."
-                            },
-                            "function": {
-                                "$ref": "#/components/schemas/Function"
-                            }
-                        }
+                        "$ref": "#/components/schemas/MeasureFilterField"
                     },
                     {
-                        "required": ["calculation"],
-                        "additionalProperties": false,
-                        "properties": {
-                            "calculation": {
-                                "type": "string",
-                                "description": "A Tableau calculation that will be used to filter on."
-                            }
-                        }
+                        "$ref": "#/components/schemas/CalculatedFilterField"
                     }
                 ]
+            },
+            "DimensionFilterField": {
+                "required": ["fieldCaption"],
+                "additionalProperties": false,
+                "properties": {
+                    "fieldCaption": {
+                        "type": "string",
+                        "description": "The caption of the field to filter on."
+                    }
+                }
+            },
+            "MeasureFilterField": {
+                "required": ["fieldCaption", "function"],
+                "additionalProperties": false,
+                "properties": {
+                    "fieldCaption": {
+                        "type": "string",
+                        "description": "The caption of the field to filter on."
+                    },
+                    "function": {
+                        "$ref": "#/components/schemas/Function"
+                    }
+                }
+            },
+            "CalculatedFilterField": {
+                "required": ["calculation"],
+                "additionalProperties": false,
+                "properties": {
+                    "calculation": {
+                        "type": "string",
+                        "description": "A Tableau calculation that will be used to filter on."
+                    }
+                }
             },
             "Function": {
                 "type": "string",
@@ -382,7 +405,10 @@
                     "TRUNC_QUARTER",
                     "TRUNC_MONTH",
                     "TRUNC_WEEK",
-                    "TRUNC_DAY"
+                    "TRUNC_DAY",
+                    "AGG",
+                    "NONE",
+                    "UNSPECIFIED"
                 ]
             },
             "MatchFilter": {
@@ -603,7 +629,9 @@
                 "properties": {
                     "values": {
                         "type": "array",
-                        "items": {},
+                        "items": {
+                            "nullable": true
+                        },
                         "description": "An array of values to filter on."
                     },
                     "exclude": {
@@ -680,7 +708,7 @@
                     {
                         "type": "object",
                         "description": "A filter that can be used to find the top or bottom number of fields relative to the values in the fieldToMeasure",
-                        "required": ["howMany, fieldToMeasure"],
+                        "required": ["howMany", "fieldToMeasure"],
                         "properties": {
                             "direction": {
                                 "type": "string",
