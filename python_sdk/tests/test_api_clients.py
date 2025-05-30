@@ -17,8 +17,8 @@ from src.api.openapi_generated import (
     QueryOutput,
     QueryRequest,
     ReadMetadataRequest,
-    SimpleField,
-    TabField,
+    DimensionField,
+    Field,
 )
 
 
@@ -151,7 +151,7 @@ def test_sync_query_request(
 
     request = QueryRequest(
         datasource=Datasource(datasourceLuid="test-datasource"),
-        query=Query(fields=[TabField(root=SimpleField(fieldCaption="Category"))]),
+        query=Query(fields=[Field(root=DimensionField(fieldCaption="Category"))]),
     )
     response = query_datasource.sync_detailed(client=client.client, body=request)
 
@@ -234,7 +234,7 @@ async def test_async_query_request(
 
     request = QueryRequest(
         datasource=Datasource(datasourceLuid="test-datasource"),
-        query=Query(fields=[TabField(root=SimpleField(fieldCaption="Category"))]),
+        query=Query(fields=[Field(root=DimensionField(fieldCaption="Category"))]),
     )
     response = await query_datasource.asyncio_detailed(
         client=client.client, body=request
