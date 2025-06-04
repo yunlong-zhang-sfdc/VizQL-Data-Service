@@ -29,7 +29,7 @@ flake8 .
 mypy .
 
 echo "Running tests with coverage..."
-pytest tests --disable-warnings --cov=src --cov-report=xml:coverage.xml
+pytest tests --disable-warnings --cov --cov-report=xml:coverage.xml
 
 if [ $? -eq 0 ]; then
     echo "All tests passed successfully!"
