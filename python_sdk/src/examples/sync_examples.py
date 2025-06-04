@@ -49,7 +49,7 @@ def execute(args):
                 print(f"Request Body: {metadata_request}")
 
             metadata_response = read_metadata.sync_detailed(
-                client=client.client, body=metadata_request
+                client=client, body=metadata_request
             )
             common.handle_response(
                 metadata_response, "ReadMetadata Query", args.verbose
@@ -62,7 +62,7 @@ def execute(args):
             try:
                 query_request = QueryRequest(query=query_func(), datasource=datasource)
                 response = query_datasource.sync_detailed(
-                    client=client.client, body=query_request
+                    client=client, body=query_request
                 )
                 print(f"\n=== ExecuteQuery: {query_func.__name__} ===")
                 if args.verbose:

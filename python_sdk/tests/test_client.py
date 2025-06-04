@@ -83,3 +83,41 @@ def test_vizql_data_service_client_initialization():
     assert client.server == server
     assert client.auth == auth
     assert isinstance(client._client, AuthenticatedClient)
+
+
+def test_vizql_data_service_client_user_agent():
+    """Test User-Agent handling in VizQLDataServiceClient"""
+    server = TSC.Server("localhost")
+    auth = TSC.TableauAuth("test-user", "test-password")
+    server._auth_token = "test-auth-token"
+
+    # Test case 1: No User-Agent
+    client1 = VizQLDataServiceClient(url="localhost", server=server, auth=auth)
+    httpx_client1 = client1.get_httpx_client()
+    assert "python-sdk/" in httpx_client1.headers["User-Agent"]
+
+    # Test case 2: Custom User-Agent
+    client2 = VizQLDataServiceClient(url="localhost", server=server, auth=auth)
+    client2.client._headers["User-Agent"] = "test-user-agent"
+    httpx_client2 = client2.get_httpx_client()
+    assert httpx_client2.headers["User-Agent"].startswith("test-user-agent")
+    assert "python-sdk/" in httpx_client2.headers["User-Agent"]
+
+
+def test_vizql_data_service_client_async_user_agent():
+    """Test User-Agent handling in VizQLDataServiceClient async client"""
+    server = TSC.Server("localhost")
+    auth = TSC.TableauAuth("test-user", "test-password")
+    server._auth_token = "test-auth-token"
+
+    # Test case 1: No User-Agent
+    client1 = VizQLDataServiceClient(url="localhost", server=server, auth=auth)
+    async_client1 = client1.get_async_httpx_client()
+    assert "python-sdk/" in async_client1.headers["User-Agent"]
+
+    # Test case 2: Custom User-Agent
+    client2 = VizQLDataServiceClient(url="localhost", server=server, auth=auth)
+    client2.client._headers["User-Agent"] = "test-user-agent"
+    async_client2 = client2.get_async_httpx_client()
+    assert async_client2.headers["User-Agent"].startswith("test-user-agent")
+    assert "python-sdk/" in async_client2.headers["User-Agent"]

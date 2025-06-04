@@ -103,7 +103,7 @@ def test_sync_metadata_request(
     request = ReadMetadataRequest(
         datasource=Datasource(datasourceLuid="test-datasource")
     )
-    response = read_metadata.sync_detailed(client=client.client, body=request)
+    response = read_metadata.sync_detailed(client=client, body=request)
 
     assert response.parsed is not None
     assert isinstance(response.parsed, MetadataOutput)
@@ -153,7 +153,7 @@ def test_sync_query_request(
         datasource=Datasource(datasourceLuid="test-datasource"),
         query=Query(fields=[Field(root=DimensionField(fieldCaption="Category"))]),
     )
-    response = query_datasource.sync_detailed(client=client.client, body=request)
+    response = query_datasource.sync_detailed(client=client, body=request)
 
     assert response.parsed is not None
     assert isinstance(response.parsed, QueryOutput)
@@ -185,7 +185,7 @@ async def test_async_metadata_request(
     request = ReadMetadataRequest(
         datasource=Datasource(datasourceLuid="test-datasource")
     )
-    response = await read_metadata.asyncio_detailed(client=client.client, body=request)
+    response = await read_metadata.asyncio_detailed(client=client, body=request)
 
     assert response.parsed is not None
     assert isinstance(response.parsed, MetadataOutput)
@@ -236,9 +236,7 @@ async def test_async_query_request(
         datasource=Datasource(datasourceLuid="test-datasource"),
         query=Query(fields=[Field(root=DimensionField(fieldCaption="Category"))]),
     )
-    response = await query_datasource.asyncio_detailed(
-        client=client.client, body=request
-    )
+    response = await query_datasource.asyncio_detailed(client=client, body=request)
 
     assert response.parsed is not None
     assert isinstance(response.parsed, QueryOutput)

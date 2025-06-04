@@ -49,7 +49,7 @@ async def execute(args):
             print(f"Request Body: {metadata_request}")
 
             metadata_response = await read_metadata.asyncio_detailed(
-                client=client.client, body=metadata_request
+                client=client, body=metadata_request
             )
             common.handle_response(
                 metadata_response, "ReadMetadata Query", args.verbose
@@ -66,7 +66,7 @@ async def execute(args):
                     print(f"Request Body: {query_request}")
 
                 response = await query_datasource.asyncio_detailed(
-                    client=client.client, body=query_request
+                    client=client, body=query_request
                 )
                 common.handle_response(
                     response, f"Query {query_func.__name__}", args.verbose

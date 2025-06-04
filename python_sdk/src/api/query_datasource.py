@@ -3,7 +3,7 @@ from typing import Any, Optional
 
 import httpx
 
-from .client import AuthenticatedClient
+from .client import VizQLDataServiceClient
 from .errors import UnexpectedStatus
 from .openapi_generated import QueryOutput, QueryRequest
 from .types import Response
@@ -30,7 +30,7 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: AuthenticatedClient, response: httpx.Response
+    *, client: VizQLDataServiceClient, response: httpx.Response
 ) -> Optional[QueryOutput]:
     if response.status_code == 200:
         response_200 = QueryOutput.model_validate_json(response.content)
@@ -43,7 +43,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: AuthenticatedClient, response: httpx.Response
+    *, client: VizQLDataServiceClient, response: httpx.Response
 ) -> Response[QueryOutput]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -55,7 +55,7 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient,
+    client: VizQLDataServiceClient,
     body: QueryRequest,
 ) -> Response[QueryOutput]:
     """Query data source with detailed response information
@@ -81,7 +81,7 @@ def sync_detailed(
         body=body,
     )
 
-    response = client.get_httpx_client().request(
+    response = client.client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -90,7 +90,7 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient,
+    client: VizQLDataServiceClient,
     body: QueryRequest,
 ) -> Optional[QueryOutput]:
     """Query data source and get only the query results
@@ -117,7 +117,7 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient,
+    client: VizQLDataServiceClient,
     body: QueryRequest,
 ) -> Response[QueryOutput]:
     """Query data source asynchronously with detailed response information
@@ -143,14 +143,14 @@ async def asyncio_detailed(
         body=body,
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
 
 async def asyncio(
     *,
-    client: AuthenticatedClient,
+    client: VizQLDataServiceClient,
     body: QueryRequest,
 ) -> Optional[QueryOutput]:
     """Query data source asynchronously and get only the query results
