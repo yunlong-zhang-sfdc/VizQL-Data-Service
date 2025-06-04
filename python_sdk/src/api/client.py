@@ -98,12 +98,24 @@ class AuthenticatedClient:
         self._client = client
         return self
 
+    def _update_user_agent(self) -> None:
+        """Update the User-Agent header to include the SDK identifier if not present."""
+        sdk_prefix = "python-sdk/"
+        sdk_identifier = f"{sdk_prefix}{VERSION}"
+        if "User-Agent" not in self._headers:
+            self._headers["User-Agent"] = sdk_identifier
+        elif sdk_prefix not in self._headers["User-Agent"]:
+            self._headers["User-Agent"] = (
+                f"{self._headers['User-Agent']} {sdk_identifier}"
+            )
+
     def get_httpx_client(self) -> httpx.Client:
         """Get the underlying httpx.Client, constructing a new one if not previously set"""
         if self._client is None:
             self._headers[self.auth_header_name] = (
                 f"{self.prefix} {self.token}" if self.prefix else self.token
             )
+            self._update_user_agent()
             self._client = httpx.Client(
                 base_url=self._base_url,
                 cookies=self._cookies,
@@ -140,6 +152,7 @@ class AuthenticatedClient:
             self._headers[self.auth_header_name] = (
                 f"{self.prefix} {self.token}" if self.prefix else self.token
             )
+            self._update_user_agent()
             self._async_client = httpx.AsyncClient(
                 base_url=self._base_url,
                 cookies=self._cookies,
@@ -195,7 +208,6 @@ class VizQLDataServiceClient:
             token=self.server.auth_token,
             prefix="",
             auth_header_name=X_TABLEAU_AUTH,
-            headers={"User-Agent": f"python-sdk/{VERSION}"},
         )
 
     @property

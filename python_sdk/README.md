@@ -69,11 +69,11 @@ datasource = Datasource(
 )
 ```
 
-### Sign in, Read metadata and query data sources
+### Sign in, Read Metadata and Query Data Sources
 ```python
 import tableauserverclient as TSC
 
-# Choose one of these auth mechanism
+# Choose one of these auth mechanisms
 tableau_auth = TSC.PersonalAccessTokenAuth('TOKEN_NAME', 'TOKEN_VALUE', 'SITENAME')
 # tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', 'SITENAME')
 # tableau_auth = TSC.JWTAuth('JWT', 'SITENAME')
@@ -97,7 +97,7 @@ with server.auth.sign_in(tableau_auth):
         datasource=datasource
     )
     read_metadata_response = read_metadata.sync(
-        client=client.client, body=read_metadata_request
+        client=client, body=read_metadata_request
     )
     print(f"Read Metadata Response: {read_metadata_response}")
 
@@ -106,12 +106,25 @@ with server.auth.sign_in(tableau_auth):
         query=query, datasource=datasource
     )
     query_response = query_datasource.sync(
-        client=client.client, body=query_request
+        client=client, body=query_request
     )
     print(f"Query Datasource Response: {query_response}")
 ```
 
-This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic v2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema..json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
+### API Methods
+The SDK provides two ways to make API calls:
+
+```python
+# Simple way - just get the response data
+response = read_metadata.sync(client=client, body=read_metadata_request)
+
+# Detailed way - get response data, status code and headers
+response, status, headers = read_metadata.sync_detailed(client=client, body=read_metadata_request)
+```
+
+Both methods work for `read_metadata` and `query_datasource`. Use `sync_detailed()` when you need HTTP response details like status code and headers.
+
+This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic v2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema.json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
 
 > **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python pydantic v2 objects to construct requests. This approach offers several advantages:
 > - Type safety and validation at compile time
