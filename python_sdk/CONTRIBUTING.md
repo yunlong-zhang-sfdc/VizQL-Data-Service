@@ -131,7 +131,7 @@ python examples.py --jwt-token "<jwt-token>" --server "<server>" --site "<site-i
 # Creating a Pull Request
 
 1. **Ensure the bug/feature was not already reported** by searching on GitHub under Issues.  If none exists, create a new issue so that other contributors can keep track of what you are trying to add/fix and offer suggestions (or let you know if there is already an effort in progress).
-2. **Clone** a forked repository to your machine.
+2. **Clone** a fork of the repository to your machine.
 3. **Create** a new branch to contain your work (e.g. `git br fix-issue-11`)
 4. **Run** tests and linting
 5. **Verify** that the major and minor numbers for the "version" in pyproject.toml are the same as the major and minor numbers for the "version" in VizQLDataServiceOpenAPISchema.json. If they aren't the same, the build will fail.
