@@ -132,7 +132,7 @@ This SDK is built using `datamodel-codegen` to generate all VizQL Data Service m
 > - Consistent request structure
 > - Easier maintenance and debugging
 
-For comprehensive examples demonstrating various query patterns and filter combinations, please check the [examples](https://github.com/tableau/VizQL-Data-Service/python_sdk/src/examples) directory.
+For comprehensive examples demonstrating various query patterns and filter combinations, please check the [examples](https://github.com/tableau/VizQL-Data-Service/tree/main/python_sdk/src/examples) directory.
 
 ## 📘 Supported Features
 - ✅ Read metadata of Tableau published datasources
@@ -148,4 +148,4 @@ For comprehensive examples demonstrating various query patterns and filter combi
 - Tableau Server 2025.1+ or Tableau Cloud
 
 ## 🤝 Contributing
-To contribute, see our [CONTRIBUTING.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTING.md) Guide. A list of all our contributors to date is in [CONTRIBUTORS.md](https://github.com/tableau/VizQL-Data-Service/python_sdk/CONTRIBUTORS.md).
+To contribute, see our [CONTRIBUTING.md](https://github.com/tableau/VizQL-Data-Service/blob/main/python_sdk/CONTRIBUTING.md) Guide. A list of all our contributors to date is in [CONTRIBUTORS.md](https://github.com/tableau/VizQL-Data-Service/blob/main/python_sdk/CONTRIBUTORS.md).

@@ -131,17 +131,20 @@ python examples.py --jwt-token "<jwt-token>" --server "<server>" --site "<site-i
 # Creating a Pull Request
 
 1. **Ensure the bug/feature was not already reported** by searching on GitHub under Issues.  If none exists, create a new issue so that other contributors can keep track of what you are trying to add/fix and offer suggestions (or let you know if there is already an effort in progress).
-2. **Clone** the forked repo to your machine.
+2. **Clone** a fork of the repository to your machine.
 3. **Create** a new branch to contain your work (e.g. `git br fix-issue-11`)
 4. **Run** tests and linting
 5. **Verify** that the major and minor numbers for the "version" in pyproject.toml are the same as the major and minor numbers for the "version" in VizQLDataServiceOpenAPISchema.json. If they aren't the same, the build will fail.
 6. **Bump** the patch number for the "version" in pyproject.toml. This will trigger a new release to PyPi upon merge to main.
 7. **Update** documentation (e.g. README.md) with details if needed.
-8. **Commit** changes to your own branch.
-9. **Push** your work back up to your fork. (e.g. `git push fix-issue-11`)
-10. **Submit** a Pull Request against the `main` branch and refer to the issue(s) you are fixing. Try not to pollute your pull request with unintended changes. Keep it simple and small.
-11. **Sign** the Salesforce CLA (you will be prompted to do so when submitting the Pull Request)
-12. **Address** any review comments
+8. **Update** the repository name in .github/workflows/manual.yml to your fork name if you want to manually publish to test.pypi.org to test your changes before creating a Pull Request
+9. **Commit** changes to your own branch.
+10. **Push** your work back up to your fork. (e.g. `git push fix-issue-11`)
+11. **Run** the manual.yml github action to publish a new package version to test.pypi.org
+12. **Test** that your changes work by downloading the new package that you published to test.pypi.org and running the sample code from the README
+13. **Submit** a Pull Request against the `main` branch and refer to the issue(s) you are fixing. Try not to pollute your pull request with unintended changes. Keep it simple and small.
+14. **Sign** the Salesforce CLA (you will be prompted to do so when submitting the Pull Request)
+15. **Address** any review comments
 
 > **NOTE**: Be sure to [sync your fork](https://help.github.com/articles/syncing-a-fork/) before making a pull request.
 
