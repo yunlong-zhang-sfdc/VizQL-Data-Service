@@ -1,0 +1,22 @@
+global-exclude tests/*
+global-exclude venv/
+global-exclude .venv/
+global-exclude tests/
+global-exclude build/
+global-exclude dist/
+global-exclude *.egg-info/
+global-exclude docs/
+global-exclude scripts/
+global-exclude .openapi-generator/
+global-exclude .mypy_cache/
+global-exclude .pytest_cache/
+global-exclude *.md
+global-exclude *.yml
+global-exclude *.ini
+global-exclude *.xml
+global-exclude *.coverage 
+
+recursive-include src *.py
+recursive-include src/api *.py
+include src/__init__.py
+include src/api/__init__.py 

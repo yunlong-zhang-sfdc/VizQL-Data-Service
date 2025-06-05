@@ -1,0 +1,32 @@
+name: Feature Request
+title: "[Feature] "
+description: Suggest a new feature or improvement
+labels: [enhancement]
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: e.g., Add dark mode support
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low
+        - Medium
+        - High
+      default: 1
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Feature Details
+      placeholder: What should this feature do? How would it help?
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context (optional)
+      placeholder: Any examples, related issues, or screenshots?

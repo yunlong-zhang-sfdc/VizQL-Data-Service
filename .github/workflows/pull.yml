@@ -1,0 +1,136 @@
+name: Python SDK Pull Request CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  generateStub:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+    - name: Check out repository 
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+      
+    - name: Run generate script
+      run: |
+        cd python_sdk
+        chmod +x scripts/generate_stub.sh
+        bash scripts/generate_stub.sh
+
+    - name: Upload client artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: generated-client-${{ matrix.python-version }}
+        path: python_sdk/src/api/openapi_generated.py
+
+  build:
+    needs: [generateStub]
+    if: needs.generateStub.result == 'success'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Download client artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: generated-client-${{ matrix.python-version }}
+        path: python_sdk/src/api
+
+    - name: Check if pyproject.toml major and minor versions match VizQLDataServiceOpenAPISchema.json major and minor versions
+      run: |
+        cd python_sdk
+        chmod +x scripts/check_version.sh
+        bash scripts/check_version.sh
+
+    - name: Run build script
+      run: |
+        cd python_sdk
+        chmod +x scripts/build.sh
+        bash scripts/build.sh
+
+    - name: Upload package artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-${{ matrix.python-version }}
+        path: python_sdk/dist/ 
+
+  test:
+    needs: [generateStub, build]
+    if: needs.generateStub.result == 'success' && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Download client artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: generated-client-${{ matrix.python-version }}
+        path: python_sdk/src/api
+
+    - name: Download package artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-${{ matrix.python-version }}
+        path: python_sdk/dist/
+
+    - name: Run test script
+      run: |
+        cd python_sdk
+        chmod +x scripts/test.sh
+        bash scripts/test.sh
+
+    - name: Upload coverage reports artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-reports-${{ matrix.python-version }}
+        path: python_sdk/coverage.xml
+
+    - name: Report code coverage
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: python_sdk/coverage.xml
+        badge: true
+        fail_below_min: false
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: true
+        indicators: true
+        output: both
+        thresholds: '60 80'
+
+    - name: Add Coverage PR Comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      if: github.event_name == 'pull_request'
+      with:
+        recreate: true
+        path: code-coverage-results.md

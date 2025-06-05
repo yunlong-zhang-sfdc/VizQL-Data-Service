@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=42.0.0", "wheel>=0.37.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vizql-data-service-py"
+version = "1.1.0"  # This value is manually updated. The major and minor versions must always be the same as the version defined in VizQLDataServiceOpenAPISchema.json
+
+description = "A Python client library for interacting with the VizQL Data Service API"
+readme = "README.md"
+authors = [{name = "Tableau", email = "github@tableau.com"}]
+maintainers = [{name = "Tableau", email = "github@tableau.com"}]
+license = "Apache-2.0"
+
+requires-python = ">= 3.9"
+dependencies = [
+    "setuptools>=42.0.0",
+    "tableauserverclient>=0.27",
+    "python-dateutil>=2.8.0",
+    "httpx>=0.23.0",
+    "urllib3>=1.25.0,<3.0.0",
+    "attrs>=21.0.0",
+    "typing-extensions>=4.0.0",
+    "pydantic>=2.0.0"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["vizqldataservice", "tableau"]
+
+[project.urls]
+"Homepage" = "https://github.com/tableau/VizQL-Data-Service/python_sdk"
+"Bug Tracker" = "https://github.com/tableau/VizQL-Data-Service/issues"
+# TODO: add documentation URL "Documentation" = ""
+"Source Code" = "https://github.com/tableau/VizQL-Data-Service/python_sdk"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.23.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[tool.setuptools]
+packages = ["vizql_data_service_py"]
+package-dir."vizql_data_service_py" = "src"
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+skip = [
+    ".venv",
+    "venv",
+    ".env",
+    "build",
+    "dist",
+    "openapi_generated.py",
+    "__init__.py"
+]
+
+[tool.black]
+exclude = '''
+(
+  openapi_generated.py
+  | /build/
+  | /venv/
+)
+'''
