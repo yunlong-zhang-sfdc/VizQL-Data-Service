@@ -124,7 +124,7 @@ response, status, headers = read_metadata.sync_detailed(client=client, body=read
 
 Both methods work for `read_metadata` and `query_datasource`. Use `sync_detailed()` when you need HTTP response details like status code and headers.
 
-This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic v2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema.json](https://github.com/tableau/VizQL-Data-Service/VizQLDataServiceOpenAPISchema.json) file. 
+This SDK is built using `datamodel-codegen` to generate all VizQL Data Service models based on Pydantic v2. For detailed API documentation and model specifications, please refer to the [VizQLDataServiceOpenAPISchema.json](https://github.com/tableau/VizQL-Data-Service/blob/main/VizQLDataServiceOpenAPISchema.json) file. 
 
 > **Note**: While raw JSON requests are supported, we strongly recommend using the provided Python pydantic v2 objects to construct requests. This approach offers several advantages:
 > - Type safety and validation at compile time
